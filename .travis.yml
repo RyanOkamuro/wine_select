@@ -1,9 +1,2 @@
 language: node_js
 node_js: node
-deploy:
-  provider: heroku
-  api_key:
-    secure: oyr8wikiiFLg+TPgoKRGCl8ZDA3sG5N9ajNXTRCra8Fy1Apje0Z3unmZ9Pn9RpYuROeAPpz+pt9j70I1wSEvtT9J7AF1u3NjUVD04xwh9/JVSS2K5H1KrN3eaBIgON55mW1pA20OvBzGIOthoM0QH/RYIipngDeFQgJTmKe5XGe6hQndzigNCgsrqERNdNZ/pL+uiwOf2yTDY3zE7yjECTbiqzjNWuHEtse/4m3S0M5XW9EIQBaT+5HfeKzIzmBnHP23IWGbTBsMBWFPBCceZhdz48rmnNRTary0nUfLK5SHv73DnH//wQ/mG3KKnFjZEryU++NE10NaEOm0iMcI/Dy6Hwqk3O8trIrpacmzPHZvQdkvzSvwS38eA5ytRVkPjct55Uxq3IqcRbYsOIEXx6btYZc55HcB6CjmyBzJoqBbcwVr/XV/ZAw5TatPF/uh241y9oBKeiGZeJ25jRIRhaDF5vsJdBwQtOkZ4s9hRqQ+KcZihtmOgoOmnLTdBvUasK6dh4IOBpzGzh6UYuVBcqX+iaXsVxA4z7V2+nsh516VJETLDdulIdKs3yt5kORXRM9QflP7BvDcQ0gzKcC+NBKyy12HiRXOI55/t86V87qV2NrJpnFjtnSpgTo2b3AxLIkVXOzak4zrO3vEWZ/Ss5jKj2fT1WQgMRp2XLZNBEw=
-  app: floating-hollows-39266
-  on:
-    repo: RyanOkamuro/wine_select
