@@ -6,6 +6,6 @@ deploy:
   provider: heroku
   api_key:
     secure: giyNrnzs2/nlCtzsmyajA7ZoqzzQyDMYOR/pU99JXkyDWz6Mo3xSEUhO4XtvvOlUdGyfWkNNgfcHeomNP8aCk950lH/eWaszqdbNeYWQPVjOBrjoxX9/gOrkTSfty6G+DUTx6/v5kUxJFieEmGucgzJ4/e67uPgSqwaO3KPhR9N3Xl0vHlMIaD/B8lXYdSsomxIb+n7gNRtNiMGXwYqMP/ffc8YLI85iXGk1Mpvp5TH85OJiF1MLtbaxaDP1SK+0el05BVQxuRwAFXE4cw0m+2/xPgPmYmXL/t6QnfhJTOTGwIIkyICVLCJrehNmZyjMuuNtoAQ1gCGnQYFGS+89Jyyc7fNDWlYMEKU5DnAaaA/t2Aqugtw4OhHdUFnSbUvMt4JOYWOTmIhSOqOYxOfmPnwkXQ4TJAzVeRQCprQLLLFnmFYSrbvh7Pl5VNbHbA5nmwH/4e0XBl+FYjPK+8pPGIpJI2APxOy53ykzXHesPpfo4AqTL0+q0WjVOHk15kpaUdnBqewTb4vkmq3by+1ESOkTEQw1EGVhLU00buYS4OYA50x0mpBd/yOXa1KdpS4aYWdAAjJxg5RiSFHWG1rIGvut7NCmZ6jcp0BMOu3NeljHmHhRfbhLxczweOqWdluKULM9UpGcnaD4YYtOifa6jtj42nH1yUDHdBPOZBvrn7g=
-  app: wine-select
+  app: lit-tundra-76700
   on:
     repo: RyanOkamuro/wine_select
