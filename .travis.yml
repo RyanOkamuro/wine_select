@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: WgYXTCxrKWIj7Fn7uWMhoocDmAPWgoY1cr6o1YcswR/cmfWcSczLmHrzY/OwokLqnnpceNYW4AL86Gl4IKqBEqlMiz+USA5NmJ18x4edU0YG0YLzlM6NiBOvDqOw6Oh/2snvh4n3ANhBBb89+lA9Nj/KFra1bUKpa3eTSJo/Az2pK0br+x5hEAZIBgkfkfE4sCf5T+7zwJCnN8Cu/K4Z44ODecGafIGxXega1xfVMHk/SEuU4VliWnhgLmbLSfVJE3mKb1MWkZFeZJ0Mjt/4+3y/wWM+zt2RXXsZqfaQ514jKCpjRxiImu/lDbT6xu1Hei/+wYI7rChUJAfUCNqvAPxIU27eoOE41fjK82aRyh9KiX59A9/al8BL5UYGrZnpgq+KiIzWbPhiNBhpyyT6i+8J7GQIxFp6KwKfmKC2XibhbGyLsHL5f3gzpOUOaGHHXMnUiofeWJT5iKr3qkfksCz0Nta67n+NDC4eJieWiiHQ8V5EsisPh6PbggN66aDshBjNy1ECa/IObainzlM9AUUCil7vG/2TXU3NaxMbENHYkDoZ+euSV/KtyhDmbujH46afxXatU+BimTLZiIK5xA+CTMRrPPmMzdeP/mAkd1rWB2oTu1hwiyutf6QxzwkZFWPWS2nLayIbTaUnqeZUosRO8tUzqirtmE1MmKe2vtc=
+  app: wine-select
+  on:
+    repo: RyanOkamuro/wine_select
