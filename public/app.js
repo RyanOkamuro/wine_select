@@ -1,9 +1,10 @@
 let MOCK_DATA =
 {
-    "redWineCollection": [
+    "wineCollection": [
         {
             "brand": "Baileyana",
             "wineName": "Firepeak",
+            "color": "Red",
             "type": "Pinot Noir",
             "rating": 5,
             "averagePrice": "$19",
@@ -16,6 +17,7 @@ let MOCK_DATA =
         {
             "brand": "Tarapaca",
             "wineName": "Etiqueta Negra Gran Reserva", 
+            "color": "Red",
             "type": "Cabernet Sauvignon",
             "rating": 4.6,
             "averagePrice": "$29.99",
@@ -28,6 +30,7 @@ let MOCK_DATA =
         {
             "brand": "Layer Cake",
             "wineName": "Primitivo",
+            "color": "Red",
             "type": "Zinfandel",
             "rating": 3.9,
             "averagePrice": "$15",
@@ -40,6 +43,7 @@ let MOCK_DATA =
         {
             "brand": "Penfolds",
             "wineName": "Bin 2",
+            "color": "Red",
             "type": "Shiraz",
             "rating": 3.7,
             "averagePrice": "$19.99",
@@ -93,30 +97,58 @@ let userReview = {
 };
 
 
-function getRedWine(callbackFn) {
+function getWine(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
 }
 
-function displayRedWine(data) {
-    for (index in data.redWineCollection) {
+function displayWine(data) {
+    for (index in data.wineCollection) {
        $('body').append(
-        '<p>' + data.redWineCollection[index].type + '</p>');
+        '<p>' + data.wineCollection[index].type + '</p>');
     }
 }
 
-function displayRedWineImage(data) {
-    for (index in data.redWineCollection) {
+function displayWineImage(data) {
+    for (index in data.wineCollection) {
        $('body').append(
-        '<p>' + `<img src='${data.redWineCollection[index].image}'>` + '</p>');
+        '<p>' + `<img src='${data.wineCollection[index].image}'>` + '</p>');
     }
 }
 
-function getAndDisplayRedWine() {
-    getRedWine(displayRedWine);
-    getRedWine(displayRedWineImage);
+function getWinery(callbackFn) {
+    setTimeout(function(){ callbackFn(wineryHistory)}, 100);
+}
+
+function displayWinery(data) {
+    for (index in data.wineVineyard) {
+       $('body').append(
+        '<p>' + data.wineVineyard[index].history + '</p>');
+    }
+}
+
+function getUserReview(callbackFn) {
+    setTimeout(function(){ callbackFn(userReview)}, 100);
+}
+
+function displayUserReview(data) {
+    for (index in data.userReviewComments) {
+       $('body').append(
+        '<p>' + data.userReviewComments[index].reviewStatement + '</p>');
+    }
+}
+
+function getAndDisplayWine() {
+    getWine(displayWine);
+    getWine(displayWineImage);
+}
+
+function getAndDisplayHistoryReview() {
+    getWinery(displayWinery);
+    getUserReview(displayUserReview);
 }
 
 $(function() {
-    getAndDisplayRedWine();
+    getAndDisplayWine();
+    getAndDisplayHistoryReview();
 })
 
