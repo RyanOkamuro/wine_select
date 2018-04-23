@@ -21,6 +21,19 @@ function wineQuery() {
             .html(wineSearch);
 }
 
+
+function wineCollection() {
+    
+}
+
+function redWineSearchWindow() {
+    $('.wineLabelRedWhite').on('click', event=> {
+        event.preventDefault();
+        wineCollection();
+    })
+}
+
+
 function startSearchWindow() {
     $('.login-form').submit(event => {
         event.preventDefault();
