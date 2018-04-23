@@ -10,6 +10,8 @@ function wineQuery() {
             <button role="button" type="submit" class="js-label-search">Submit</button>
             </fieldset>
         </form>
+        <img src='http://www.leclos.net/wp-content/uploads/850761.png' class='redAndwhite' alt='Lafite'>
+        <img src='http://www.jpost.com/HttpHandlers/ShowImage.ashx?id=327394' class='redAndwhite' alt='Jadot Lous'>
     </section>
     `;
     $('.login-form').hide();
