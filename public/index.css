@@ -28,7 +28,7 @@
       margin: 0;
   }
 
-  .signup-form {
+  .login-form {
       width: 400px;
       padding: 40px;
       border-radius: 4px;
@@ -36,19 +36,19 @@
       border: 1px solid black;
   }
 
-  .signup-form legend {
+  .login-form legend {
       width: 100%;
       text-align: center;
       margin: 0 auto 50px;
   }
 
-  .signup-form label {
+  .login-form label {
       display: block;
       margin-bottom: 5px;
       margin-top: 5px;
   }
 
-  .signup-form input, .signup-form button {
+  .login-form input, .login-form button {
       width: 100%;
       padding: 6px;
       border-radius: 3px;
@@ -59,6 +59,3 @@
     text-align: center;
     margin: 15px auto;
   }
-
-
-
