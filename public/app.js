@@ -12,15 +12,22 @@ function wineQuery() {
         </form>
     </section>
     `;
+    $('.login-form').hide();
+    let outputElem = $('#red-white');
+        outputElem
+            .prop('hidden', false)
+            .html(wineSearch);
 }
 
 function startSearchWindow() {
     $('.login-form').submit(event => {
         event.preventDefault();
-        $('.login-form').hide();
-        let outputElem = $('#red-white');
-        outputElem
-            .prop('hidden', false)
-            .html(wineSearch);
+        wineQuery();
     });
 }
+
+function handleCreateApp() {
+    startSearchWindow();
+}
+
+$(handleCreateApp);
