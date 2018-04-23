@@ -78,4 +78,4 @@ function handleCreateApp() {
 }
 
 $(handleCreateApp);
->>>>>>> feature/app-js
+
