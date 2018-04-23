@@ -17,9 +17,10 @@ function wineQuery() {
 function startSearchWindow() {
     $('.login-form').submit(event => {
         event.preventDefault();
+        $('.login-form').hide();
         let outputElem = $('#red-white');
         outputElem
             .prop('hidden', false)
-            .html(wineQuery);
-    })
+            .html(wineSearch);
+    });
 }
