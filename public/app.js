@@ -1,36 +1,64 @@
+let MOCK_DATA =
+{
+    "wineCollection": [
+        {
+            "brand": "Baileyana",
+            "wineName": "Firepeak",
+            "color": "Red",
+            "type": "Pinot Noir",
+            "rating": 5,
+            "averagePrice": "$19",
+            "region": "Edna Valley",
+            "country": "USA",
+            "year": 2014,
+            "foodSuggestion": "Chicken and Turkey",
+            "image": "https://www.winetransit.com/media/catalog/product/cache/926507dc7f93631a094422215b778fe0/b/a/baileyana_firepeak_pnoir_mv_750.png"
+        },
+        {
+            "brand": "Tarapaca",
+            "wineName": "Etiqueta Negra Gran Reserva", 
+            "color": "Red",
+            "type": "Cabernet Sauvignon",
+            "rating": 4.6,
+            "averagePrice": "$29.99",
+            "region": "Maipo Valley",
+            "country": "Chile",
+            "year": 2014,
+            "foodSuggestion": "Lamb",
+            "image": "https://files.thewinebowgroup.com/PDF/brand5002/T0008448_tarapaca-g-reserva-etiq-negra-s-f-jpg-1.jpg"
+        },
+        {
+            "brand": "Layer Cake",
+            "wineName": "Primitivo",
+            "color": "Red",
+            "type": "Zinfandel",
+            "rating": 3.9,
+            "averagePrice": "$15",
+            "region": "Puglia",
+            "country": "Italy",
+            "year": 2014,
+            "foodSuggestion": "Beef and Chicken",
+            "image": "https://www.b-21.com/labels/live/ITLCPR14AE.jpg"
+        },
+        {
+            "brand": "Penfolds",
+            "wineName": "Bin 2",
+            "color": "Red",
+            "type": "Shiraz",
+            "rating": 3.7,
+            "averagePrice": "$19.99",
+            "region": "South Australia",
+            "country": "Australia",
+            "year": 2012,
+            "foodSuggestion": "Beef and Lamb",
+            "image": "https://www.nataliemaclean.com/images/winepicks/058ba29dde3c11dc0f1c8adf3ae14ed6/original_penfolds-bin-2-shiraz-mourv-dre-2012-209478-bottle-1415126015.jpg"
+        }
+    ]
+};
 
-
-function wineSearch() {
-    let wineQuery = `
-    <section role='region' class='redOrWhite'>
-        <form role='form' class='brandSearch'>
-            <fieldset name='brandQuery'>
-            <legend>Search for Brand</legend>
-            <label for='js-brand' class='wineBrand'>Brand Name</label>
-            <input placeholder='Layer Cake' type='text' name='js-brand' id='js-brand' autofocus/>
-            <button role="button" type="submit" class="js-submit-wine-search">Submit</button>
-            </fieldset>
-        </form>
-    </section>
-    `;
-}
-
-
-
-
-
-function startSearchPage() {
-    $('.login-form').submit(event => {
-        event.preventDefault();
-        let outputElem = $('#red-white');
-        outputElem
-            .prop('hidden', false)
-            .html(wineQuery);
-        getExchange();
-        locateBanks();
-        });
-    }
-
+//-------------------------------Keep------------------------------------
+//Search by querying wine label.  
+//Search by red or white wine by clicking on the wine bottle image. 
 function wineQuery() {
     let wineSearch = `
     <section role='region' class='wineLabelRedWhite'>
@@ -47,24 +75,52 @@ function wineQuery() {
     </section>
     `;
     $('.login-form').hide();
+    //display brand, red wine, or white wine search page
     let outputElem = $('#red-white');
         outputElem
             .prop('hidden', false)
             .html(wineSearch);
 }
 
-
-function wineCollection() {
-    
+function wineCollectionListing() {
+    let searchResultsList = `
+    <section role='region' class='wineResults'>
+        <ul id='labelInformation'>Test</ul>
+    </section>
+    `;
+    $('.wineLabelRedWhite').hide();
+    let outputElem = $('#wineList');
+        outputElem
+            .prop('hidden', false)
+            .html(searchResultsList);
 }
 
-function redWineSearchWindow() {
-    $('.wineLabelRedWhite').on('click', event=> {
+//function results(MOCK_DATA) {
+    //for (let i = 0; i <MOCK_DATA.length; i++) {
+        //createWineListing(MOCK_DATA[i]);
+    //}
+//}
+
+function getWine(callbackFn) {
+    setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
+}
+
+function createWineListing(data) {
+    let wineInfoList = document.getElementById('labelInformation');
+    let li = document.createElement('li');
+    for (index in data.wineCollection) {
+    li.innerHTML = `Wine Label: ${data.wineCollection[index].brand} <br /> Type: ${data.wineCollection[index].type}`;
+    //<br /> Rating: ${data.wineCollection[index].rating}<br /> Price: ${data.wineCollection[index].price}<br /> Region: ${data.wineCollection[index].country}<br /> Year ${data.wineCollection[index].year}<br />`;
+    wineInfoList.appendChild(li);
+    }
+}
+
+function wineSearchWindow() {
+    $('body').on('click', 'img', event=> {
         event.preventDefault();
-        wineCollection();
+        wineCollectionListing();
     })
 }
-
 
 function startSearchWindow() {
     $('.login-form').submit(event => {
@@ -75,6 +131,7 @@ function startSearchWindow() {
 
 function handleCreateApp() {
     startSearchWindow();
+    wineSearchWindow();
 }
 
 $(handleCreateApp);
