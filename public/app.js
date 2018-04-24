@@ -96,6 +96,20 @@ function wineCollectionListing() {
             .html(searchResultsList);
 }
 
+//Display single wine information
+function singleWineResult(currentWine) {
+    let singleWine = `
+    <section role='region' class='oneWine'>
+        <p>${currentWine.brand}</p>
+    </section>
+    `;
+    $('.wineResults').hide();
+    let outputElem = $('#wineDetails');
+        outputElem
+            .prop('hidden', false)
+            .html(singleWine);
+}
+
 function getWine(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
 }
@@ -110,7 +124,7 @@ function createWineListing(data) {
     Price: ${data.redWineCollection[index].averagePrice} <br />  
     Region: ${data.redWineCollection[index].country} <br /> 
     Year: ${data.redWineCollection[index].year} <br />    
-    <img src='${data.redWineCollection[index].image}' class='displayBottle' alt='bottle'>
+    <img src='${data.redWineCollection[index].image}' class='redWine' data-index='${index}' alt='bottle'>
     `;
     $('#labelInformation').append(li);
     }
@@ -124,16 +138,28 @@ function startSearchWindow() {
 }
 
 function wineSearchWindow() {
-    $('body').on('click', 'img', event=> {
+    $('body').on('click', '.red', event=> {
         event.preventDefault();
         wineCollectionListing();
         getAndDisplayWineResults();
     })
 }
 
+function singleWineSearchWindow(data) {
+    $('body').on('click', '.redWine', event=> {
+        let profileWineName = $(event.target).data('index');
+        console.log(profileWineName);
+        let currentWine = MOCK_DATA.redWineCollection[profileWineName]
+        console.log(currentWine);
+        event.preventDefault();
+        singleWineResult(currentWine);
+    })
+}
+
 function handleCreateApp() {
     startSearchWindow();
     wineSearchWindow();
+    singleWineSearchWindow();
 }
 
 function getAndDisplayWineResults() {
