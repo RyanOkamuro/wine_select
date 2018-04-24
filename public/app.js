@@ -100,14 +100,25 @@ function wineCollectionListing() {
 function singleWineResult(currentWine) {
     let singleWine = `
     <section role='region' class='oneWine'>
-        <p>${currentWine.brand}</p>
+        <img src='${currentWine.image}' class='singleRedWineImage' alt='wine-bottle'>
+        <ul id='singleLabel'></ul>
     </section>
+    `;
+    let li = document.createElement('li');
+    li.innerHTML = `
+        Wine Label: ${currentWine.brand} <br />
+        Type: ${currentWine.type} <br />
+        Rating: ${currentWine.rating} <br /> 
+        Price: ${currentWine.averagePrice} <br />
+        Region: ${currentWine.country} <br />
+        Year: ${currentWine.year} <br />
     `;
     $('.wineResults').hide();
     let outputElem = $('#wineDetails');
         outputElem
             .prop('hidden', false)
             .html(singleWine);
+    $('#singleLabel').append(li);
 }
 
 function getWine(callbackFn) {
@@ -124,7 +135,7 @@ function createWineListing(data) {
     Price: ${data.redWineCollection[index].averagePrice} <br />  
     Region: ${data.redWineCollection[index].country} <br /> 
     Year: ${data.redWineCollection[index].year} <br />    
-    <img src='${data.redWineCollection[index].image}' class='redWine' data-index='${index}' alt='bottle'>
+    <img src='${data.redWineCollection[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
     `;
     $('#labelInformation').append(li);
     }

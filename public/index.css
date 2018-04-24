@@ -100,8 +100,22 @@
       width: 50px;
   }
 
-  #labelInformation {
+  #labelInformation, #singleLabel {
       list-style-type: none;
+  }
+
+  .singleRedWineImage {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      height: 300px;
+      width: 80px;
+  }
+
+  #singleLabel {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
   }
   
 
