@@ -13,7 +13,9 @@ let MOCK_DATA =
             "country": "USA",
             "year": 2014,
             "foodSuggestion": "Chicken and Turkey",
-            "image": "https://www.winetransit.com/media/catalog/product/cache/926507dc7f93631a094422215b778fe0/b/a/baileyana_firepeak_pnoir_mv_750.png"
+            "image": "https://www.winetransit.com/media/catalog/product/cache/926507dc7f93631a094422215b778fe0/b/a/baileyana_firepeak_pnoir_mv_750.png",
+            "history": "The flagship winery from the Niven Family, Baileyana was created over 30 years ago by our matriarch, Catharine Niven, and is now in the expert hands of the second and third generations of her family. An expression of classic cool climate varietals, each wine is sourced from select blocks from our estate Paragon Vineyard—planted in 1973 by Catharine’s husband, Jack. Baileyana’s range of Chardonnays, Pinot Noirs, Syrahs,and sparkling wines are all crafted by our dynamic winemaking team. Refined, rich, and perfectly balanced, Baileyana wines emulate the spirited woman who brought them to life. Boldly Beautiful.",
+            "moreInformation": "http://baileyana.com/"
         },
         {
             "brand": "Tarapaca",
@@ -26,7 +28,9 @@ let MOCK_DATA =
             "country": "Chile",
             "year": 2014,
             "foodSuggestion": "Lamb",
-            "image": "https://files.thewinebowgroup.com/PDF/brand5002/T0008448_tarapaca-g-reserva-etiq-negra-s-f-jpg-1.jpg"
+            "image": "https://files.thewinebowgroup.com/PDF/brand5002/T0008448_tarapaca-g-reserva-etiq-negra-s-f-jpg-1.jpg",
+            "history": "Since we were founded at the foothills of the Andes mountain range in 1874, we have crafted elegant, quality wines, becoming one of the most traditional and historical Chilean wineries, as well as a benchmark for viticulture in Chile and over 50 countries.",
+            "information": "http://www.tarapaca.cl/en/history/" 
         },
         {
             "brand": "Layer Cake",
@@ -39,7 +43,9 @@ let MOCK_DATA =
             "country": "Italy",
             "year": 2014,
             "foodSuggestion": "Beef and Chicken",
-            "image": "https://www.b-21.com/labels/live/ITLCPR14AE.jpg"
+            "image": "https://www.b-21.com/labels/live/ITLCPR14AE.jpg",
+            "history": "At Layer Cake, we work directly with the farmers to grow the fruit we work with. Our grapes are grown to exacting standards in some of the most diversely-layered vineyards around the world. They are handpicked, separated and fermented with care, then aged in French Oak. The character of each Layer Cake wine is influenced by the vineyard soil, which is layered like a cake…every layer tells a story.",
+            "information": "http://layercakewines.com/about/"
         },
         {
             "brand": "Penfolds",
@@ -52,7 +58,24 @@ let MOCK_DATA =
             "country": "Australia",
             "year": 2012,
             "foodSuggestion": "Beef and Lamb",
-            "image": "https://www.nataliemaclean.com/images/winepicks/058ba29dde3c11dc0f1c8adf3ae14ed6/original_penfolds-bin-2-shiraz-mourv-dre-2012-209478-bottle-1415126015.jpg"
+            "image": "https://www.nataliemaclean.com/images/winepicks/058ba29dde3c11dc0f1c8adf3ae14ed6/original_penfolds-bin-2-shiraz-mourv-dre-2012-209478-bottle-1415126015.jpg",
+            "history": "The success of Penfolds has been driven by the generations of visionaries and innovators. From the beginning in 1844 to today, the merging of science, art and innovation has driven Penfolds to become one of Australia’s most famed and respected winemakers.",
+            "information": "https://www.penfolds.com/en-us/about-penfolds/heritage/our-history"
+        }
+    ]
+};
+
+let userReview = {
+    "userReviewComments": [
+        {
+            "userName": "RedZin",
+            "rating": 4.5,
+            "reviewStatement": "Very smooth, compliments the dining experience when eating filet mignon"
+        },
+        {
+            "userName": "ShirazMe",
+            "rating": 4.3,
+            "reviewStatement": "Has a nice fruity taste, makes for a great daily dining wine"
         }
     ]
 };
@@ -102,6 +125,10 @@ function singleWineResult(currentWine) {
     <section role='region' class='oneWine'>
         <img src='${currentWine.image}' class='singleRedWineImage' alt='wine-bottle'>
         <ul id='singleLabel'></ul>
+    </section>
+    <section role='region' class='history-winerylink'>
+    ${currentWine.history};
+    <a href='${currentWine.information}'>More information</a>;
     </section>
     `;
     let li = document.createElement('li');
