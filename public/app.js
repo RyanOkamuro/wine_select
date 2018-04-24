@@ -1,6 +1,7 @@
+
 let MOCK_DATA =
 {
-    "wineCollection": [
+    "redWineCollection": [
         {
             "brand": "Baileyana",
             "wineName": "Firepeak",
@@ -56,7 +57,6 @@ let MOCK_DATA =
     ]
 };
 
-//-------------------------------Keep------------------------------------
 //Search by querying wine label.  
 //Search by red or white wine by clicking on the wine bottle image. 
 function wineQuery() {
@@ -70,8 +70,8 @@ function wineQuery() {
             <button role="button" type="submit" class="js-label-search">Submit</button>
             </fieldset>
         </form>
-        <img src='http://www.leclos.net/wp-content/uploads/850761.png' class='redAndwhite' alt='Lafite'>
-        <img src='http://www.jpost.com/HttpHandlers/ShowImage.ashx?id=327394' class='redAndwhite' alt='Jadot Lous'>
+        <img src='http://www.leclos.net/wp-content/uploads/850761.png' class='red' alt='Lafite'>
+        <img src='http://www.jpost.com/HttpHandlers/ShowImage.ashx?id=327394' class='white' alt='Jadot Lous'>
     </section>
     `;
     $('.login-form').hide();
@@ -82,10 +82,11 @@ function wineQuery() {
             .html(wineSearch);
 }
 
+//Display wine list from search results
 function wineCollectionListing() {
     let searchResultsList = `
     <section role='region' class='wineResults'>
-        <ul id='labelInformation'>Test</ul>
+        <ul id='labelInformation'></ul>
     </section>
     `;
     $('.wineLabelRedWhite').hide();
@@ -95,31 +96,24 @@ function wineCollectionListing() {
             .html(searchResultsList);
 }
 
-//function results(MOCK_DATA) {
-    //for (let i = 0; i <MOCK_DATA.length; i++) {
-        //createWineListing(MOCK_DATA[i]);
-    //}
-//}
-
 function getWine(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
 }
 
 function createWineListing(data) {
-    let wineInfoList = document.getElementById('labelInformation');
+    for (index in data.redWineCollection) {
     let li = document.createElement('li');
-    for (index in data.wineCollection) {
-    li.innerHTML = `Wine Label: ${data.wineCollection[index].brand} <br /> Type: ${data.wineCollection[index].type}`;
-    //<br /> Rating: ${data.wineCollection[index].rating}<br /> Price: ${data.wineCollection[index].price}<br /> Region: ${data.wineCollection[index].country}<br /> Year ${data.wineCollection[index].year}<br />`;
-    wineInfoList.appendChild(li);
+    li.innerHTML = `
+    Wine Label: ${data.redWineCollection[index].brand} <br /> 
+    Type: ${data.redWineCollection[index].type} <br /> 
+    Rating: ${data.redWineCollection[index].rating} <br />
+    Price: ${data.redWineCollection[index].averagePrice} <br />  
+    Region: ${data.redWineCollection[index].country} <br /> 
+    Year: ${data.redWineCollection[index].year} <br />    
+    <img src='${data.redWineCollection[index].image}' class='displayBottle' alt='bottle'>
+    `;
+    $('#labelInformation').append(li);
     }
-}
-
-function wineSearchWindow() {
-    $('body').on('click', 'img', event=> {
-        event.preventDefault();
-        wineCollectionListing();
-    })
 }
 
 function startSearchWindow() {
@@ -129,10 +123,25 @@ function startSearchWindow() {
     });
 }
 
+function wineSearchWindow() {
+    $('body').on('click', 'img', event=> {
+        event.preventDefault();
+        wineCollectionListing();
+        getAndDisplayWineResults();
+    })
+}
+
 function handleCreateApp() {
     startSearchWindow();
     wineSearchWindow();
 }
 
+function getAndDisplayWineResults() {
+    getWine(createWineListing);
+}
+
 $(handleCreateApp);
 
+$(function() {
+    getAndDisplayWineResults();
+})

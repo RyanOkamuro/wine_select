@@ -85,12 +85,25 @@
       margin-bottom: 3px;
   }
 
-  .redAndwhite {
+  .red, .white {
       display: block;
       height: 300px;
       width: 80px;
       margin: 0 auto 50px auto;
   }
+
+  .displayBottle {
+      position: relative;
+      left: 500px;
+      bottom: 100px;
+      height: 150px;
+      width: 50px;
+  }
+
+  #labelInformation {
+      list-style-type: none;
+  }
+  
 
 
 
