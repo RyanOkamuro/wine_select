@@ -101,56 +101,163 @@ function generateInformation() {
   return generateInformation[Math.floor(Math.random() * generateInformation.length)];
   }
 
+  function generateWineData() {
+    return {
+      "Wine Label": generateBrand(),
+      "Type": generateType(),
+      "Rating": generateRating(),
+      "Price": generatePrice(),
+      "Region": generateCountry(),
+      "Year": generateYear()
+    };
+  }
 
-//describe('Label Information', function() {
+  function tearDownDb() {
+    console.warn('Delete database');
+    return mongoose.connection.dropDatabase();
+  }
 
+  
+  describe('Wine API resource', function() {
 
-  //before(function() {
-    //return runServer();
-  //});
+    before(function() {
+      return runServer(TEST_DATABASE_URL);
+    });
 
-  //after(function() {
-    //return closeServer();
-  //});
+    beforeEach(function() {
+      return seedWineData();
+    });
 
-  //it('should list information on GET', function() {
-    //return chai.request(app)
-      //.get('/wineList')
-      //.then(function(res) {
-        //expect(res).to.have.status(200);
-        //expect(res).to.be.json;
-        //expect(res.body).to.be.a('array');
-        //expect(res.body.length).to.be.at.least(1);
-        //const expectedKeys = ['brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggesion', 'image', 'history', 'moreInformation'];
-        //res.body.forEach(function(item) {
-          //expect(item).to.be.a('object');
-          //expect(item).to.include.keys(expectedKeys);
-        //});
-      //});
-  //});
+    afterEach(function() {
+      return tearDownDb();
+    });
 
-  //it('should add an item on POST', function() {
-    //const newWineBottle = {brand: 'Burn Cottage', wineName: 'Cashburn Pinot Noir', color: 'Red', type: 'Pinot Noir', rating: 4.5, averagePrice: 30.99, region: 'Central Otago', country: 'New Zealand', year: 2015, foodSuggesion: 'Beef or chicken', image: 'https://cdn.shopify.com/s/files/1/0380/7593/products/cashburn-11-bottle_grande.png?v=1458579525', history: 'Burn Cottage Vineyard Property is a twenty four hectare estate in the foothills of the Pisa range in Central Otago, New Zealand. The vineyard is owned by the Sauvage family which also owns the celebrated Koehler Ruprecht estate in the Pfalz region of Germany, as well as several fine wine importing and wholesaling companies in the United States.', moreInformation: 'https://www.burncottage.com/history.html'};
-    //return chai.request(app)
-      //.post('/wineList')
-      //.send(newWineBottle)
-      //.then(function(res) {
-        //expect(res).to.have.status(201);
-        //expect(res).to.be.json;
-        //expect(res.body).to.be.a('object');
-        //expect(res.body).to.include.keys('brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggesion', 'image', 'history', 'moreInformation');
-        // response should be deep equal to `newItem` from above if we assign
-        // `id` to it from `res.body.id`
-      //});
-  //});
+    after(function() {
+      return closeServer();
+    });
 
-
-describe('index page', function () {
-  it('should exist', function () {
-    return chai.request(app)
-      .get('/')
-      .then(function (res) {
-        expect(res).to.have.status(200);
-      });
+  describe('GET Label Information', function() {
+    it('should list information on GET', function() {
+      let res;
+      let resWine;
+      return chai.request(app)
+        .get('/wineList')
+        .then(function(res) {
+          res = _res;
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body.wineList).to.be.a('array');
+          expect(res.body.length.wineList).to.be.at.least(1);
+          const expectedKeys = ['id','brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggesion', 'image', 'history', 'moreInformation'];
+          res.body.forEach(function(item) {
+          expect(item).to.be.a('object');
+          expect(item).to.include.keys(expectedKeys);
+        });
+        resWine = res.body.wine[0];
+        return wineListRouter.findById(resWine.id);
+      })
+      .then(function(wine) {
+        expect(resWine.id).to.equal(wine.id);
+        expect(resWine.brand).to.equal(wine.brand);
+        expect(resWine.wineName).to.equal(wine.WineName);
+        expect(resWine.color).to.equal(wine.color);
+        expect(resWine.type).to.equal(wine.type);
+        expect(resWine.rating).to.equal(wine.rating);
+        expect(resWine.averagePrice).to.equal(wine.averagePrice);
+        expect(resWine.region).to.equal(wine.region);
+        expect(resWine.country).to.equal(wine.country);
+        expect(resWine.year).to.equal(wine.year);
+        expect(resWine.foodSuggestion).to.equal(wine.foodSuggestion);
+        expect(resWine.image).to.equal(wine.image);
+        expect(resWine.history).to.equal(wine.history);
+        expect(resWine.moreInformation).to.equal(wine.moreInformation);
+      })
   });
 });
+
+  describe('POST Label Information', function() {
+    it('should add an item on POST', function() {
+      const newWineBottle = generateWineData();
+      
+      return chai.request(app)
+        .post('/wineList')
+        .send(newWineBottle)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys('brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggesion', 'image', 'history', 'moreInformation');
+          expect(res.body.brand).to.equal(newWineBottle.brand);
+          expect(res.body.wineName).to.equal(newWineBottle.wineName);
+          expect(res.body.color).to.equal(newWineBottle.color);
+          expect(res.body.type).to.equal(newWineBottle.type);
+          expect(res.body.rating).to.equal(newWineBottle.rating);
+          expect(res.body.averagePrice).to.equal(newWineBottle.averagePrice);
+          expect(res.body.region).to.equal(newWineBottle.region);
+          expect(res.body.country).to.equal(newWineBottle.country);
+          expect(res.body.foodSuggestion).to.equal(newWineBottle.foodSuggestion);
+          expect(res.body.image).to.equal(newWineBottle.image);
+          expect(res.body.history).to.equal(newWineBottle.history);
+          expect(res.body.moreInformation).to.equal(newWineBottle.moreInformation);
+      });
+  });
+  });
+
+describe('PUT Label Information', function() {
+  it('should add an item on PUT', function() {
+    const updateData = {
+      rating: 4.3,
+      averagePrice: 49.99 
+    };
+
+    return wineListRouter
+      .findOne()
+      .then(function(wineBottle){
+        updateData.id = wineBottle.id;
+
+        return chai.request(app)
+          .put(`/wineList/${wineBottle.id}`)
+          .send(updateData);
+      })
+      .then(function(res) {
+        expect(res).to.have.status(204);
+
+        return wineListRouter.findById(updateData.id);
+      })
+      .then(function(wineBottle) {
+        expect(wineBottle.rating).to.equal(updateData.rating);
+        expect(wineBottle.averagePrice).to.equal(updateData.averagePrice);
+      });
+    });
+  });
+
+  describe('DELETE Label Information', function() {
+    it('delete wine by id', function() {
+      let wine;
+
+      return wineListRouter
+        .findOne()
+        .then(function(_wine) {
+          wine = _wine;
+          return chai.request(app).delete(`/wineList/${wine.id}`);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+          return wineListRouter.findById(wine.id);
+        })
+        .then(function(_wine) {
+          expect(_wine).to.be.null;
+        });
+    }); 
+  });
+});
+
+//describe('index page', function () {
+  //it('should exist', function () {
+    //return chai.request(app)
+      //.get('/')
+      //.then(function (res) {
+        //expect(res).to.have.status(200);
+      //});
+  //});
+//});
