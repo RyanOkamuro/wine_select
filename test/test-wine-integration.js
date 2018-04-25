@@ -2,7 +2,6 @@
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const faker = require('faker');
 const mongoose = require('mongoose');
 
 const {wineListRouter} = require('./wineListRouter');
@@ -17,7 +16,7 @@ function seedWineData() {
   console.info('seeding wine info');
   const seedData = [];
 
-  for (let i=1; i<=10; i++) {
+  for (let i=1; i<=4; i++) {
     seedData.push(generateWineData());
   }
   return wineListRouter.insertMany(seedData);
