@@ -144,7 +144,7 @@ function addWine() {
         </form>
     </section>
     `;
-    //$('.wineRedWhiteImages').hide();
+    $('.wineRedWhiteImages').hide();
     let outputElem = $('.newWineInputArea');
     outputElem
         .prop('hidden', false)
@@ -175,8 +175,8 @@ function singleWineResult(currentWine) {
         <ul id='singleLabel'></ul>
     </section>
     <section role='region' class='history-winerylink'>
-    ${currentWine.history};
-    <a href='${currentWine.information}'>More information</a>;
+    ${currentWine.history}
+    <a href='${currentWine.information}'>More information</a>
     </section>
     `;
     let li = document.createElement('li');
@@ -220,14 +220,13 @@ function startSearchWindow() {
     $('.login-form').submit(event => {
         event.preventDefault();
         wineQuery();
-        addWine();
     });
 }
 
 function addNewWineBottle() {
     $('.newWineInputArea').on('click', '.js-label-add-wines', event => {
         event.preventDefault();
-        //addWine();
+        addWine();
     });
 }
 
