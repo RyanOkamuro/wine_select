@@ -94,7 +94,7 @@
       width: 80px;
   }
 
-  .redWine {
+  .redWine, .whiteWine {
       position: absolute;
       right: 0;
       top: 0;

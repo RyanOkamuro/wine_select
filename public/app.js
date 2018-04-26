@@ -65,6 +65,72 @@ let MOCK_DATA =
     ]
 };
 
+let MOCK_DATA2 =
+{
+    "whiteWineCollection": [
+        {
+            "brand": "Christian Moreau",
+            "wineName": "Chablis ",
+            "color": "White",
+            "type": "Chardonnay",
+            "rating": 4.3,
+            "averagePrice": 21.99,
+            "region": "Burgundy",
+            "country": "France",
+            "year": 2015,
+            "foodSuggestion": "Seafood",
+            "image": "http://frederick-wildman.s3.amazonaws.com/wines_bottle/21cbd891bf45a59dc97dc221ed61ac4b.png",
+            "history": "Our vineyard is located in the village of Chablis, in the very heart of the Chablis country, on the left bank of the Serein River, with a south-south east exposure. It is located in the climat Les Pargues. The soil is kimmeridgien calcareously clay which goes back to the upper jurrassic age (portlandien).",
+            "moreInformation": "http://www.domainechristianmoreau.com/eng/wines.html"
+        },
+        {
+            "brand": "Bernkasteler Badstube",
+            "wineName": "Dr. Thanisch", 
+            "color": "White",
+            "type": "Riesling",
+            "rating": 4.5,
+            "averagePrice": 23.99,
+            "region": "Mosel",
+            "country": "Germany",
+            "year": 2016,
+            "foodSuggestion": "Seafood",
+            "image": "https://www.dynamicwines.com.au/assets/full/DT1115.jpg",
+            "history": "The internationally recognized Wwe. Dr. H. Thanisch, Erben Müller-Burgraef estate is located in the picturesque town of Bernkastel-Kues in the heart of the Middle Mosel. Here we cultivate, 12 hectares (ca. 30 acres) of prime, steep Riesling sites.",
+            "information": "http://www.dr-thanisch.de/index.php?id=3&L=1" 
+        },
+        {
+            "brand": "Gaja",
+            "wineName": "Alteni Di Brassica",
+            "color": "White",
+            "type": "Sauvignon Blanc",
+            "rating": 4.1,
+            "averagePrice": 149.99,
+            "region": "Piedmont",
+            "country": "Italy",
+            "year": 2015,
+            "foodSuggestion": "Cured Meat, Chicken, Seafood",
+            "image": "https://www.worldofwine.com.es/wp-content/uploads/2015/01/it4-alteni-di-brassica-web.jpg",
+            "history": "Golden yellow with an elegant perfume with aromatic notes in harmony with the distinct fruit. Dense structure and balanced body, supported by perfectly integrated acidity.",
+            "information": "https://www.wine.com/product/gaja-alteni-di-brassica-sauvignon-blanc-2015/335280"
+        },
+        {
+            "brand": "Holm Oak",
+            "wineName": "Tasmania",
+            "color": "White",
+            "type": "Pinot Gris",
+            "rating": 3.7,
+            "averagePrice": 23.99,
+            "region": "Tamar Valley",
+            "country": "Australia",
+            "year": 2015,
+            "foodSuggestion": "Seafood and Chicken",
+            "image": "https://cdn6.bigcommerce.com/s-kkxmb/products/6414/images/9897/46581FB8F76904381824AA7C7E6FA9C0__46308.1498782782.600.600.PNG?c=2",
+            "history": "The vineyards that winemaker Rebecca and her viticulturist husband Tim Duffy own in the Tamar Valley are steeped with a rich Australian (and sporting!) history, making their site probably one of the most interesting and unique in the country.",
+            "information": "http://www.holmoakvineyards.com.au/About-Us/Our-Vineyards"
+        }
+    ]
+};
+
 let userReview = {
     "userReviewComments": [
         {
@@ -196,11 +262,14 @@ function singleWineResult(currentWine) {
     $('#singleLabel').append(li);
 }
 
+//MOCK_DATA--For Red Wine; MOCK_DATA2--For White Wine
 function getWine(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
+    setTimeout(function(){ callbackFn(MOCK_DATA2)}, 100);
 }
 
-function createWineListing(data) {
+//Red Wine Listing
+function createRedWineListing(data) {
     for (index in data.redWineCollection) {
     let li = document.createElement('li');
     li.classList.add('vino');
@@ -212,6 +281,24 @@ function createWineListing(data) {
     Region: ${data.redWineCollection[index].country} <br /> 
     Year: ${data.redWineCollection[index].year} <br />    
     <img src='${data.redWineCollection[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
+    `;
+    $('#labelInformation').append(li);
+    }
+}
+
+//White Wine Listing
+function createWhiteWineListing(data) {
+    for (index in data.whiteWineCollection) {
+    let li = document.createElement('li');
+    li.classList.add('vino');
+    li.innerHTML = `
+    Wine Label: ${data.whiteWineCollection[index].brand} <br /> 
+    Type: ${data.whiteWineCollection[index].type} <br /> 
+    Rating: ${data.whiteWineCollection[index].rating} <br />
+    Price: ${data.whiteWineCollection[index].averagePrice} <br />  
+    Region: ${data.whiteWineCollection[index].country} <br /> 
+    Year: ${data.whiteWineCollection[index].year} <br />    
+    <img src='${data.whiteWineCollection[index].image}' class='whiteWine' data-index='${index}' alt='wine-bottle'>
     `;
     $('#labelInformation').append(li);
     }
@@ -231,15 +318,26 @@ function addNewWineBottle() {
     });
 }
 
-function wineSearchWindow() {
+//Red Wine Search Window
+function redWineSearchWindow() {
     $('body').on('click', '.red', event=> {
         event.preventDefault();
         wineCollectionListing();
-        getAndDisplayWineResults();
+        getAndDisplayRedWineResults();
     })
 }
 
-function singleWineSearchWindow(data) {
+//White Wine Search Window
+function whiteWineSearchWindow() {
+    $('body').on('click', '.white', event=> {
+        event.preventDefault();
+        wineCollectionListing();
+        getAndDisplayWhiteWineResults();
+    })
+}
+
+//Single Red Wine Search Window
+function singleRedWineSearchWindow(data) {
     $('body').on('click', '.redWine', event=> {
         let profileWineName = $(event.target).data('index');
         console.log(profileWineName);
@@ -250,19 +348,37 @@ function singleWineSearchWindow(data) {
     })
 }
 
+//Single White Wine Search Window
+function singleWhiteWineSearchWindow(data) {
+    $('body').on('click', '.whiteWine', event=> {
+        let profileWineName = $(event.target).data('index');
+        console.log(profileWineName);
+        let currentWine = MOCK_DATA2.whiteWineCollection[profileWineName]
+        console.log(currentWine);
+        event.preventDefault();
+        singleWineResult(currentWine);
+    })
+}
+
 function handleCreateApp() {
     startSearchWindow();
     addNewWineBottle() 
-    wineSearchWindow();
-    singleWineSearchWindow();
+    redWineSearchWindow();
+    whiteWineSearchWindow();
+    singleRedWineSearchWindow();
+    singleWhiteWineSearchWindow();
 }
 
-function getAndDisplayWineResults() {
-    getWine(createWineListing);
+function getAndDisplayRedWineResults() {
+    getWine(createRedWineListing);
 }
 
+function getAndDisplayWhiteWineResults() {
+    getWine(createWhiteWineListing);
+}
 $(handleCreateApp);
 
 $(function() {
-    getAndDisplayWineResults();
+    getAndDisplayRedWineResults();
+    getAndDisplayWhiteWineResults();
 })
