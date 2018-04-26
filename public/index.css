@@ -85,23 +85,40 @@
       margin-bottom: 3px;
   }
 
+  .wineRedWhiteImages {
+      text-align: center;
+  }
+
   .red, .white {
-      margin: 0 auto;
-      display: inline-block;
       height: 300px;
       width: 80px;
   }
 
   .redWine {
-      position: relative;
-      left: 500px;
-      bottom: 100px;
+      position: absolute;
+      right: 0;
+      top: 0;
       height: 150px;
       width: 50px;
   }
 
+  #labelInformation {
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+  }
+
+  .vino {
+      margin-bottom: 30px;
+  }
+
   #labelInformation, #singleLabel {
       list-style-type: none;
+  }
+
+  .oneWine {
+      text-align: center;
   }
 
   .singleRedWineImage {
@@ -113,9 +130,16 @@
   }
 
   #singleLabel {
-      width: 50%;
+      width: auto;
       margin-left: auto;
       margin-right: auto;
+      display: inline-block;
+      text-align: left;
+  }
+
+  #labelInformation > li {
+      position: relative;
+      min-height: 150px;
   }
 
   .history-winerylink {

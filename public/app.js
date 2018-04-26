@@ -203,6 +203,7 @@ function getWine(callbackFn) {
 function createWineListing(data) {
     for (index in data.redWineCollection) {
     let li = document.createElement('li');
+    li.classList.add('vino');
     li.innerHTML = `
     Wine Label: ${data.redWineCollection[index].brand} <br /> 
     Type: ${data.redWineCollection[index].type} <br /> 

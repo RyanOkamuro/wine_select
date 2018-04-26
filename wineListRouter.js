@@ -13,9 +13,9 @@ const wineSchema = mongoose.Schema({
     country: {type: String, required: true},
     year: {type: Number, required: true},
     foodSuggestion: {type: String, required: true},
-    image: {type: Text, required: true},
-    history: {type: Text, required: true},
-    moreInformation: {type: Text, required: true},
+    image: {type: String, required: true},
+    history: {type: String, required: true},
+    moreInformation: {type: String, required: true},
 });
 
 wineSchema.virtual('wineLabelDetails').get(function() {

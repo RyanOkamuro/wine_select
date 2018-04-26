@@ -4,7 +4,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
-const {wineListRouter} = require('./wineListRouter');
+const {wineListRouter} = require('../wineListRouter');
 const {app, closeServer, runServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 
@@ -95,7 +95,7 @@ function generateHistory() {
   }
 
 function generateInformation() {
-  const information = [
+  const moreInformation = [
     'http://baileyana.com/', 'http://www.tarapaca.cl/en/history/', 'http://layercakewines.com/about/', 'https://www.penfolds.com/en-us/about-penfolds/heritage/our-history'];
   return generateInformation[Math.floor(Math.random() * generateInformation.length)];
   }
@@ -105,7 +105,7 @@ function generateInformation() {
       "Wine Label": generateBrand(),
       "Type": generateType(),
       "Rating": generateRating(),
-      "Price": generatePrice(),
+      "Price": generateAveragePrice(),
       "Region": generateCountry(),
       "Year": generateYear()
     };
