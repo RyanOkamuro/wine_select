@@ -85,14 +85,18 @@ let userReview = {
 function wineQuery() {
     let wineSearch = `
     <section role='region' class='wineLabelRedWhite'>
-        <form role='form' class='wineBrand'>
+        <form role='form' class='wineBrand-form'>
             <fieldset name='wineLabel'>
             <legend>Wine Label Search</legend>
             <label for='js-wine-label' class='winery'>Wine Label</label>
             <input placeholder='Layer Cake' type='text' name='js-wine-label' id='js-wine-label' autofocus/>
-            <button role="button" type="submit" class="js-label-search">Submit</button>
+            <button role='button' type='submit' class='js-label-search'>Submit</button>
+            <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
             </fieldset>
         </form>
+    </section>
+    <section role='region' class='newWineInputArea' aria-live='assertive' hidden></section>
+    <section role='region' class='wineRedWhiteImages'>
         <img src='http://www.leclos.net/wp-content/uploads/850761.png' class='red' alt='Lafite'>
         <img src='http://www.jpost.com/HttpHandlers/ShowImage.ashx?id=327394' class='white' alt='Jadot Lous'>
     </section>
@@ -105,6 +109,48 @@ function wineQuery() {
             .html(wineSearch);
 }
 
+function addWine() {
+    let newWine = `
+    <section role='region' class='addBottle'>
+        <form role='form' class='newBottle-form'>
+            <fieldset name='addNewWineListing'>
+                <legend>Add New Wine Bottle</legend>
+                <label for='js-wine-brand' class='newWineBrand'>Wine Brand</label>
+                <input placeholder='Shafer' type='text' name='js-wine-brand' id='js-wine-brand'>
+                <label for='js-wine-name' class='newWineName'>Wine Name</label>
+                <input placeholder='Hillside Select' type='text' name='js-wine-name' id='js-wine-name'>
+                <label for='js-wine-type' class='newWineType'>Wine Type</label>
+                <input placeholder='Cabernet Sauvignon' type='text' name='js-wine-type' id='js-wine-type'>
+                <label for='js-wine-rating' class='newWineRating'>Rating</label>
+                <input placeholder= 4.8 type='number' name='js-wine-rating' id='js-wine-rating'>
+                <label for='js-wine-averagePrice' class='newWineAveragePrice'>Average Price</label>
+                <input placeholder= 329.99 type='number' name='js-wine-averagePrice' id='js-wine-averagePrice'>
+                <label for='js-wine-region' class='newWineRegion'>Region</label>
+                <input placeholder='Napa Valley' type='text' name='js-wine-region' id='js-wine-region'>
+                <label for='js-wine-country' class='newWineCoutry'>Country of Origin</label>
+                <input placeholder='USA' type='text' name='js-wine-country' id='js-wine-country'>
+                <label for='js-wine-year' class='newWineYear'>Year</label>
+                <input placeholder= 2013 type='number' name='js-wine-year' id='js-wine-year'>
+                <label for='js-wine-food' class='newWineFood'>Food Pairing</label>
+                <input placeholder='Beef' type='text' name='js-wine-food' id='js-wine-food'>
+                <label for='js-wine-image' class='newWineImage'>Wine Image URL</label>
+                <input placeholder='www.wineimage...' type='text' name='js-wine-image' id='js-wine-image'>
+                <label for='js-wine-history' class='newWineHistory'>History</label>
+                <input placeholder='The 2013 Hillside Select is...' type='text' name='js-wine-food' id='js-wine-food'>
+                <label for='js-wine-information' class='newWineInformation'>More Information URL</label>
+                <input placeholder='www.shafervine...' type='text' name='js-wine-food' id='js-wine-food'>
+                <button role='button' type='submit' class='js-add-bottle'>Submit</button>
+            </fieldset>
+        </form>
+    </section>
+    `;
+    //$('.wineRedWhiteImages').hide();
+    let outputElem = $('.newWineInputArea');
+    outputElem
+        .prop('hidden', false)
+        .html(newWine);
+}
+
 //Display wine list from search results
 function wineCollectionListing() {
     let searchResultsList = `
@@ -113,6 +159,8 @@ function wineCollectionListing() {
     </section>
     `;
     $('.wineLabelRedWhite').hide();
+    $('.wineRedWhiteImages').hide();
+    $('.addBottle').hide();
     let outputElem = $('#wineList');
         outputElem
             .prop('hidden', false)
@@ -172,6 +220,14 @@ function startSearchWindow() {
     $('.login-form').submit(event => {
         event.preventDefault();
         wineQuery();
+        addWine();
+    });
+}
+
+function addNewWineBottle() {
+    $('.newWineInputArea').on('click', '.js-label-add-wines', event => {
+        event.preventDefault();
+        //addWine();
     });
 }
 
@@ -196,6 +252,7 @@ function singleWineSearchWindow(data) {
 
 function handleCreateApp() {
     startSearchWindow();
+    addNewWineBottle() 
     wineSearchWindow();
     singleWineSearchWindow();
 }
