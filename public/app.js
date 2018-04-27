@@ -70,7 +70,7 @@ let MOCK_DATA2 =
     "whiteWineCollection": [
         {
             "brand": "Christian Moreau",
-            "wineName": "Chablis ",
+            "wineName": "Chablis",
             "color": "White",
             "type": "Chardonnay",
             "rating": 4.3,
@@ -84,8 +84,8 @@ let MOCK_DATA2 =
             "moreInformation": "http://www.domainechristianmoreau.com/eng/wines.html"
         },
         {
-            "brand": "Bernkasteler Badstube",
-            "wineName": "Dr. Thanisch", 
+            "brand": "Dr. Thanisch",
+            "wineName": "Bernkasteler Badstube", 
             "color": "White",
             "type": "Riesling",
             "rating": 4.5,
@@ -155,7 +155,16 @@ function wineQuery() {
             <fieldset name='wineLabel'>
             <legend>Wine Label Search</legend>
             <label for='js-wine-label' class='winery'>Wine Label</label>
-            <input placeholder='Layer Cake' type='text' name='js-wine-label' id='js-wine-label' autofocus/>
+            <select name='js-wine-label' id='js-wine-label'>
+                <option value="BF">Baileyana Firepeak</option>
+                <option value="CMC">Christian Moreau Chablis</option>
+                <option value="DTBB">Dr. Thanisch Bernkasteler Badstube</option>
+                <option value="GADB">Gaja Alteni Di Brassica</option>
+                <option value="HOT">Holm Oak Tasmania</option>
+                <option value="LCP">Layer Cake Primitivo</option>
+                <option value="PB">Penfolds Bin 2</option>
+                <option value="TENGR">Tarapaca Etiqueta Negra Gran Reserva</option>
+            </select>
             <button role='button' type='submit' class='js-label-search'>Submit</button>
             <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
             </fieldset>

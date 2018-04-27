@@ -154,22 +154,22 @@ function generateInformation() {
         });
         resWine = res.body.wine[0];
         return wineListRouter.findById(resWine.id);
-      })
-      .then(function(wine) {
-        expect(resWine.id).to.equal(wine.id);
-        expect(resWine.brand).to.equal(wine.brand);
-        expect(resWine.wineName).to.equal(wine.WineName);
-        expect(resWine.color).to.equal(wine.color);
-        expect(resWine.type).to.equal(wine.type);
-        expect(resWine.rating).to.equal(wine.rating);
-        expect(resWine.averagePrice).to.equal(wine.averagePrice);
-        expect(resWine.region).to.equal(wine.region);
-        expect(resWine.country).to.equal(wine.country);
-        expect(resWine.year).to.equal(wine.year);
-        expect(resWine.foodSuggestion).to.equal(wine.foodSuggestion);
-        expect(resWine.image).to.equal(wine.image);
-        expect(resWine.history).to.equal(wine.history);
-        expect(resWine.moreInformation).to.equal(wine.moreInformation);
+        })
+        .then(function(wine) {
+          expect(resWine.id).to.equal(wine.id);
+          expect(resWine.brand).to.equal(wine.brand);
+          expect(resWine.wineName).to.equal(wine.WineName);
+          expect(resWine.color).to.equal(wine.color);
+          expect(resWine.type).to.equal(wine.type);
+          expect(resWine.rating).to.equal(wine.rating);
+          expect(resWine.averagePrice).to.equal(wine.averagePrice);
+          expect(resWine.region).to.equal(wine.region);
+          expect(resWine.country).to.equal(wine.country);
+          expect(resWine.year).to.equal(wine.year);
+          expect(resWine.foodSuggestion).to.equal(wine.foodSuggestion);
+          expect(resWine.image).to.equal(wine.image);
+          expect(resWine.history).to.equal(wine.history);
+          expect(resWine.moreInformation).to.equal(wine.moreInformation);
       })
   });
 });
