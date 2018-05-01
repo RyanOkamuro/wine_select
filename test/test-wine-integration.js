@@ -11,7 +11,7 @@ const {TEST_DATABASE_URL} = require('../config');
 const expect = chai.expect;
 
 chai.use(chaiHttp);
-
+console.log('hi');
 function seedWineData() {
   console.info('seeding wine info');
   const seedData = [];

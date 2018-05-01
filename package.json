@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Wine Select App",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RyanOkamuro/wine_select.git"
+  },
   "scripts": {
     "test": "mocha --exit"
   },
@@ -10,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
-    "mongoose": "^5.0.15",
+    "mongoose": "^5.0.17",
     "morgan": "^1.9.0"
   },
   "devDependencies": {

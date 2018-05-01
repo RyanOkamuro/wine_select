@@ -131,6 +131,24 @@ let MOCK_DATA2 =
     ]
 };
 
+//function getWine() {
+    //const settings = {
+        //'async': true,
+        //'crossDomain': true,
+        //'url': '',
+        //'method': 'GET',
+        //'headers': {
+            //'Authorization': 'Bearer ',
+            //'Cache-Control': 'no-cache',
+        //},
+        //'success': function() {
+            //wineSearch()
+        //}
+    //}
+    //$.ajax(settings);
+//}
+
+
 let userReview = {
     "userReviewComments": [
         {
