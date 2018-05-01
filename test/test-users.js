@@ -1,3 +1,5 @@
+/*
+
 'use strict';
 global.DATABASE_URL = 'mongodb://localhost/jwt-auth-demo-test';
 const chai = require('chai');
@@ -472,3 +474,6 @@ describe('/api/user', function() {
     });
   });
 });
+
+
+*/

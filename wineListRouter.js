@@ -27,11 +27,16 @@ wineSchema.virtual('wineOrigin').get(function() {
 wineSchema.methods.serialize = function() {
     return {
         id: this._id,
-        wineName: this.wineName,
+        wineLabelDetails: this.wineLabelDetails,
+        type: this.type,
         rating: this.rating,
         averagePrice: this.averagePrice,
         wineOrigin: this.wineOrigin,
-        year: this.year
+        year: this.year,
+        foodSuggestion: this.foodSuggestion,
+        image: this.image,
+        history: this.history,
+        moreInformation: this.moreInformation
     };
 }
 

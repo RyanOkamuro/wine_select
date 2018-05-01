@@ -1,15 +1,17 @@
 'use strict';
 
+//require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-
-mongoose.Promise = global.Promise;
-
+//const passport = require('passport');
+//const { router: usersRouter } = require('/users');
+//const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 const {wineListRouter} = require('./wineListRouter');
 //const {userReviewRouter} = require('./userReviewRouter');
 
+mongoose.Promise = global.Promise;
 const {PORT, DATABASE_URL} = require('./config');
 
 const app = express();
@@ -17,14 +19,31 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(morgan('common'));
-//--new add
-app.use(express.json())
+app.use(express.json());
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if (req.method === 'OPTIONS') {
+    return res.send(204);
+  }
+  next();
+});
+
+//passport.use(localStrategy);
+//passport.use(jwtStrategy);
+
+//app.use('/users/', usersRouter);
+//app.use('/auth/', authRouter);
+
+//const jwtAuth = passport.authenticate('jwt', {session: false })
+
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-//app.use('/wineList', wineListRouter);
+app.use('/wineList', wineListRouter);
 //app.use('/userReview', userReviewRouter);
 
 app.get('/wineBottles', (req, res) => {
