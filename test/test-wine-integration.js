@@ -23,23 +23,24 @@ function seedWineData() {
   return wineListRouter.insertMany(seedData);
 }
 
-//Need to concatinate generateBrand & WineName together
+let randomBottle = 0;
 function generateLabel() {
   const bottleLabel = [
     'Baileyana Firepeak', 'Tarapaca Etiqueta Negra Gran Reserva', 'Layer Cake Primitivo', 'Penfolds Bin 2'];
-  return bottleLabel[Math.floor(Math.random() * bottleLabel.length)];
+  randomBottle = Math.floor(Math.random() * bottleLabel.length)
+    return bottleLabel[randomBottle];
 }
 
 function generateBrand() {
   const brand = [
     'Baileyana', 'Tarapaca', 'Layer Cake', 'Penfolds'];
-  return brand[Math.floor(Math.random() * brand.length)];
+  return brand[randomBottle];
 }
 
 function generateWineName() {
   const wineName = [
     'Firepeak', 'Etiqueta Negra Gran Reserva', 'Primitivo', 'Bin 2'];
-  return wineName[Math.floor(Math.random() * wineName.length)];
+  return wineName[randomBottle];
 }
 
 function generateColor() {
@@ -66,28 +67,29 @@ function generateAveragePrice() {
   return averagePrice[Math.floor(Math.random() * averagePrice.length)];
 }
 
-//Need to concatinate generateWineRegion & generateCountry together
+let randomLocation = 0;
 function generateWineOrigin() {
   const wineOrigin = [
     'Edna Valley USA', 'Maipo Valley Chile', 'Puglia Italy', 'South Australia Australia'];
-  return wineOrigin[Math.floor(Math.random() * wineOrigin.length)];
+  randomLocation = Math.floor(Math.random() * wineOrigin.length)
+    return wineOrigin[randomLocation];
 }
 
 function generateRegion() {
   const region = [
     'Edna Valley', 'Maipo Valley', 'Puglia', 'South Australia'];
-  return region[Math.floor(Math.random() * region.length)];
+  return region[randomLocation];
 }
 
 function generateCountry() {
   const country = [
     'USA', 'Chile', 'Italy', 'Australia'];
-    return country[Math.floor(Math.random() * country.length)];
+    return country[randomLocation];
 }
 
 function generateYear() {
   const year = [
-    '2014', '2014', '2014', '2012'];
+    2014, 2014, 2014, 2012];
   return year[Math.floor(Math.random() * year.length)];
 }
 
@@ -116,6 +118,7 @@ function generateInformation() {
   }
 
   function generateWineData() {
+    
     return {
       'wineLabelDetails': generateLabel(),
       'brand': generateBrand(),
@@ -194,103 +197,92 @@ function generateInformation() {
   //});
 //});
 
-  //describe('POST Label Information', function() {
-    //it('should add an item on POST', function() {
-      //const newWineBottle = generateWineData();
+  describe('POST Label Information', function() {
+    it('should add an item on POST', function() {
+      const newWineBottle = generateWineData();
       
-      //return chai.request(app)
-        //.post('/wineBottles')
-        //.send(newWineBottle)
-        //.then(function(res) {
-          //expect(res).to.have.status(201);
-          //expect(res).to.be.json;
-          //expect(res.body).to.be.a('object');
-          //expect(res.body).to.include.keys('wineLabelDetails', 'type', 'rating', 'averagePrice', 'wineOrigin', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation');
-          //expect(res.body.wineLabelDetails).to.equal(newWineBottle.wineLabelDetails);
-          //expect(res.body.type).to.equal(newWineBottle.type);
-          //expect(res.body.rating).to.equal(newWineBottle.rating);
-          //expect(res.body.averagePrice).to.equal(newWineBottle.averagePrice);
-          //expect(res.body.wineOrigin).to.equal(newWineBottle.wineOrigin);
-          //expect(res.body.year).to.equal(newWineBottle.year);
-          //expect(res.body.foodSuggestion).to.equal(newWineBottle.foodSuggestion);
-          //expect(res.body.image).to.equal(newWineBottle.image);
-          //expect(res.body.history).to.equal(newWineBottle.history);
-          //expect(res.body.moreInformation).to.equal(newWineBottle.moreInformation);
-          //expect(res.body.id).to.not.be.null;
-          //return wineListRouter.findById(res.body.id);
-        //})
-        //.then(function(wine) {
-          //expect(wine.wineLabelDetails).to.equal(newWineBottle.wineLabelDetails);
-          //expect(wine.type).to.equal(newWineBottle.type);
-          //expect(wine.rating).to.equal(newWineBottle.rating);
-          //expect(wine.averagePrice).to.equal(newWineBottle.averagePrice);
-          //expect(wine.wineOrigin).to.equal(newWineBottle.wineOrigin);
-          //expect(wine.year).to.equal(newWineBottle.year);
-          //expect(wine.foodSuggestion).to.equal(newWineBottle.foodSuggestion);
-          //expect(wine.image).to.equal(newWineBottle.image);
-          //expect(wine.history).to.equal(newWineBottle.history);
-          //expect(wine.moreInformation).to.equal(newWineBottle.moreInformation);
-        //});
-      //});
-  //});
+      return chai.request(app)
+        .post('/wineBottles')
+        .send(newWineBottle)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys('wineLabelDetails', 'type', 'rating', 'averagePrice', 'wineOrigin', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation');
+          expect(res.body.wineLabelDetails).to.equal(newWineBottle.wineLabelDetails);
+          expect(res.body.type).to.equal(newWineBottle.type);
+          expect(res.body.rating).to.equal(newWineBottle.rating);
+          expect(res.body.averagePrice).to.equal(newWineBottle.averagePrice);
+          expect(res.body.wineOrigin).to.equal(newWineBottle.wineOrigin);
+          expect(res.body.year).to.equal(newWineBottle.year);
+          expect(res.body.foodSuggestion).to.equal(newWineBottle.foodSuggestion);
+          expect(res.body.image).to.equal(newWineBottle.image);
+          expect(res.body.history).to.equal(newWineBottle.history);
+          expect(res.body.moreInformation).to.equal(newWineBottle.moreInformation);
+          expect(res.body.id).to.not.be.null;
+          return wineListRouter.findById(res.body.id);
+        })
+        .then(function(wine) {
+          expect(wine.wineLabelDetails).to.equal(newWineBottle.wineLabelDetails);
+          expect(wine.type).to.equal(newWineBottle.type);
+          expect(wine.rating).to.equal(newWineBottle.rating);
+          expect(wine.averagePrice).to.equal(newWineBottle.averagePrice);
+          expect(wine.wineOrigin).to.equal(newWineBottle.wineOrigin);
+          expect(wine.year).to.equal(newWineBottle.year);
+          expect(wine.foodSuggestion).to.equal(newWineBottle.foodSuggestion);
+          expect(wine.image).to.equal(newWineBottle.image);
+          expect(wine.history).to.equal(newWineBottle.history);
+          expect(wine.moreInformation).to.equal(newWineBottle.moreInformation);
+        });
+      });
+  });
 
-//describe('PUT Label Information', function() {
-  //it('should add an item on PUT', function() {
-    //const updateData = {
-      //rating: 4.3,
-      //averagePrice: 49.99 
-    //};
+describe('PUT Label Information', function() {
+  it('should add an item on PUT', function() {
+    const updateData = {
+      rating: 4.3,
+      averagePrice: 49.99 
+    };
 
-    //return wineListRouter
-      //.findOne()
-      //.then(function(wineBottle){
-        //updateData.id = wineBottle.id;
+    return wineListRouter
+      .findOne()
+      .then(function(wineBottle){
+        updateData.id = wineBottle.id;
 
-        //return chai.request(app)
-          //.put(`/wineBottles/${wineBottle.id}`)
-          //.send(updateData);
-      //})
-      //.then(function(res) {
-        //expect(res).to.have.status(204);
+        return chai.request(app)
+          .put(`/wineBottles/${wineBottle.id}`)
+          .send(updateData);
+      })
+      .then(function(res) {
+        expect(res).to.have.status(204);
 
-        //return wineListRouter.findById(updateData.id);
-      //})
-      //.then(function(wineBottle) {
-        //expect(wineBottle.rating).to.equal(updateData.rating);
-        //expect(wineBottle.averagePrice).to.equal(updateData.averagePrice);
-      //});
-    //});
-  //});
+        return wineListRouter.findById(updateData.id);
+      })
+      .then(function(wineBottle) {
+        expect(wineBottle.rating).to.equal(updateData.rating);
+        expect(wineBottle.averagePrice).to.equal(updateData.averagePrice);
+      });
+    });
+  });
 
-  //describe('DELETE Label Information', function() {
-    //it('delete wine by id', function() {
-      //let wine;
+  describe('DELETE Label Information', function() {
+    it('delete wine by id', function() {
+      let wine;
 
-      //return wineListRouter
-        //.findOne()
-        //.then(function(_wine) {
-          //wine = _wine;
-          //return chai.request(app).delete(`/wineBottles/${wine.id}`);
-        //})
-        //.then(function(res) {
-         //expect(res).to.have.status(204);
-          //return wineListRouter.findById(wine.id);
-        //})
-        //.then(function(_wine) {
-          //expect(_wine).to.be.null;
-        //});
-    //}); 
-  //});
+      return wineListRouter
+        .findOne()
+        .then(function(_wine) {
+          wine = _wine;
+          return chai.request(app).delete(`/wineBottles/${wine.id}`);
+        })
+        .then(function(res) {
+         expect(res).to.have.status(204);
+          return wineListRouter.findById(wine.id);
+        })
+        .then(function(_wine) {
+          expect(_wine).to.be.null;
+        });
+    }); 
+  });
 });
 
-
-//-----Disregard--//
-//describe('index page', function () {
-  //it('should exist', function () {
-    //return chai.request(app)
-      //.get('/')
-      //.then(function (res) {
-        //expect(res).to.have.status(200);
-      //});
-  //});
-//});
