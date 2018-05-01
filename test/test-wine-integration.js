@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
 const {wineListRouter} = require('../wineListRouter');
-const {app, closeServer, runServer} = require('../server');
+const {app, runServer, closeServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 
 const expect = chai.expect;
@@ -140,20 +140,20 @@ function generateInformation() {
       let res;
       let resWine;
       return chai.request(app)
-        .get('/wineList')
+        .get('/wineBottles')
         .then(function(res) {
           res = _res;
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body.wineList).to.be.a('array');
-          expect(res.body.length.wineList).to.be.at.least(1);
-          const expectedKeys = ['id','brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggesion', 'image', 'history', 'moreInformation'];
+          expect(res.body.wineBottles).to.be.a('array');
+          expect(res.body.length.wineBottles).to.be.at.least(1);
+          const expectedKeys = ['id','brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation'];
           res.body.forEach(function(item) {
           expect(item).to.be.a('object');
           expect(item).to.include.keys(expectedKeys);
         });
         resWine = res.body.wine[0];
-        return wineListRouter.findById(resWine.id);
+      return wineListRouter.findById(resWine.id);
         })
         .then(function(wine) {
           expect(resWine.id).to.equal(wine.id);
@@ -174,33 +174,33 @@ function generateInformation() {
   });
 });
 
-  //describe('POST Label Information', function() {
-    //it('should add an item on POST', function() {
-      //const newWineBottle = generateWineData();
+  describe('POST Label Information', function() {
+    it('should add an item on POST', function() {
+      const newWineBottle = generateWineData();
       
-      //return chai.request(app)
-        //.post('/wineList')
-        //.send(newWineBottle)
-        //.then(function(res) {
-          //expect(res).to.have.status(201);
-          //expect(res).to.be.json;
-          //expect(res.body).to.be.a('object');
-          //expect(res.body).to.include.keys('brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggesion', 'image', 'history', 'moreInformation');
-          //expect(res.body.brand).to.equal(newWineBottle.brand);
-          //expect(res.body.wineName).to.equal(newWineBottle.wineName);
-          //expect(res.body.color).to.equal(newWineBottle.color);
-          //expect(res.body.type).to.equal(newWineBottle.type);
-          //expect(res.body.rating).to.equal(newWineBottle.rating);
-          //expect(res.body.averagePrice).to.equal(newWineBottle.averagePrice);
-          //expect(res.body.region).to.equal(newWineBottle.region);
-          //expect(res.body.country).to.equal(newWineBottle.country);
-          //expect(res.body.foodSuggestion).to.equal(newWineBottle.foodSuggestion);
-          //expect(res.body.image).to.equal(newWineBottle.image);
-          //expect(res.body.history).to.equal(newWineBottle.history);
-          //expect(res.body.moreInformation).to.equal(newWineBottle.moreInformation);
-      //});
-  //});
-  //});
+      return chai.request(app)
+        .post('/wineBottles')
+        .send(newWineBottle)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys('brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation');
+          expect(res.body.brand).to.equal(newWineBottle.brand);
+          expect(res.body.wineName).to.equal(newWineBottle.wineName);
+          expect(res.body.color).to.equal(newWineBottle.color);
+          expect(res.body.type).to.equal(newWineBottle.type);
+          expect(res.body.rating).to.equal(newWineBottle.rating);
+          expect(res.body.averagePrice).to.equal(newWineBottle.averagePrice);
+          expect(res.body.region).to.equal(newWineBottle.region);
+          expect(res.body.country).to.equal(newWineBottle.country);
+          expect(res.body.foodSuggestion).to.equal(newWineBottle.foodSuggestion);
+          expect(res.body.image).to.equal(newWineBottle.image);
+          expect(res.body.history).to.equal(newWineBottle.history);
+          expect(res.body.moreInformation).to.equal(newWineBottle.moreInformation);
+      });
+  });
+  });
 
 //describe('PUT Label Information', function() {
   //it('should add an item on PUT', function() {
@@ -215,7 +215,7 @@ function generateInformation() {
         //updateData.id = wineBottle.id;
 
         //return chai.request(app)
-          //.put(`/wineList/${wineBottle.id}`)
+          //.put(`/wineBottles/${wineBottle.id}`)
           //.send(updateData);
       //})
       //.then(function(res) {
@@ -238,7 +238,7 @@ function generateInformation() {
         //.findOne()
         //.then(function(_wine) {
           //wine = _wine;
-          //return chai.request(app).delete(`/wineList/${wine.id}`);
+          //return chai.request(app).delete(`/wineBottles/${wine.id}`);
         //})
         //.then(function(res) {
          //expect(res).to.have.status(204);

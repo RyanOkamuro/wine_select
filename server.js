@@ -17,23 +17,26 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(morgan('common'));
-
+//--new add
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-app.use('/wineList', wineListRouter);
+//app.use('/wineList', wineListRouter);
 //app.use('/userReview', userReviewRouter);
 
 app.get('/wineBottles', (req, res) => {
   wineListRouter
-    .find()
+    .find().exec()
     .then(wineBottles => {
+      //console.log(wineBottles, 'xyl');
       res.json({
-        wineBottle: wineBottle.map(
-          (wineBottle) => wineBottle.serialize())
+        wineBottles: wineBottles.map(
+          (wineListRouter) => wineListRouter.serialize())
         });
+        res.status(200).json(wineBottles)
     })
     .catch(err => {
       console.error(err);
@@ -44,7 +47,7 @@ app.get('/wineBottles', (req, res) => {
 app.get('/wineBottles/:id', (req,res) => {
   wineListRouter
     .findById(req.params.id)
-    .then(wineBottle => res.json(wineBottle.serialize()))
+    .then(wineListRouter => res.json(wineListRouter.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ message: 'Internal server error'});
@@ -52,7 +55,8 @@ app.get('/wineBottles/:id', (req,res) => {
 });
 
 app.post('/wineBottles', (req, res) => {
-  const requiredFields = ['brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggesion', 'image', 'history', 'moreInformation'];
+  const requiredFields = ['brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation'];
+  console.log(req.body);
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -116,25 +120,33 @@ app.put('/wineBottles/:id', (req, res) => {
   });
 
   app.use('*', function (req, res) {
-    res.status(404).json({ message: 'Not founds' });
+    res.status(404).json({ message: 'Not found' });
   });
     
 let server;
 
-function runServer() {
-  const port = process.env.PORT || 8080;
-  return new Promise((resolve, reject) => {
-    server = app.listen(port, () => {
-      console.log(`Your app is listening on port ${port}`);
-      resolve(server);
-    }).on('error', err => {
-      reject(err)
+  function runServer(DATABASE_URL, port = PORT) {
+    console.log(DATABASE_URL);
+    return new Promise((resolve, reject) => {
+      mongoose.connect(DATABASE_URL, err => {
+        if (err) {
+          return reject(err);
+        }
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      })
+      .on('error', err => {
+        mongoose.disconnect();
+        reject(err)
+      });
     });
   });
-}
+};
 
 function closeServer() {
-  return new Promise((resolve, reject) => {
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
     console.log('Closing server');
     server.close(err => {
       if (err) {
@@ -142,13 +154,14 @@ function closeServer() {
         return;
       }
       resolve();
+      });
     });
   });
 }
 
 
 if (require.main === module) {
-  runServer().catch(err => console.error(err));
+  runServer(DATABASE_URL).catch(err => console.error(err));
 };
 
 module.exports = {app, runServer, closeServer};
