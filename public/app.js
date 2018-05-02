@@ -135,7 +135,7 @@ let MOCK_DATA2 =
     //const settings = {
         //'async': true,
         //'crossDomain': true,
-        //'url': '',
+        //'url': 'mongodb://newuser:123456@ds259079.mlab.com:59079/wine-select',
         //'method': 'GET',
         //'headers': {
             //'Authorization': 'Bearer ',

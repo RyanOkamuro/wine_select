@@ -162,40 +162,54 @@ function generateInformation() {
       return closeServer();
     });
 
-  //describe('GET Label Information', function() {
-    //it('should list information on GET', function() {
-      //let res;
-      //let resWine;
-      //return chai.request(app)
-        //.get('/wineBottles')
-        //.then(function(res) {
-          //expect(res).to.have.status(200);
-          //expect(res).to.be.json;
-          //expect(res.body.wineBottles).to.be.a('array');
-          //expect(res.body.length.wineBottles).to.be.at.least(1);
-          //const expectedKeys = ['wineLabelDetails', 'type', 'rating', 'averagePrice', 'wineOrigin', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation'];
-          //res.body.forEach(function(item) {
-          //expect(item).to.be.a('object');
-          //expect(item).to.include.keys(expectedKeys);
-        //});
-        //resWine = res.body.wine[0];
-        //return wineListRouter.findById(resWine.id);
-        //})
-        //.then(function(wine) {
-          //expect(resWine.id).to.equal(wine.id);
-          //expect(resWine.wineLabelDetails).to.equal(wine.wineLabelDetails);
-          //expect(resWine.type).to.equal(wine.type);
-          //expect(resWine.rating).to.equal(wine.rating);
-          //expect(resWine.averagePrice).to.equal(wine.averagePrice);
-          //expect(resWine.wineOrigin).to.equal(wine.wineOrigin);
-          //expect(resWine.year).to.equal(wine.year);
-          //expect(resWine.foodSuggestion).to.equal(wine.foodSuggestion);
-          //expect(resWine.image).to.equal(wine.image);
-          //expect(resWine.history).to.equal(wine.history);
-          //expect(resWine.moreInformation).to.equal(wine.moreInformation);
-      //})
-  //});
-//});
+  describe('GET Label Information', function() {
+    it('should list information on GET', function() {
+      let res;
+      return chai.request(app)
+        .get('/wineBottles')
+        .then(function(_res) {
+          res = _res;
+          expect(res).to.have.status(200);
+          expect(res.body.wineBottles).to.have.lengthOf.at.least(1);
+          return wineListRouter.count();
+        })
+        .then(function(count) {
+          expect(res.body.wineBottles).to.have.lengthOf(count);
+        });
+      });
+
+      it('should return the correct fields for wineBottles', function() {
+        let resWine;
+        return chai.request(app)
+          .get('/wineBottles')
+          .then(function(res) {
+            expect(res).to.have.status(200);
+            expect(res).to.be.json;
+            expect(res.body.wineBottles).to.be.a('array');
+            expect(res.body.wineBottles).to.have.lengthOf.at.least(1);
+            const expectedKeys = ['wineLabelDetails', 'type', 'rating', 'averagePrice', 'wineOrigin', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation'];
+            res.body.wineBottles.forEach(function(wine) {
+              expect(wine).to.be.a('object');
+              expect(wine).to.include.keys(expectedKeys);
+          });
+          resWine = res.body.wineBottles[0];
+          return wineListRouter.findById(resWine.id);
+        })
+        .then(function(wine) {
+          expect(resWine.id).to.equal(wine.id);
+          expect(resWine.wineLabelDetails).to.equal(wine.wineLabelDetails);
+          expect(resWine.type).to.equal(wine.type);
+          expect(resWine.rating).to.equal(wine.rating);
+          expect(resWine.averagePrice).to.equal(wine.averagePrice);
+          expect(resWine.wineOrigin).to.equal(wine.wineOrigin);
+          expect(resWine.year).to.equal(wine.year);
+          expect(resWine.foodSuggestion).to.equal(wine.foodSuggestion);
+          expect(resWine.image).to.equal(wine.image);
+          expect(resWine.history).to.equal(wine.history);
+          expect(resWine.moreInformation).to.equal(wine.moreInformation);
+      })
+  });
+});
 
   describe('POST Label Information', function() {
     it('should add an item on POST', function() {
