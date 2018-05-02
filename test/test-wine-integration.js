@@ -11,7 +11,6 @@ const {TEST_DATABASE_URL} = require('../config');
 const expect = chai.expect;
 
 chai.use(chaiHttp);
-console.log('hi');
 function seedWineData() {
   console.info('seeding wine info');
   const seedData = [];
@@ -214,7 +213,6 @@ function generateInformation() {
   describe('POST Label Information', function() {
     it('should add an item on POST', function() {
       const newWineBottle = generateWineData();
-      
       return chai.request(app)
         .post('/wineBottles')
         .send(newWineBottle)
@@ -282,7 +280,6 @@ describe('PUT Label Information', function() {
   describe('DELETE Label Information', function() {
     it('delete wine by id', function() {
       let wine;
-
       return wineListRouter
         .findOne()
         .then(function(_wine) {

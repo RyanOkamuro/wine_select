@@ -184,12 +184,3 @@ if (require.main === module) {
 };
 
 module.exports = {app, runServer, closeServer};
-
-
-//if (require.main === module) {
-  //app.listen(process.env.PORT || 8080, function () {
-    //console.info(`App listening on ${this.address().port}`);
-  //});
-//}
-
-//module.exports = app;
