@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
-const { wineListRouter } = require('./wineListRouter');
+//const { wineListRouter } = require('./wineListRouter');
 const { router: redWineRouter } = require('./redWine');
 const { router: whiteWineRouter } = require('./whiteWine');
 //const {userReviewRouter} = require('./userReviewRouter');
@@ -32,13 +32,14 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 app.use('/users/', usersRouter);
 app.use('/auth/', authRouter);
 app.use('/whiteWine/', whiteWineRouter);
-app.use('/redWine', redWineRouter);
+app.use('/redWine/', redWineRouter);
 //app.use('/wineBottles', wineListRouter);
 
 const jwtAuth = passport.authenticate('jwt', {session: false })

@@ -1,7 +1,5 @@
-/*
-
 'use strict';
-global.DATABASE_URL = 'mongodb://localhost/jwt-auth-demo-test';
+global.DATABASE_URL = 'mongodb://localhost/wine-select';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
@@ -12,7 +10,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('/api/user', function() {
+describe('/user', function() {
   const username = 'exampleUser';
   const password = 'examplePass';
   const firstName = 'Example';
@@ -36,12 +34,12 @@ describe('/api/user', function() {
     return User.remove({});
   });
 
-  describe('/api/users', function() {
+  describe('/users', function() {
     describe('POST', function() {
       it('Should reject users with missing username', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             password,
             firstName,
@@ -65,7 +63,7 @@ describe('/api/user', function() {
       it('Should reject users with missing password', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             firstName,
@@ -89,7 +87,7 @@ describe('/api/user', function() {
       it('Should reject users with non-string username', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username: 1234,
             password,
@@ -116,7 +114,7 @@ describe('/api/user', function() {
       it('Should reject users with non-string password', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             password: 1234,
@@ -143,7 +141,7 @@ describe('/api/user', function() {
       it('Should reject users with non-string first name', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             password,
@@ -170,7 +168,7 @@ describe('/api/user', function() {
       it('Should reject users with non-string last name', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             password,
@@ -197,7 +195,7 @@ describe('/api/user', function() {
       it('Should reject users with non-trimmed username', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username: ` ${username} `,
             password,
@@ -224,7 +222,7 @@ describe('/api/user', function() {
       it('Should reject users with non-trimmed password', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             password: ` ${password} `,
@@ -251,7 +249,7 @@ describe('/api/user', function() {
       it('Should reject users with empty username', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username: '',
             password,
@@ -278,7 +276,7 @@ describe('/api/user', function() {
       it('Should reject users with password less than ten characters', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             password: '123456789',
@@ -305,7 +303,7 @@ describe('/api/user', function() {
       it('Should reject users with password greater than 72 characters', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             password: new Array(73).fill('a').join(''),
@@ -330,7 +328,6 @@ describe('/api/user', function() {
           });
       });
       it('Should reject users with duplicate username', function() {
-        // Create an initial user
         return User.create({
           username,
           password,
@@ -338,8 +335,7 @@ describe('/api/user', function() {
           lastName
         })
           .then(() =>
-            // Try to create a second user with the same username
-            chai.request(app).post('/api/users').send({
+            chai.request(app).post('/users').send({
               username,
               password,
               firstName,
@@ -366,7 +362,7 @@ describe('/api/user', function() {
       it('Should create a new user', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             password,
@@ -401,7 +397,7 @@ describe('/api/user', function() {
       it('Should trim firstName and lastName', function() {
         return chai
           .request(app)
-          .post('/api/users')
+          .post('/users')
           .send({
             username,
             password,
@@ -433,7 +429,7 @@ describe('/api/user', function() {
 
     describe('GET', function() {
       it('Should return an empty array initially', function() {
-        return chai.request(app).get('/api/users').then(res => {
+        return chai.request(app).get('/users').then(res => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('array');
           expect(res.body).to.have.length(0);
@@ -454,7 +450,7 @@ describe('/api/user', function() {
             lastName: lastNameB
           }
         )
-          .then(() => chai.request(app).get('/api/users'))
+          .then(() => chai.request(app).get('/users'))
           .then(res => {
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('array');
@@ -474,6 +470,3 @@ describe('/api/user', function() {
     });
   });
 });
-
-
-*/
