@@ -131,6 +131,23 @@ let MOCK_DATA2 =
     ]
 };
 
+function newUser() {
+    let newUserAccount = `
+    <section role='region' class='newAddUser'>
+        <form role='form' class='newUser-form'>
+            <fieldset name='newAddedUser'>
+            <legend>New User</legend>
+            <label for='js-new-user-name' class='newUserName'>User Name</label>
+            <input placeholder='RedWineUser' type='text' name='js-new-user-name' id='js-new-user-name'>
+            <label for='js-new-user-password' class='newUserPassword'>User Name</label>
+            <input placeholder='mysecretpassword' type='text' name='js-new-user-password' id='js-new-user-password'>
+            <button role='button' type='submit' class='js-add-user'>Submit</button>
+            </fieldset>
+        </form>
+    </section>
+    `    
+}
+
 //function getWine() {
     //const settings = {
         //'async': true,
