@@ -174,7 +174,7 @@ function getWhiteWine() {
     const settings2 = {
         'async': true,
         'crossDomain': true,
-        'url': `mongodb://newuser:123456@ds259079.mlab.com:59079/wine-select`,
+        'url': '/whiteWine',
         'method': 'GET',
         'headers': {
             'Authorization': `Bearer ${authToken}`,
@@ -241,7 +241,7 @@ function addWine() {
                 <label for='js-wine-rating' class='newWineRating'>Rating</label>
                 <input placeholder= 4.8 type='number' name='js-wine-rating' id='js-wine-rating'>
                 <label for='js-wine-averagePrice' class='newWineAveragePrice'>Average Price</label>
-                <input placeholder= 329.99 type='number' name='js-wine-averagePrice' id='js-wine-averagePrice'>
+                <input placeholder= 30.99 type='number' name='js-wine-averagePrice' id='js-wine-averagePrice'>
                 <label for='js-wine-region' class='newWineRegion'>Region</label>
                 <input placeholder='Napa Valley' type='text' name='js-wine-region' id='js-wine-region'>
                 <label for='js-wine-country' class='newWineCoutry'>Country of Origin</label>
@@ -253,9 +253,9 @@ function addWine() {
                 <label for='js-wine-image' class='newWineImage'>Wine Image URL</label>
                 <input placeholder='www.wineimage...' type='text' name='js-wine-image' id='js-wine-image'>
                 <label for='js-wine-history' class='newWineHistory'>History</label>
-                <input placeholder='The 2013 Hillside Select is...' type='text' name='js-wine-food' id='js-wine-food'>
+                <input placeholder='The 2013 Hillside Select is...' type='text' name='js-wine-history' id='js-wine-history'>
                 <label for='js-wine-information' class='newWineInformation'>More Information URL</label>
-                <input placeholder='www.shafervine...' type='text' name='js-wine-food' id='js-wine-food'>
+                <input placeholder='www.shafervine...' type='text' name='js-wine-information' id='js-wine-information'>
                 <button role='button' type='submit' class='js-add-bottle'>Submit</button>
             </fieldset>
         </form>
