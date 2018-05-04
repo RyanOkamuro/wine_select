@@ -156,7 +156,7 @@ function getRedWine() {
     const settings = {
         'async': true,
         'crossDomain': true,
-        'url': 'mongodb://newuser:123456@ds259079.mlab.com:59079/wine-select',
+        'url': '/redWine',
         'method': 'GET',
         'headers': {
             'Authorization': `Bearer ${authToken}`,
@@ -382,7 +382,7 @@ function startSearchWindow() {
 }
 
 function addNewWineBottle() {
-    $('.newWineInputArea').on('click', '.js-label-add-wines', event => {
+    $('#red-white').on('click', '.js-label-add-wines', event => {
         event.preventDefault();
         addWine();
     });
