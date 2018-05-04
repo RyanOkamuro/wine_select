@@ -4,13 +4,15 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
-const {wineListRouter} = require('../wineListRouter');
+const {Red} = require('../redWine/models');
 const {app, runServer, closeServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
+
+
 function seedWineData() {
   console.info('seeding wine info');
   const seedData = [];
@@ -18,8 +20,7 @@ function seedWineData() {
   for (let i=1; i<=4; i++) {
     seedData.push(generateWineData());
   }
-  console.log(seedData);
-  return wineListRouter.insertMany(seedData);
+  return Red.insertMany(seedData);
 }
 
 let randomBottle = 0;
@@ -165,34 +166,34 @@ function generateInformation() {
     it('should list information on GET', function() {
       let res;
       return chai.request(app)
-        .get('/wineBottles')
+        .get('/redWine')
         .then(function(_res) {
           res = _res;
           expect(res).to.have.status(200);
-          expect(res.body.wineBottles).to.have.lengthOf.at.least(1);
-          return wineListRouter.count();
+          expect(res.body.redWine).to.have.lengthOf.at.least(1);
+          return Red.count();
         })
         .then(function(count) {
-          expect(res.body.wineBottles).to.have.lengthOf(count);
+          expect(res.body.redWine).to.have.lengthOf(count);
         });
       });
 
-      it('should return the correct fields for wineBottles', function() {
+      it('should return the correct fields for redWine', function() {
         let resWine;
         return chai.request(app)
-          .get('/wineBottles')
+          .get('/redWine')
           .then(function(res) {
             expect(res).to.have.status(200);
             expect(res).to.be.json;
-            expect(res.body.wineBottles).to.be.a('array');
-            expect(res.body.wineBottles).to.have.lengthOf.at.least(1);
+            expect(res.body.redWine).to.be.a('array');
+            expect(res.body.redWine).to.have.lengthOf.at.least(1);
             const expectedKeys = ['wineLabelDetails', 'type', 'rating', 'averagePrice', 'wineOrigin', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation'];
-            res.body.wineBottles.forEach(function(wine) {
+            res.body.redWine.forEach(function(wine) {
               expect(wine).to.be.a('object');
               expect(wine).to.include.keys(expectedKeys);
           });
-          resWine = res.body.wineBottles[0];
-          return wineListRouter.findById(resWine.id);
+          resWine = res.body.redWine[0];
+          return Red.findById(resWine.id);
         })
         .then(function(wine) {
           expect(resWine.id).to.equal(wine.id);
@@ -214,7 +215,7 @@ function generateInformation() {
     it('should add an item on POST', function() {
       const newWineBottle = generateWineData();
       return chai.request(app)
-        .post('/wineBottles')
+        .post('/redWine')
         .send(newWineBottle)
         .then(function(res) {
           expect(res).to.have.status(201);
@@ -232,7 +233,7 @@ function generateInformation() {
           expect(res.body.history).to.equal(newWineBottle.history);
           expect(res.body.moreInformation).to.equal(newWineBottle.moreInformation);
           expect(res.body.id).to.not.be.null;
-          return wineListRouter.findById(res.body.id);
+          return Red.findById(res.body.id);
         })
         .then(function(wine) {
           expect(wine.wineLabelDetails).to.equal(newWineBottle.wineLabelDetails);
@@ -256,23 +257,23 @@ describe('PUT Label Information', function() {
       averagePrice: 49.99 
     };
 
-    return wineListRouter
+    return Red
       .findOne()
-      .then(function(wineBottle){
-        updateData.id = wineBottle.id;
+      .then(function(redWines){
+        updateData.id = redWines.id;
 
         return chai.request(app)
-          .put(`/wineBottles/${wineBottle.id}`)
+          .put(`/redWine/${redWines.id}`)
           .send(updateData);
       })
       .then(function(res) {
         expect(res).to.have.status(204);
 
-        return wineListRouter.findById(updateData.id);
+        return Red.findById(updateData.id);
       })
-      .then(function(wineBottle) {
-        expect(wineBottle.rating).to.equal(updateData.rating);
-        expect(wineBottle.averagePrice).to.equal(updateData.averagePrice);
+      .then(function(redWines) {
+        expect(redWines.rating).to.equal(updateData.rating);
+        expect(redWines.averagePrice).to.equal(updateData.averagePrice);
       });
     });
   });
@@ -280,15 +281,15 @@ describe('PUT Label Information', function() {
   describe('DELETE Label Information', function() {
     it('delete wine by id', function() {
       let wine;
-      return wineListRouter
+      return Red
         .findOne()
         .then(function(_wine) {
           wine = _wine;
-          return chai.request(app).delete(`/wineBottles/${wine.id}`);
+          return chai.request(app).delete(`/redWine/${wine.id}`);
         })
         .then(function(res) {
          expect(res).to.have.status(204);
-          return wineListRouter.findById(wine.id);
+          return Red.findById(wine.id);
         })
         .then(function(_wine) {
           expect(_wine).to.be.null;

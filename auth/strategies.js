@@ -7,9 +7,11 @@ const { JWT_SECRET } = require('../config');
 
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;
+  console.log(username, password);
   User.findOne({ username: username })
     .then(_user => {
       user = _user;
+      console.log(user);
       if (!user) {
         return Promise.reject({
           reason: 'LoginError',
@@ -37,7 +39,7 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
 
 const jwtStrategy = new JwtStrategy(
   {
-    secretOrKey: MY_SECRET,
+    secretOrKey: JWT_SECRET,
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
     algorithms: ['HS256']
   },

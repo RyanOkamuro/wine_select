@@ -1,3 +1,6 @@
+//let REDWINE_URL = 'redWine';
+//let WHITEWINE_URL = 'whiteWine';
+let user = localStorage.getItem('currentUser');
 
 let MOCK_DATA =
 {
@@ -148,38 +151,42 @@ function newUser() {
     `    
 }
 
-//function getWine() {
-    //const settings = {
-        //'async': true,
-        //'crossDomain': true,
-        //'url': 'mongodb://newuser:123456@ds259079.mlab.com:59079/wine-select',
-        //'method': 'GET',
-        //'headers': {
-            //'Authorization': 'Bearer ',
-            //'Cache-Control': 'no-cache',
-        //},
-        //'success': function() {
-            //wineSearch()
-        //}
-    //}
-    //$.ajax(settings);
-//}
-
-
-let userReview = {
-    "userReviewComments": [
-        {
-            "userName": "RedZin",
-            "rating": 4.5,
-            "reviewStatement": "Very smooth, compliments the dining experience when eating filet mignon"
+function getRedWine() {
+    let authToken = localStorage.getItem('authToken');
+    const settings = {
+        'async': true,
+        'crossDomain': true,
+        'url': 'mongodb://newuser:123456@ds259079.mlab.com:59079/wine-select',
+        'method': 'GET',
+        'headers': {
+            'Authorization': `Bearer ${authToken}`,
+            'Cache-Control': 'no-cache',
         },
-        {
-            "userName": "ShirazMe",
-            "rating": 4.3,
-            "reviewStatement": "Has a nice fruity taste, makes for a great daily dining wine"
+        'success': function(data) {
+            createRedWineListing(data)
         }
-    ]
-};
+    }
+    $.ajax(settings);
+}
+
+function getWhiteWine() {
+    let authToken = localStorage.getItem('authToken');
+    const settings2 = {
+        'async': true,
+        'crossDomain': true,
+        'url': `mongodb://newuser:123456@ds259079.mlab.com:59079/wine-select`,
+        'method': 'GET',
+        'headers': {
+            'Authorization': `Bearer ${authToken}`,
+            'Cache-Control': 'no-cache',
+        },
+        'success': function(data) {
+            createWhiteWineListing(data)
+        }
+    }
+    $.ajax(settings2);
+}
+
 
 //Search by querying wine label.  
 //Search by red or white wine by clicking on the wine bottle image. 
@@ -351,7 +358,26 @@ function createWhiteWineListing(data) {
 function startSearchWindow() {
     $('.login-form').submit(event => {
         event.preventDefault();
-        wineQuery();
+        let username = $('#js-user-name').val();
+        let password = $('#js-user-password').val();
+        let userInformation = {username, password};
+        const loginPass = {
+            'url': '/api/auth/login',
+            'type': 'POST',
+            'contentType': 'application/json',
+            'data': JSON.stringify(userInformation),
+            'success': function(data) {
+                localStorage.setItem('authToken', data.authToken);
+                localStorage.setItem('currentUser', username);
+                user = username;
+                console.log(data);
+                wineQuery(data);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        };
+        $.ajax(loginPass);
     });
 }
 

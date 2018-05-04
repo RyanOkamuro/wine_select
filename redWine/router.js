@@ -11,12 +11,12 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 router.get('/', jwtAuth, (req, res) => {
     Red
     .find().exec()
-    .then(redWines => {
+    .then(redWine => {
       res.json({
-        redWines: redWines.map(
+        redWine: redWine.map(
           (Red) => Red.serialize())
         });
-        res.status(200).json(redWines)
+        res.status(200).json(redWine)
     })
     .catch(err => {
       console.error(err);
@@ -24,7 +24,7 @@ router.get('/', jwtAuth, (req, res) => {
     });
   });
   
-router.get('/redWines/:id', (req,res) => {
+router.get('/redWine/:id', (req,res) => {
     Red
     .findById(req.params.id)
     .then(Red => res.json(Red.serialize()))
@@ -34,7 +34,7 @@ router.get('/redWines/:id', (req,res) => {
     });
 });
 
-router.post('/redWines', (req, res) => {
+router.post('/redWine', (req, res) => {
   const requiredFields = ['brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation'];
   console.log(req.body);
   for (let i = 0; i < requiredFields.length; i++) {
@@ -62,14 +62,14 @@ router.post('/redWines', (req, res) => {
       history: req.body.history, 
       moreInformation: req.body.moreInformation
     })
-    .then(redWine => res.status(201).json(redWine.serialize()))
+    .then(redWines => res.status(201).json(redWines.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ message: 'Internal server error' });
     });
 });
 
-router.put('/redWines/:id', (req, res) => {
+router.put('/redWine/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -88,14 +88,14 @@ router.put('/redWines/:id', (req, res) => {
 
     Red
     .findByIdAndUpdate(req.params.id, { $set: toUpdate})
-    .then(redWine => res.status(204).end())
+    .then(redWines => res.status(204).end())
     .catch(err => res.status(500).json ({ message: 'Internal server error'}));
   });
 
-router.delete('/redWines/:id', (req, res) => {
+router.delete('/redWine/:id', (req, res) => {
     Red
     .findByIdAndRemove(req.params.id)
-    .then(redWine => res.status(204).end())
+    .then(redWines => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Internal server error' }));
   });
 
