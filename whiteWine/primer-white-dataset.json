@@ -28,7 +28,7 @@
             "foodSuggestion": "Seafood",
             "image": "https://www.dynamicwines.com.au/assets/full/DT1115.jpg",
             "history": "The internationally recognized Wwe. Dr. H. Thanisch, Erben Müller-Burgraef estate is located in the picturesque town of Bernkastel-Kues in the heart of the Middle Mosel. Here we cultivate, 12 hectares (ca. 30 acres) of prime, steep Riesling sites.",
-            "information": "http://www.dr-thanisch.de/index.php?id=3&L=1" 
+            "moreInformation": "http://www.dr-thanisch.de/index.php?id=3&L=1" 
         },
         {
             "brand": "Gaja",
@@ -43,7 +43,7 @@
             "foodSuggestion": "Cured Meat, Chicken, Seafood",
             "image": "https://www.worldofwine.com.es/wp-content/uploads/2015/01/it4-alteni-di-brassica-web.jpg",
             "history": "Golden yellow with an elegant perfume with aromatic notes in harmony with the distinct fruit. Dense structure and balanced body, supported by perfectly integrated acidity.",
-            "information": "https://www.wine.com/product/gaja-alteni-di-brassica-sauvignon-blanc-2015/335280"
+            "moreInformation": "https://www.wine.com/product/gaja-alteni-di-brassica-sauvignon-blanc-2015/335280"
         },
         {
             "brand": "Holm Oak",
@@ -58,7 +58,7 @@
             "foodSuggestion": "Seafood and Chicken",
             "image": "https://cdn6.bigcommerce.com/s-kkxmb/products/6414/images/9897/46581FB8F76904381824AA7C7E6FA9C0__46308.1498782782.600.600.PNG?c=2",
             "history": "The vineyards that winemaker Rebecca and her viticulturist husband Tim Duffy own in the Tamar Valley are steeped with a rich Australian (and sporting!) history, making their site probably one of the most interesting and unique in the country.",
-            "information": "http://www.holmoakvineyards.com.au/About-Us/Our-Vineyards"
+            "moreInformation": "http://www.holmoakvineyards.com.au/About-Us/Our-Vineyards"
         }
     ]
 }

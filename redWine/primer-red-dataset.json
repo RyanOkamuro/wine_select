@@ -28,7 +28,7 @@
             "foodSuggestion": "Lamb",
             "image": "https://files.thewinebowgroup.com/PDF/brand5002/T0008448_tarapaca-g-reserva-etiq-negra-s-f-jpg-1.jpg",
             "history": "Since we were founded at the foothills of the Andes mountain range in 1874, we have crafted elegant, quality wines, becoming one of the most traditional and historical Chilean wineries, as well as a benchmark for viticulture in Chile and over 50 countries.",
-            "information": "http://www.tarapaca.cl/en/history/" 
+            "moreInformation": "http://www.tarapaca.cl/en/history/" 
         },
         {
             "brand": "Layer Cake",
@@ -43,7 +43,7 @@
             "foodSuggestion": "Beef and Chicken",
             "image": "https://www.b-21.com/labels/live/ITLCPR14AE.jpg",
             "history": "At Layer Cake, we work directly with the farmers to grow the fruit we work with. Our grapes are grown to exacting standards in some of the most diversely-layered vineyards around the world. They are handpicked, separated and fermented with care, then aged in French Oak. The character of each Layer Cake wine is influenced by the vineyard soil, which is layered like a cake…every layer tells a story.",
-            "information": "http://layercakewines.com/about/"
+            "moreInformation": "http://layercakewines.com/about/"
         },
         {
             "brand": "Penfolds",
@@ -58,7 +58,7 @@
             "foodSuggestion": "Beef and Lamb",
             "image": "https://www.nataliemaclean.com/images/winepicks/058ba29dde3c11dc0f1c8adf3ae14ed6/original_penfolds-bin-2-shiraz-mourv-dre-2012-209478-bottle-1415126015.jpg",
             "history": "The success of Penfolds has been driven by the generations of visionaries and innovators. From the beginning in 1844 to today, the merging of science, art and innovation has driven Penfolds to become one of Australia’s most famed and respected winemakers.",
-            "information": "https://www.penfolds.com/en-us/about-penfolds/heritage/our-history"
+            "moreInformation": "https://www.penfolds.com/en-us/about-penfolds/heritage/our-history"
         }
     ]
 }

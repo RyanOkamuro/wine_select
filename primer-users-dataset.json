@@ -1,0 +1,20 @@
+{
+    "_id": {
+        "$oid": "5aedecd15a7855114c4770a0"
+    },
+    "firstName": "Shawn",
+    "lastName": "White",
+    "username": "WhiteWine",
+    "password": "$2a$10$xB6XKNcVdFvngE02jruqPud.NXQNQobnC6StNchrnUsL1r77V8dT6",
+    "__v": 0
+}
+{
+    "_id": {
+        "$oid": "5aedece85a7855114c4770a1"
+    },
+    "firstName": "Alice",
+    "lastName": "Red",
+    "username": "WineTaster",
+    "password": "$2a$10$GbTu4kRsuxSkuHAXgd5FTed9p68m262Pj7NObKwhjSzFDPNMzu9pa",
+    "__v": 0
+}

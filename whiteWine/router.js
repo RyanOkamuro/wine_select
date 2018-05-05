@@ -24,7 +24,7 @@ router.get('/', jwtAuth, (req, res) => {
     });
   });
   
-router.get('/whiteWine/:id', (req,res) => {
+router.get('/:id', (req,res) => {
     White
     .findById(req.params.id)
     .then(White => res.json(White.serialize()))
@@ -34,7 +34,7 @@ router.get('/whiteWine/:id', (req,res) => {
     });
 });
 
-router.post('/whiteWine', (req, res) => {
+router.post('/', (req, res) => {
   const requiredFields = ['brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation'];
   console.log(req.body);
   for (let i = 0; i < requiredFields.length; i++) {
@@ -69,7 +69,7 @@ router.post('/whiteWine', (req, res) => {
     });
 });
 
-router.put('/whiteWine/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -92,7 +92,7 @@ router.put('/whiteWine/:id', (req, res) => {
     .catch(err => res.status(500).json ({ message: 'Internal server error'}));
   });
 
-router.delete('/whiteWine/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     White
     .findByIdAndRemove(req.params.id)
     .then(whiteWines => res.status(204).end())
