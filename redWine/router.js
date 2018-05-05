@@ -10,8 +10,9 @@ const {Red} = require('./models');
 const jwtAuth = passport.authenticate('jwt', {session: false});
 router.get('/', jwtAuth, (req, res) => {
     Red
-    .find().exec()
+    .find({}).exec()
     .then(redWine => {
+      console.log(redWine);
       res.json({
         redWine: redWine.map(
           (Red) => Red.serialize())

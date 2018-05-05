@@ -2,137 +2,137 @@
 //let WHITEWINE_URL = 'whiteWine';
 let user = localStorage.getItem('currentUser');
 
-let MOCK_DATA =
-{
-    "redWineCollection": [
-        {
-            "brand": "Baileyana",
-            "wineName": "Firepeak",
-            "color": "Red",
-            "type": "Pinot Noir",
-            "rating": 5,
-            "averagePrice": 19,
-            "region": "Edna Valley",
-            "country": "USA",
-            "year": 2014,
-            "foodSuggestion": "Chicken and Turkey",
-            "image": "https://www.winetransit.com/media/catalog/product/cache/926507dc7f93631a094422215b778fe0/b/a/baileyana_firepeak_pnoir_mv_750.png",
-            "history": "The flagship winery from the Niven Family, Baileyana was created over 30 years ago by our matriarch, Catharine Niven, and is now in the expert hands of the second and third generations of her family. An expression of classic cool climate varietals, each wine is sourced from select blocks from our estate Paragon Vineyard—planted in 1973 by Catharine’s husband, Jack. Baileyana’s range of Chardonnays, Pinot Noirs, Syrahs,and sparkling wines are all crafted by our dynamic winemaking team. Refined, rich, and perfectly balanced, Baileyana wines emulate the spirited woman who brought them to life. Boldly Beautiful.",
-            "moreInformation": "http://baileyana.com/"
-        },
-        {
-            "brand": "Tarapaca",
-            "wineName": "Etiqueta Negra Gran Reserva", 
-            "color": "Red",
-            "type": "Cabernet Sauvignon",
-            "rating": 4.6,
-            "averagePrice": 29.99,
-            "region": "Maipo Valley",
-            "country": "Chile",
-            "year": 2014,
-            "foodSuggestion": "Lamb",
-            "image": "https://files.thewinebowgroup.com/PDF/brand5002/T0008448_tarapaca-g-reserva-etiq-negra-s-f-jpg-1.jpg",
-            "history": "Since we were founded at the foothills of the Andes mountain range in 1874, we have crafted elegant, quality wines, becoming one of the most traditional and historical Chilean wineries, as well as a benchmark for viticulture in Chile and over 50 countries.",
-            "information": "http://www.tarapaca.cl/en/history/" 
-        },
-        {
-            "brand": "Layer Cake",
-            "wineName": "Primitivo",
-            "color": "Red",
-            "type": "Zinfandel",
-            "rating": 3.9,
-            "averagePrice": 15,
-            "region": "Puglia",
-            "country": "Italy",
-            "year": 2014,
-            "foodSuggestion": "Beef and Chicken",
-            "image": "https://www.b-21.com/labels/live/ITLCPR14AE.jpg",
-            "history": "At Layer Cake, we work directly with the farmers to grow the fruit we work with. Our grapes are grown to exacting standards in some of the most diversely-layered vineyards around the world. They are handpicked, separated and fermented with care, then aged in French Oak. The character of each Layer Cake wine is influenced by the vineyard soil, which is layered like a cake…every layer tells a story.",
-            "information": "http://layercakewines.com/about/"
-        },
-        {
-            "brand": "Penfolds",
-            "wineName": "Bin 2",
-            "color": "Red",
-            "type": "Shiraz",
-            "rating": 3.7,
-            "averagePrice": 19.99,
-            "region": "South Australia",
-            "country": "Australia",
-            "year": 2012,
-            "foodSuggestion": "Beef and Lamb",
-            "image": "https://www.nataliemaclean.com/images/winepicks/058ba29dde3c11dc0f1c8adf3ae14ed6/original_penfolds-bin-2-shiraz-mourv-dre-2012-209478-bottle-1415126015.jpg",
-            "history": "The success of Penfolds has been driven by the generations of visionaries and innovators. From the beginning in 1844 to today, the merging of science, art and innovation has driven Penfolds to become one of Australia’s most famed and respected winemakers.",
-            "information": "https://www.penfolds.com/en-us/about-penfolds/heritage/our-history"
-        }
-    ]
-};
+//let MOCK_DATA =
+//{
+    //"redWineCollection": [
+        //{
+            //"brand": "Baileyana",
+            //"wineName": "Firepeak",
+            //"color": "Red",
+            //"type": "Pinot Noir",
+            //"rating": 5,
+            //"averagePrice": 19,
+            //"region": "Edna Valley",
+            //"country": "USA",
+            //"year": 2014,
+            //"foodSuggestion": "Chicken and Turkey",
+            //"image": "https://www.winetransit.com/media/catalog/product/cache/926507dc7f93631a094422215b778fe0/b/a/baileyana_firepeak_pnoir_mv_750.png",
+            //"history": "The flagship winery from the Niven Family, Baileyana was created over 30 years ago by our matriarch, Catharine Niven, and is now in the expert hands of the second and third generations of her family. An expression of classic cool climate varietals, each wine is sourced from select blocks from our estate Paragon Vineyard—planted in 1973 by Catharine’s husband, Jack. Baileyana’s range of Chardonnays, Pinot Noirs, Syrahs,and sparkling wines are all crafted by our dynamic winemaking team. Refined, rich, and perfectly balanced, Baileyana wines emulate the spirited woman who brought them to life. Boldly Beautiful.",
+            //"moreInformation": "http://baileyana.com/"
+        //},
+        //{
+            //"brand": "Tarapaca",
+            //"wineName": "Etiqueta Negra Gran Reserva", 
+            //"color": "Red",
+            //"type": "Cabernet Sauvignon",
+            //"rating": 4.6,
+            //"averagePrice": 29.99,
+            //"region": "Maipo Valley",
+            //"country": "Chile",
+            //"year": 2014,
+            //"foodSuggestion": "Lamb",
+            //"image": "https://files.thewinebowgroup.com/PDF/brand5002/T0008448_tarapaca-g-reserva-etiq-negra-s-f-jpg-1.jpg",
+            //"history": "Since we were founded at the foothills of the Andes mountain range in 1874, we have crafted elegant, quality wines, becoming one of the most traditional and historical Chilean wineries, as well as a benchmark for viticulture in Chile and over 50 countries.",
+            //"information": "http://www.tarapaca.cl/en/history/" 
+        //},
+        //{
+            //"brand": "Layer Cake",
+            //"wineName": "Primitivo",
+            //"color": "Red",
+            //"type": "Zinfandel",
+            //"rating": 3.9,
+            //"averagePrice": 15,
+            //"region": "Puglia",
+            //"country": "Italy",
+            //"year": 2014,
+            //"foodSuggestion": "Beef and Chicken",
+            //"image": "https://www.b-21.com/labels/live/ITLCPR14AE.jpg",
+            //"history": "At Layer Cake, we work directly with the farmers to grow the fruit we work with. Our grapes are grown to exacting standards in some of the most diversely-layered vineyards around the world. They are handpicked, separated and fermented with care, then aged in French Oak. The character of each Layer Cake wine is influenced by the vineyard soil, which is layered like a cake…every layer tells a story.",
+            //"information": "http://layercakewines.com/about/"
+        //},
+        //{
+            //"brand": "Penfolds",
+            //"wineName": "Bin 2",
+            //"color": "Red",
+            //"type": "Shiraz",
+            //"rating": 3.7,
+            //"averagePrice": 19.99,
+            //"region": "South Australia",
+            //"country": "Australia",
+            //"year": 2012,
+            //"foodSuggestion": "Beef and Lamb",
+            //"image": "https://www.nataliemaclean.com/images/winepicks/058ba29dde3c11dc0f1c8adf3ae14ed6/original_penfolds-bin-2-shiraz-mourv-dre-2012-209478-bottle-1415126015.jpg",
+            //"history": "The success of Penfolds has been driven by the generations of visionaries and innovators. From the beginning in 1844 to today, the merging of science, art and innovation has driven Penfolds to become one of Australia’s most famed and respected winemakers.",
+            //"information": "https://www.penfolds.com/en-us/about-penfolds/heritage/our-history"
+        //}
+    //]
+//};
 
-let MOCK_DATA2 =
-{
-    "whiteWineCollection": [
-        {
-            "brand": "Christian Moreau",
-            "wineName": "Chablis",
-            "color": "White",
-            "type": "Chardonnay",
-            "rating": 4.3,
-            "averagePrice": 21.99,
-            "region": "Burgundy",
-            "country": "France",
-            "year": 2015,
-            "foodSuggestion": "Seafood",
-            "image": "http://frederick-wildman.s3.amazonaws.com/wines_bottle/21cbd891bf45a59dc97dc221ed61ac4b.png",
-            "history": "Our vineyard is located in the village of Chablis, in the very heart of the Chablis country, on the left bank of the Serein River, with a south-south east exposure. It is located in the climat Les Pargues. The soil is kimmeridgien calcareously clay which goes back to the upper jurrassic age (portlandien).",
-            "moreInformation": "http://www.domainechristianmoreau.com/eng/wines.html"
-        },
-        {
-            "brand": "Dr. Thanisch",
-            "wineName": "Bernkasteler Badstube", 
-            "color": "White",
-            "type": "Riesling",
-            "rating": 4.5,
-            "averagePrice": 23.99,
-            "region": "Mosel",
-            "country": "Germany",
-            "year": 2016,
-            "foodSuggestion": "Seafood",
-            "image": "https://www.dynamicwines.com.au/assets/full/DT1115.jpg",
-            "history": "The internationally recognized Wwe. Dr. H. Thanisch, Erben Müller-Burgraef estate is located in the picturesque town of Bernkastel-Kues in the heart of the Middle Mosel. Here we cultivate, 12 hectares (ca. 30 acres) of prime, steep Riesling sites.",
-            "information": "http://www.dr-thanisch.de/index.php?id=3&L=1" 
-        },
-        {
-            "brand": "Gaja",
-            "wineName": "Alteni Di Brassica",
-            "color": "White",
-            "type": "Sauvignon Blanc",
-            "rating": 4.1,
-            "averagePrice": 149.99,
-            "region": "Piedmont",
-            "country": "Italy",
-            "year": 2015,
-            "foodSuggestion": "Cured Meat, Chicken, Seafood",
-            "image": "https://www.worldofwine.com.es/wp-content/uploads/2015/01/it4-alteni-di-brassica-web.jpg",
-            "history": "Golden yellow with an elegant perfume with aromatic notes in harmony with the distinct fruit. Dense structure and balanced body, supported by perfectly integrated acidity.",
-            "information": "https://www.wine.com/product/gaja-alteni-di-brassica-sauvignon-blanc-2015/335280"
-        },
-        {
-            "brand": "Holm Oak",
-            "wineName": "Tasmania",
-            "color": "White",
-            "type": "Pinot Gris",
-            "rating": 3.7,
-            "averagePrice": 23.99,
-            "region": "Tamar Valley",
-            "country": "Australia",
-            "year": 2015,
-            "foodSuggestion": "Seafood and Chicken",
-            "image": "https://cdn6.bigcommerce.com/s-kkxmb/products/6414/images/9897/46581FB8F76904381824AA7C7E6FA9C0__46308.1498782782.600.600.PNG?c=2",
-            "history": "The vineyards that winemaker Rebecca and her viticulturist husband Tim Duffy own in the Tamar Valley are steeped with a rich Australian (and sporting!) history, making their site probably one of the most interesting and unique in the country.",
-            "information": "http://www.holmoakvineyards.com.au/About-Us/Our-Vineyards"
-        }
-    ]
-};
+//let MOCK_DATA2 =
+//{
+    //"whiteWineCollection": [
+        //{
+            //"brand": "Christian Moreau",
+            //"wineName": "Chablis",
+            //"color": "White",
+            //"type": "Chardonnay",
+            //"rating": 4.3,
+            //"averagePrice": 21.99,
+            //"region": "Burgundy",
+            //"country": "France",
+            //"year": 2015,
+            //"foodSuggestion": "Seafood",
+            //"image": "http://frederick-wildman.s3.amazonaws.com/wines_bottle/21cbd891bf45a59dc97dc221ed61ac4b.png",
+            //"history": "Our vineyard is located in the village of Chablis, in the very heart of the Chablis country, on the left bank of the Serein River, with a south-south east exposure. It is located in the climat Les Pargues. The soil is kimmeridgien calcareously clay which goes back to the upper jurrassic age (portlandien).",
+            //"moreInformation": "http://www.domainechristianmoreau.com/eng/wines.html"
+        //},
+        //{
+            //"brand": "Dr. Thanisch",
+            //"wineName": "Bernkasteler Badstube", 
+            //"color": "White",
+            //"type": "Riesling",
+            //"rating": 4.5,
+            //"averagePrice": 23.99,
+            //"region": "Mosel",
+            //"country": "Germany",
+            //"year": 2016,
+            //"foodSuggestion": "Seafood",
+            //"image": "https://www.dynamicwines.com.au/assets/full/DT1115.jpg",
+            //"history": "The internationally recognized Wwe. Dr. H. Thanisch, Erben Müller-Burgraef estate is located in the picturesque town of Bernkastel-Kues in the heart of the Middle Mosel. Here we cultivate, 12 hectares (ca. 30 acres) of prime, steep Riesling sites.",
+            //"information": "http://www.dr-thanisch.de/index.php?id=3&L=1" 
+        //},
+        //{
+            //"brand": "Gaja",
+            //"wineName": "Alteni Di Brassica",
+            //"color": "White",
+            //"type": "Sauvignon Blanc",
+            //"rating": 4.1,
+            //"averagePrice": 149.99,
+            //"region": "Piedmont",
+            //"country": "Italy",
+            //"year": 2015,
+            //"foodSuggestion": "Cured Meat, Chicken, Seafood",
+            //"image": "https://www.worldofwine.com.es/wp-content/uploads/2015/01/it4-alteni-di-brassica-web.jpg",
+            //"history": "Golden yellow with an elegant perfume with aromatic notes in harmony with the distinct fruit. Dense structure and balanced body, supported by perfectly integrated acidity.",
+            //"information": "https://www.wine.com/product/gaja-alteni-di-brassica-sauvignon-blanc-2015/335280"
+        //},
+        //{
+            //"brand": "Holm Oak",
+            //"wineName": "Tasmania",
+            //"color": "White",
+            //"type": "Pinot Gris",
+            //"rating": 3.7,
+            //"averagePrice": 23.99,
+            //"region": "Tamar Valley",
+            //"country": "Australia",
+            //"year": 2015,
+            //"foodSuggestion": "Seafood and Chicken",
+            //"image": "https://cdn6.bigcommerce.com/s-kkxmb/products/6414/images/9897/46581FB8F76904381824AA7C7E6FA9C0__46308.1498782782.600.600.PNG?c=2",
+            //"history": "The vineyards that winemaker Rebecca and her viticulturist husband Tim Duffy own in the Tamar Valley are steeped with a rich Australian (and sporting!) history, making their site probably one of the most interesting and unique in the country.",
+            //"information": "http://www.holmoakvineyards.com.au/About-Us/Our-Vineyards"
+        //}
+    //]
+//};
 
 function newUser() {
     let newUserAccount = `
@@ -140,15 +140,25 @@ function newUser() {
         <form role='form' class='newUser-form'>
             <fieldset name='newAddedUser'>
             <legend>New User</legend>
+            <label for='js-new-first-name' class='newUserFirstName'>First Name</label>
+            <input placeholder='Alice' type='text' name='js-new-first-name' id='js-new-first-name'>
+            <label for='js-new-last-name' class='newUserLastName'>Last Name</label>
+            <input placeholder='Red' type='text' name='js-new-last-name' id='js-new-last-name'>
             <label for='js-new-user-name' class='newUserName'>User Name</label>
-            <input placeholder='RedWineUser' type='text' name='js-new-user-name' id='js-new-user-name'>
-            <label for='js-new-user-password' class='newUserPassword'>User Name</label>
+            <input placeholder='username' type='text' name='js-new-user-name' id='js-new-user-name'>
+            <label for='js-new-user-password' class='newUserPassword'>Password</label>
             <input placeholder='mysecretpassword' type='text' name='js-new-user-password' id='js-new-user-password'>
             <button role='button' type='submit' class='js-add-user'>Submit</button>
             </fieldset>
         </form>
     </section>
-    `    
+    `;
+    $('.login-form').hide();
+    //display new accout registration form
+    let outputElem = $('#new-registration');
+        outputElem
+            .prop('hidden', false)
+            .html(newUserAccount);    
 }
 
 function getRedWine() {
@@ -163,7 +173,9 @@ function getRedWine() {
             'Cache-Control': 'no-cache',
         },
         'success': function(data) {
+            console.log(data);
             createRedWineListing(data)
+            singleRedWineSearchWindow(data)
         }
     }
     $.ajax(settings);
@@ -182,6 +194,7 @@ function getWhiteWine() {
         },
         'success': function(data) {
             createWhiteWineListing(data)
+            singleWhiteWineSearchWindow(data)
         }
     }
     $.ajax(settings2);
@@ -219,6 +232,7 @@ function wineQuery() {
     </section>
     `;
     $('.login-form').hide();
+    $('.newUser-form').hide();
     //display brand, red wine, or white wine search page
     let outputElem = $('#red-white');
         outputElem
@@ -314,24 +328,24 @@ function singleWineResult(currentWine) {
 }
 
 //MOCK_DATA--For Red Wine; MOCK_DATA2--For White Wine
-function getWine(callbackFn) {
-    setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
-    setTimeout(function(){ callbackFn(MOCK_DATA2)}, 100);
-}
+//function getWine(callbackFn) {
+    //setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
+    //setTimeout(function(){ callbackFn(MOCK_DATA2)}, 100);
+//}
 
 //Red Wine Listing
 function createRedWineListing(data) {
-    for (index in data.redWineCollection) {
+    for (index in data.redWine) {
     let li = document.createElement('li');
     li.classList.add('vino');
     li.innerHTML = `
-    Wine Label: ${data.redWineCollection[index].brand} <br /> 
-    Type: ${data.redWineCollection[index].type} <br /> 
-    Rating: ${data.redWineCollection[index].rating} <br />
-    Price: ${data.redWineCollection[index].averagePrice} <br />  
-    Region: ${data.redWineCollection[index].country} <br /> 
-    Year: ${data.redWineCollection[index].year} <br />    
-    <img src='${data.redWineCollection[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
+    Wine Label: ${data.redWine[index].brand} <br /> 
+    Type: ${data.redWine[index].type} <br /> 
+    Rating: ${data.redWine[index].rating} <br />
+    Price: ${data.redWine[index].averagePrice} <br />  
+    Region: ${data.redWine[index].country} <br /> 
+    Year: ${data.redWine[index].year} <br />    
+    <img src='${data.redWine[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
     `;
     $('#labelInformation').append(li);
     }
@@ -381,6 +395,20 @@ function startSearchWindow() {
     });
 }
 
+function registerNewUser() {
+    $('#register-new-user').click(function() {
+        newUser();
+    });
+}
+
+function submitNewUser() {
+    $('.newUser-form').submit(event => {
+        event.preventDefault();
+        wineQuery();
+    });
+}
+
+
 function addNewWineBottle() {
     $('#red-white').on('click', '.js-label-add-wines', event => {
         event.preventDefault();
@@ -392,8 +420,9 @@ function addNewWineBottle() {
 function redWineSearchWindow() {
     $('body').on('click', '.red', event=> {
         event.preventDefault();
+        getRedWine();
         wineCollectionListing();
-        getAndDisplayRedWineResults();
+        //getAndDisplayRedWineResults();
     })
 }
 
@@ -401,8 +430,9 @@ function redWineSearchWindow() {
 function whiteWineSearchWindow() {
     $('body').on('click', '.white', event=> {
         event.preventDefault();
+        getWhiteWine();
         wineCollectionListing();
-        getAndDisplayWhiteWineResults();
+        //getAndDisplayWhiteWineResults();
     })
 }
 
@@ -410,9 +440,7 @@ function whiteWineSearchWindow() {
 function singleRedWineSearchWindow(data) {
     $('body').on('click', '.redWine', event=> {
         let profileWineName = $(event.target).data('index');
-        console.log(profileWineName);
-        let currentWine = MOCK_DATA.redWineCollection[profileWineName]
-        console.log(currentWine);
+        let currentWine = data.redWine[profileWineName]
         event.preventDefault();
         singleWineResult(currentWine);
     })
@@ -422,9 +450,7 @@ function singleRedWineSearchWindow(data) {
 function singleWhiteWineSearchWindow(data) {
     $('body').on('click', '.whiteWine', event=> {
         let profileWineName = $(event.target).data('index');
-        console.log(profileWineName);
-        let currentWine = MOCK_DATA2.whiteWineCollection[profileWineName]
-        console.log(currentWine);
+        let currentWine = data.whiteWineCollection[profileWineName]
         event.preventDefault();
         singleWineResult(currentWine);
     })
@@ -432,23 +458,25 @@ function singleWhiteWineSearchWindow(data) {
 
 function handleCreateApp() {
     startSearchWindow();
-    addNewWineBottle() 
+    registerNewUser();
+    submitNewUser();
+    addNewWineBottle(); 
     redWineSearchWindow();
     whiteWineSearchWindow();
     singleRedWineSearchWindow();
     singleWhiteWineSearchWindow();
 }
 
-function getAndDisplayRedWineResults() {
-    getWine(createRedWineListing);
-}
+//function getAndDisplayRedWineResults() {
+    //getWine(createRedWineListing);
+//}
 
-function getAndDisplayWhiteWineResults() {
-    getWine(createWhiteWineListing);
-}
+//function getAndDisplayWhiteWineResults() {
+    //getWine(createWhiteWineListing);
+//}
 $(handleCreateApp);
 
-$(function() {
-    getAndDisplayRedWineResults();
-    getAndDisplayWhiteWineResults();
-})
+//$(function() {
+    //getAndDisplayRedWineResults();
+    //getAndDisplayWhiteWineResults();
+//})
