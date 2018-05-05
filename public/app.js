@@ -176,6 +176,7 @@ function getRedWine() {
             console.log(data);
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
+            singleWhiteWineSearchWindow(data)
         }
     }
     $.ajax(settings);
@@ -312,11 +313,11 @@ function singleWineResult(currentWine) {
     `;
     let li = document.createElement('li');
     li.innerHTML = `
-        Wine Label: ${currentWine.brand} <br />
+        Wine Label: ${currentWine.wineLabelDetails} <br />
         Type: ${currentWine.type} <br />
         Rating: ${currentWine.rating} <br /> 
         Price: ${currentWine.averagePrice} <br />
-        Region: ${currentWine.country} <br />
+        Region: ${currentWine.wineOrigin} <br />
         Year: ${currentWine.year} <br />
     `;
     $('.wineResults').hide();
@@ -339,11 +340,11 @@ function createRedWineListing(data) {
     let li = document.createElement('li');
     li.classList.add('vino');
     li.innerHTML = `
-    Wine Label: ${data.redWine[index].brand} <br /> 
+    Wine Label: ${data.redWine[index].wineLabelDetails} <br /> 
     Type: ${data.redWine[index].type} <br /> 
     Rating: ${data.redWine[index].rating} <br />
     Price: ${data.redWine[index].averagePrice} <br />  
-    Region: ${data.redWine[index].country} <br /> 
+    Region: ${data.redWine[index].wineOrigin} <br /> 
     Year: ${data.redWine[index].year} <br />    
     <img src='${data.redWine[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
     `;
@@ -357,11 +358,11 @@ function createWhiteWineListing(data) {
     let li = document.createElement('li');
     li.classList.add('vino');
     li.innerHTML = `
-    Wine Label: ${data.whiteWineCollection[index].brand} <br /> 
+    Wine Label: ${data.whiteWineCollection[index].wineLabelDetails} <br /> 
     Type: ${data.whiteWineCollection[index].type} <br /> 
     Rating: ${data.whiteWineCollection[index].rating} <br />
     Price: ${data.whiteWineCollection[index].averagePrice} <br />  
-    Region: ${data.whiteWineCollection[index].country} <br /> 
+    Region: ${data.whiteWineCollection[index].wineOrigin} <br /> 
     Year: ${data.whiteWineCollection[index].year} <br />    
     <img src='${data.whiteWineCollection[index].image}' class='whiteWine' data-index='${index}' alt='wine-bottle'>
     `;
@@ -463,8 +464,8 @@ function handleCreateApp() {
     addNewWineBottle(); 
     redWineSearchWindow();
     whiteWineSearchWindow();
-    singleRedWineSearchWindow();
-    singleWhiteWineSearchWindow();
+    //singleRedWineSearchWindow();
+    //singleWhiteWineSearchWindow();
 }
 
 //function getAndDisplayRedWineResults() {

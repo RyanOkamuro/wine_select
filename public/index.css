@@ -28,7 +28,7 @@
       margin: 0;
   }
 
-  .login-form, .newBottle-form {
+  .login-form, .newBottle-form, .newUser-form {
       width: 400px;
       padding: 40px;
       border-radius: 4px;
@@ -36,19 +36,19 @@
       border: 1px solid black;
   }
 
-  .login-form legend, .newBottle-form legend {
+  .login-form legend, .newBottle-form legend, .newUser-form legend {
       width: 100%;
       text-align: center;
       margin: 0 auto 50px;
   }
 
-  .login-form label, .newBottle-form label {
+  .login-form label, .newBottle-form label, .newUser-form label {
       display: block;
       margin-bottom: 5px;
       margin-top: 5px;
   }
 
-  .login-form input, .login-form button, .newBottle-form input, .newBottle-form button {
+  .login-form input, .login-form button, .newBottle-form input, .newBottle-form button, .newUser-form input, .newUser-form button {
       width: 100%;
       padding: 6px;
       border-radius: 3px;
