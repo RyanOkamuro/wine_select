@@ -10,8 +10,18 @@ const {TEST_DATABASE_URL} = require('../config');
 
 const expect = chai.expect;
 
+//let loginUserTest = {
+  //'username': 'WhiteWine',
+  //'password': 'WhiteWine1234'
+//}
+
 chai.use(chaiHttp);
 
+let authToken;
+
+//function seedUserData() {
+
+//}
 
 function seedWineData() {
   console.info('seeding wine info');
@@ -151,6 +161,7 @@ function generateInformation() {
     });
 
     beforeEach(function() {
+      //return seedUserData();
       return seedWineData();
     });
 
@@ -165,8 +176,10 @@ function generateInformation() {
   describe('GET Label Information', function() {
     it('should list information on GET', function() {
       let res;
+      console.log('!!!', authToken);
       return chai.request(app)
         .get('/redWine')
+        .set('Authorization', `Bearer ${authToken}`)
         .then(function(_res) {
           res = _res;
           expect(res).to.have.status(200);
@@ -182,6 +195,7 @@ function generateInformation() {
         let resWine;
         return chai.request(app)
           .get('/redWine')
+          .set('Authorization', `Bearer ${authToken}`)
           .then(function(res) {
             expect(res).to.have.status(200);
             expect(res).to.be.json;

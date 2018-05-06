@@ -13,10 +13,10 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Auth endpoints', function () {
-  const username = 'exampleUser';
-  const password = 'examplePass';
-  const firstName = 'Example';
-  const lastName = 'User';
+  const username = 'WineTaster';
+  const password = 'RedWine1234';
+  const firstName = 'Alice';
+  const lastName = 'Red';
 
   before(function () {
     return runServer();
@@ -46,15 +46,18 @@ describe('Auth endpoints', function () {
       return chai
         .request(app)
         .post('/api/auth/login')
-        .then(() =>
-          expect.fail(null, null, 'Request should not succeed')
-        )
+        .then((obj) => {
+        console.log(obj, '!!!!');
+          return expect.fail(null, null, 'Request should not succeed')
+        })
         .catch(err => {
           if (err instanceof chai.AssertionError) {
+            console.log(err, '?????');
             throw err;
           }
 
           const res = err.response;
+          console.log(res, '$$$$$');
           expect(res).to.have.status(400);
         });
     });

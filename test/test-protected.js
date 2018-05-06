@@ -13,10 +13,10 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Protected endpoint', function() {
-  const username = 'exampleUser';
-  const password = 'examplePass';
-  const firstName = 'Example';
-  const lastName = 'User';
+  const username = 'WineTaster';
+  const password = 'RedWine1234';
+  const firstName = 'Alice';
+  const lastName = 'Red';
 
   before(function() {
     return runServer();

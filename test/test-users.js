@@ -11,14 +11,14 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('/api/user', function() {
-  const username = 'exampleUser';
-  const password = 'examplePass';
-  const firstName = 'Example';
-  const lastName = 'User';
-  const usernameB = 'exampleUserB';
-  const passwordB = 'examplePassB';
-  const firstNameB = 'ExampleB';
-  const lastNameB = 'UserB';
+  const username = 'WineTaster';
+  const password = 'RedWine1234';
+  const firstName = 'Alice';
+  const lastName = 'Red';
+  const usernameB = 'WhiteWine';
+  const passwordB = 'WhiteWine1234';
+  const firstNameB = 'Shawn';
+  const lastNameB = 'White';
 
   before(function() {
     return runServer();
