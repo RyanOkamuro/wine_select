@@ -454,13 +454,28 @@ function registerNewUser() {
     });
 }
 
-function submitNewUser(newUser) {
+function addNewUser() {
     $('#new-registration').submit('.js-add-user', event => {
         event.preventDefault();
-        wineQuery(newUser);
+        let firstName = $('#js-new-first-name').val();
+        let lastName = $('#js-new-last-name').val();
+        let username = $('#js-new-user-name').val();
+        let password = $('#js-new-user-password').val();
+        let userInformation = {firstName, lastName, username, password};
+        console.log(userInformation);
+        const registerUser = {
+            'url': '/api/users/',
+            'type': 'POST',
+            'contentType': 'application/json',
+            'data': JSON.stringify(userInformation),
+            'success': function(data) {
+                //$("#new-registration input[type='text']").val('');
+                wineQuery();
+            },
+        };
+        $.ajax(registerUser);
     });
 }
-
 
 function addNewWineBottle() {
     $('#red-white').on('click', '.js-label-add-wines', event => {
@@ -537,7 +552,7 @@ function singleWhiteWineSearchWindow(data) {
 function handleCreateApp() {
     startSearchWindow();
     registerNewUser();
-    submitNewUser();
+    addNewUser();
     addNewWineBottle();
     addRedWine(); 
     redWineSearchWindow();

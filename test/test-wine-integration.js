@@ -1,6 +1,7 @@
 'use strict';
 
 const chai = require('chai');
+const request = require('supertest');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
@@ -12,7 +13,8 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-let authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7I…XIifQ.ty5ASVIoTNu4PQB15KYnj5yTDotIMrpSHLiE7gF6xrk';
+let authToken;
+let agent = request.agent(app);
 
 function seedWineData() {
   console.info('seeding wine info');
@@ -168,7 +170,8 @@ function generateInformation() {
     it('should list information on GET', function() {
       let res;
       console.log('!!!', authToken);
-      return chai.request(app)
+      //return chai.request(app)
+      agent
         .get('/redWine')
         .set('Authorization', `Bearer ${authToken}`)
         .then(function(_res) {
@@ -184,7 +187,8 @@ function generateInformation() {
 
       it('should return the correct fields for redWine', function() {
         let resWine;
-        return chai.request(app)
+        //return chai.request(app)
+        agent
           .get('/redWine')
           .set('Authorization', `Bearer ${authToken}`)
           .then(function(res) {
