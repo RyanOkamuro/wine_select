@@ -10,18 +10,9 @@ const {TEST_DATABASE_URL} = require('../config');
 
 const expect = chai.expect;
 
-//let loginUserTest = {
-  //'username': 'WhiteWine',
-  //'password': 'WhiteWine1234'
-//}
-
 chai.use(chaiHttp);
 
-let authToken;
-
-//function seedUserData() {
-
-//}
+let authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7I…XIifQ.ty5ASVIoTNu4PQB15KYnj5yTDotIMrpSHLiE7gF6xrk';
 
 function seedWineData() {
   console.info('seeding wine info');
