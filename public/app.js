@@ -235,7 +235,7 @@ function addNewRedWine(redBottle) {
         },
         'dataType': 'json',
         'contentType': 'application/json',
-        'data': redBottle,
+        'data': JSON.stringify(redBottle),
         'success': function(redVino) {
             getRedWine(redVino)
         }
@@ -372,6 +372,7 @@ function singleWineResult(currentWine) {
     `;
     $('.wineResults').hide();
     $('.addBottle').hide();
+    $('.wineLabelRedWhite').hide();
     let outputElem = $('#wineDetails');
         outputElem
             .prop('hidden', false)
@@ -405,17 +406,17 @@ function createRedWineListing(data) {
 
 //White Wine Listing
 function createWhiteWineListing(data) {
-    for (index in data.whiteWineCollection) {
+    for (index in data.whiteWine) {
     let li = document.createElement('li');
     li.classList.add('vino');
     li.innerHTML = `
-    Wine Label: ${data.whiteWineCollection[index].wineLabelDetails} <br /> 
-    Type: ${data.whiteWineCollection[index].type} <br /> 
-    Rating: ${data.whiteWineCollection[index].rating} <br />
-    Price: ${data.whiteWineCollection[index].averagePrice} <br />  
-    Region: ${data.whiteWineCollection[index].wineOrigin} <br /> 
-    Year: ${data.whiteWineCollection[index].year} <br />    
-    <img src='${data.whiteWineCollection[index].image}' class='whiteWine' data-index='${index}' alt='wine-bottle'>
+    Wine Label: ${data.whiteWine[index].wineLabelDetails} <br /> 
+    Type: ${data.whiteWine[index].type} <br /> 
+    Rating: ${data.whiteWine[index].rating} <br />
+    Price: ${data.whiteWine[index].averagePrice} <br />  
+    Region: ${data.whiteWine[index].wineOrigin} <br /> 
+    Year: ${data.whiteWine[index].year} <br />    
+    <img src='${data.whiteWine[index].image}' class='whiteWine' data-index='${index}' alt='wine-bottle'>
     `;
     $('#labelInformation').append(li);
     }
@@ -487,8 +488,9 @@ function addRedWine() {
             moreInformation: $(event.target).find('#js-wine-information').val(),
         };
         console.log(wineData);
-        //$("#wineDetails input[type='text']").val('');
+        $("#wineDetails input[type='text']").val('');
         addNewRedWine(wineData);
+        singleWineResult(wineData);
     });
 }
 
