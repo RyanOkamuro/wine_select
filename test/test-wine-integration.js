@@ -157,7 +157,7 @@ function generateInformation() {
       //return seedUserData();
       return seedWineData();
     });
-
+/*
     afterEach(function() {
       return tearDownDb();
     });
@@ -165,11 +165,10 @@ function generateInformation() {
     after(function() {
       return closeServer();
     });
-
+*/
   describe('GET Label Information', function() {
     it('should list information on GET', function() {
       let res;
-      console.log('!!!', authToken);
       //return chai.request(app)
       agent
         .get('/redWine')

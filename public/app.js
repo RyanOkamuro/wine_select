@@ -175,6 +175,8 @@ function getRedWine() {
         'success': function(data) {
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
+            editWineLabel(data)
+            
         }
     }
     $.ajax(settings);
@@ -199,28 +201,6 @@ function getWhiteWine() {
     $.ajax(settings2);
 }
 
-//Add new user
-//function addNewWineUser(wineUser) {
-    //let authToken = localStorage.getItem('authToken');
-    //const settings4 = {
-        //'async': true,
-        //'crossDomain': true,
-        //'url': '/api/users/',
-        //'method': 'POST',
-        //'headers': {
-            //'Authorization': `Bearer ${authToken}`,
-            //'Cache-Control': 'no-cache',
-        //},
-        //'dataType': 'json',
-        //'contentType': 'application/json',
-        //'data': JSON.stringify(wineUser),
-        //'success': function(userInfo) {
-            //submitNewUser(userInfo)
-        //}
-    //}
-    //$.ajax(settings4);
-//}
-
 //Add Red Wine 
 function addNewRedWine(redBottle) {
     let authToken = localStorage.getItem('authToken');
@@ -241,6 +221,31 @@ function addNewRedWine(redBottle) {
         }
     }
     $.ajax(settings3);
+}
+
+//Edit Red Wine
+function editCurrentRedWine(id, redBottle) {
+    console.log(id);
+    console.log(redBottle);
+    let authToken = localStorage.getItem('authToken');
+    const settings4 = {
+        'async': true,
+        'crossDomain': true,
+        'url': '/redWine/' + id,
+        'method': 'PUT',
+        'headers': {
+            'Authorization': `Bearer ${authToken}`,
+            'Cache-Control': 'no-cache',
+        },
+        'dataType': 'json',
+        'contentType': 'application/json',
+        'data': JSON.stringify(id, redBottle),
+        'success': function(modifiedRedVino) {
+            getRedWine(modifiedRedVino)
+            singleWineResult(modifiedRedVino)
+        }
+    }
+    $.ajax(settings4);
 }
 
 
@@ -288,6 +293,8 @@ function wineQuery() {
     //<option value='Red'>Red</option>
     //<option value='White'>White</option>
 
+
+//Add New Wine
 function addWine() {
     let newWine = `
     <section role='region' class='addBottle'>
@@ -332,6 +339,37 @@ function addWine() {
         .html(newWine);
 }
 
+//Edit Wine Label Information
+function editWine(currentWine) {
+    console.log(currentWine);
+    let editBottleLabel = `
+    <section role='region' class='editBottle'>
+        <form role='form' class='editBottle-form'>
+            <fieldset name='editWineInformation'>
+                <legend>Edit Wine Label</legend>
+                <label for='js-edit-wine-brand' class='editWineBrand'>Wine Brand</label>
+                <input placeholder='Shafer' type='text' name='js-edit-wine-brand' id='js-edit-wine-brand'>
+                <label for='js-edit-wine-name' class='editWineName'>Wine Name</label>
+                <input placeholder='Hillside Select' type='text' name='js-edit-wine-name' id='js-edit-wine-name'>
+                <label for='js-edit-wine-rating' class='editWineRating'>Rating</label>
+                <input placeholder= 4.8 type='number' step='any' name='js-edit-wine-rating' id='js-edit-wine-rating'>
+                <label for='js-edit-wine-averagePrice' class='editWineAveragePrice'>Average Price</label>
+                <input placeholder= 30.99 type='number' step='any' name='js-edit-wine-averagePrice' id='js-edit-wine-averagePrice'>
+                <label for='js-edit-wine-food' class='editWineFood'>Food Pairing</label>
+                <input placeholder='Beef' type='text' name='js-edit-wine-food' id='js-edit-wine-food'>
+                <button role='button' type='submit' class='js-update-bottle'>Update</button>
+            </fieldset>
+        </form>
+    </section>
+    `;
+    $('.wineResults').hide();
+    let outputElem = $('#editWineDetails');
+    outputElem
+        .prop('hidden', false)
+        .html(editBottleLabel);
+        submitEditRedLabel();
+}
+
 //Display wine list from search results
 function wineCollectionListing() {
     let searchResultsList = `
@@ -373,6 +411,7 @@ function singleWineResult(currentWine) {
     $('.wineResults').hide();
     $('.addBottle').hide();
     $('.wineLabelRedWhite').hide();
+    $('.editBottle-form').hide();
     let outputElem = $('#wineDetails');
         outputElem
             .prop('hidden', false)
@@ -399,7 +438,10 @@ function createRedWineListing(data) {
     Region: ${data.redWine[index].wineOrigin} <br /> 
     Year: ${data.redWine[index].year} <br />    
     <img src='${data.redWine[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
+    <button role='button' value='${data.redWine[index].id}' type='button' class='js-edit-wine-info'>Edit</button>
+    <button role='button' type='button' class='js-delete-wine'>Delete</button>
     `;
+    console.log($(data.redWine[index].id));
     $('#labelInformation').append(li);
     }
 }
@@ -417,6 +459,8 @@ function createWhiteWineListing(data) {
     Region: ${data.whiteWine[index].wineOrigin} <br /> 
     Year: ${data.whiteWine[index].year} <br />    
     <img src='${data.whiteWine[index].image}' class='whiteWine' data-index='${index}' alt='wine-bottle'>
+    <button role='button' type='button' class='js-edit-wine-info'>Edit</button>
+    <button role='button' type='button' class='js-delete-wine'>Delete</button>
     `;
     $('#labelInformation').append(li);
     }
@@ -448,12 +492,14 @@ function startSearchWindow() {
     });
 }
 
+//Register New User
 function registerNewUser() {
     $('#register-new-user').click(function() {
         newUser();
     });
 }
 
+//Add New User
 function addNewUser() {
     $('#new-registration').submit('.js-add-user', event => {
         event.preventDefault();
@@ -462,7 +508,7 @@ function addNewUser() {
         let username = $('#js-new-user-name').val();
         let password = $('#js-new-user-password').val();
         let userInformation = {firstName, lastName, username, password};
-        console.log(userInformation);
+        console.log(JSON.stringify(userInformation));
         const registerUser = {
             'url': '/api/users/',
             'type': 'POST',
@@ -472,6 +518,11 @@ function addNewUser() {
                 //$("#new-registration input[type='text']").val('');
                 wineQuery();
             },
+            'error': function(err) {
+                if (password.length < 10) {
+                    $('#new-registration').html("Password must be a minimum of 10 characters")
+                }
+            }
         };
         $.ajax(registerUser);
     });
@@ -529,6 +580,32 @@ function whiteWineSearchWindow() {
     })
 }
 
+//Button to edit Red Wine
+function editWineLabel(data) {
+    $('.js-edit-wine-info').on('click', event => {
+        let currentWine = $('.js-edit-wine-info').val();
+        event.preventDefault();
+        editWine(currentWine);
+    })    
+}
+
+//Edit Red Wine brand, name, price
+function submitEditRedLabel() {
+    $('.editBottle-form').submit('.js-update-bottle', event => {
+        event.preventDefault();
+        let current_id = $('.js-edit-wine-info').val();
+        var wineData = {
+            brand: $(event.target).find('#js-edit-wine-brand').val(),
+            wineName: $(event.target).find('#js-edit-wine-name').val(),
+            rating: $(event.target).find('#js-edit-wine-rating').val(),
+            averagePrice: $(event.target).find('#js-edit-wine-averagePrice').val(),
+            foodSuggestion: $(event.target).find('#js-edit-wine-food').val()
+        };
+        console.log(wineData);
+        editCurrentRedWine(current_id, wineData);
+    });
+}
+
 //Single Red Wine Search Window
 function singleRedWineSearchWindow(data) {
     $('body').on('click', '.redWine', event=> {
@@ -557,6 +634,7 @@ function handleCreateApp() {
     addRedWine(); 
     redWineSearchWindow();
     whiteWineSearchWindow();
+    //editWineLabel();
     //singleRedWineSearchWindow();
     //singleWhiteWineSearchWindow();
 }
