@@ -134,6 +134,7 @@ let user = localStorage.getItem('currentUser');
     //]
 //};
 
+//Create new user account
 function newUser() {
     let newUserAccount = `
     <section role='region' class='newAddUser'>
@@ -161,8 +162,9 @@ function newUser() {
             .html(newUserAccount);    
 }
 
-function getRedWine() {
+function getRedWine(updatedBottleInformation) {
     let authToken = localStorage.getItem('authToken');
+    console.log(authToken);
     const settings = {
         'async': true,
         'crossDomain': true,
@@ -176,7 +178,10 @@ function getRedWine() {
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
             editWineLabel(data)
-            
+            removeRedWine(data)
+            if (updatedBottleInformation !== undefined){
+                singleWineResult(updatedBottleInformation)
+            } 
         }
     }
     $.ajax(settings);
@@ -226,7 +231,7 @@ function addNewRedWine(redBottle) {
 //Edit Red Wine
 function editCurrentRedWine(id, redBottle) {
     console.log(id);
-    console.log(redBottle);
+    console.log(JSON.stringify(redBottle));
     let authToken = localStorage.getItem('authToken');
     const settings4 = {
         'async': true,
@@ -239,13 +244,33 @@ function editCurrentRedWine(id, redBottle) {
         },
         'dataType': 'json',
         'contentType': 'application/json',
-        'data': JSON.stringify(id, redBottle),
+        'data': JSON.stringify({id, redBottle}),
         'success': function(modifiedRedVino) {
+            console.log(modifiedRedVino);
             getRedWine(modifiedRedVino)
-            singleWineResult(modifiedRedVino)
+            
         }
     }
     $.ajax(settings4);
+}
+
+//Delete Red Wine
+function deleteRedWine(id) {
+    let authToken = localStorage.getItem('authToken');
+    const settings5 = {
+        'async': true,
+        'crossDomain': true,
+        'url': '/redWine/' + id,
+        'method': 'DELETE',
+        'headers': {
+            'Authorization': `Bearer ${authToken}`,
+            'Cache-Control': 'no-cache',
+        },
+        'success': function(redVino) {
+            getRedWine(redVino)
+        }
+    }
+    $.ajax(settings5);
 }
 
 
@@ -286,6 +311,7 @@ function wineQuery() {
         outputElem
             .prop('hidden', false)
             .html(wineSearch);
+            
 }
 
 //<label for='js-wine-color' class='newWineColor'>Wine Color</label>
@@ -384,6 +410,7 @@ function wineCollectionListing() {
         outputElem
             .prop('hidden', false)
             .html(searchResultsList);
+            
 }
 
 //Display single wine information
@@ -439,7 +466,7 @@ function createRedWineListing(data) {
     Year: ${data.redWine[index].year} <br />    
     <img src='${data.redWine[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
     <button role='button' value='${data.redWine[index].id}' type='button' class='js-edit-wine-info'>Edit</button>
-    <button role='button' type='button' class='js-delete-wine'>Delete</button>
+    <button role='button' value='${data.redWine[index].id}' type='button' class='js-delete-wine'>Delete</button>
     `;
     console.log($(data.redWine[index].id));
     $('#labelInformation').append(li);
@@ -582,12 +609,24 @@ function whiteWineSearchWindow() {
 
 //Button to edit Red Wine
 function editWineLabel(data) {
+    console.log(data);
     $('.js-edit-wine-info').on('click', event => {
         let currentWine = $('.js-edit-wine-info').val();
         event.preventDefault();
         editWine(currentWine);
     })    
 }
+
+//Button to delete single Red Wine bottle entry
+function removeRedWine(data) {
+    $('.js-delete-wine').on('click', event => {
+        let currentID = $('.js-delete-wine').val();
+        console.log(currentID);
+        event.preventDefault();
+        deleteRedWine(currentID);
+        createRedWineListing(data);
+    })
+} 
 
 //Edit Red Wine brand, name, price
 function submitEditRedLabel() {
@@ -632,9 +671,11 @@ function handleCreateApp() {
     addNewUser();
     addNewWineBottle();
     addRedWine(); 
+    //editWineLabel();
+    removeRedWine();
     redWineSearchWindow();
     whiteWineSearchWindow();
-    //editWineLabel();
+    
     //singleRedWineSearchWindow();
     //singleWhiteWineSearchWindow();
 }

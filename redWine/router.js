@@ -71,12 +71,15 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+  console.log(req.params, req.body);
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
       `(${req.body.id}) must match`);
-      return res.status(400).json({ message: message });
-    }
+    console.error(message);
+    // we return here to break out of this function
+    return res.status(400).json({message: message});
+  }
 
   const toUpdate = {};
   const updateableFields = ['brand', 'wineName','rating', 'averagePrice', 'foodSuggestion'];
@@ -88,10 +91,10 @@ router.put('/:id', (req, res) => {
   });
 
     Red
-    .findByIdAndUpdate(req.params.id, { $set: toUpdate})
-    .then(redWines => res.status(204).end())
-    .catch(err => res.status(500).json ({ message: 'Internal server error'}));
-  });
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .then(redWines => res.status(204).json(redWines))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
 
 router.delete('/:id', (req, res) => {
     Red
