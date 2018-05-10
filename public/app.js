@@ -15,7 +15,7 @@ function newUser() {
             <input placeholder='Red' type='text' name='js-new-last-name' id='js-new-last-name'>
             <label for='js-new-user-name' class='newUserName'>User Name</label>
             <input placeholder='username' type='text' name='js-new-user-name' id='js-new-user-name'>
-            <label for='js-new-user-password' class='newUserPassword'>Password</label>
+            <label for='js-new-user-password' class='newUserPassword'>Password <span id='reenterPass'></span></label>
             <input placeholder='mysecretpassword' type='text' name='js-new-user-password' id='js-new-user-password'>
             <button role='button' type='submit' class='js-add-user'>Submit</button>
             </fieldset>
@@ -30,9 +30,8 @@ function newUser() {
             .html(newUserAccount);    
 }
 
-function getRedWine(updatedBottleInformation) {
+function getRedWine() {
     let authToken = localStorage.getItem('authToken');
-    console.log(authToken);
     const settings = {
         'async': true,
         'crossDomain': true,
@@ -43,13 +42,14 @@ function getRedWine(updatedBottleInformation) {
             'Cache-Control': 'no-cache',
         },
         'success': function(data) {
+            //if (image !== undefined){
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
             editWineLabel(data)
             removeRedWine(data)
-            if (updatedBottleInformation !== undefined){
-                singleWineResult(updatedBottleInformation)
-            } 
+            //if (updatedBottleInformation !== undefined){
+                //singleWineResult(updatedBottleInformation)
+            //} 
         }
     }
     $.ajax(settings);
@@ -115,8 +115,8 @@ function editCurrentRedWine(id, redBottle) {
         'data': JSON.stringify({id, redBottle}),
         'success': function(modifiedRedVino) {
             console.log(modifiedRedVino);
-            getRedWine(modifiedRedVino)
-            
+            getRedWine();
+            wineCollectionListing();
         }
     }
     $.ajax(settings4);
@@ -316,23 +316,25 @@ function singleWineResult(currentWine) {
 
 //Red Wine Listing
 function createRedWineListing(data) {
+    let ul = document.createElement('ul');
+        ul.classList.add('vino');
     for (index in data.redWine) {
-    let li = document.createElement('li');
-    li.classList.add('vino');
-    li.innerHTML = `
-    Wine Label: ${data.redWine[index].wineLabelDetails} <br /> 
-    Type: ${data.redWine[index].type} <br /> 
-    Rating: ${data.redWine[index].rating} <br />
-    Price: ${data.redWine[index].averagePrice} <br />  
-    Region: ${data.redWine[index].wineOrigin} <br /> 
-    Year: ${data.redWine[index].year} <br />    
-    <img src='${data.redWine[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
-    <button role='button' value='${data.redWine[index].id}' type='button' class='js-edit-wine-info'>Edit</button>
-    <button role='button' value='${data.redWine[index].id}' type='button' class='js-delete-wine'>Delete</button>
-    `;
-    console.log($(data.redWine[index].id));
-    $('#labelInformation').append(li);
+        let li = document.createElement('li');
+        li.classList.add('vino');
+        li.innerHTML = `
+        Wine Label: ${data.redWine[index].wineLabelDetails} <br /> 
+        Type: ${data.redWine[index].type} <br /> 
+        Rating: ${data.redWine[index].rating} <br />
+        Price: ${data.redWine[index].averagePrice} <br />  
+        Region: ${data.redWine[index].wineOrigin} <br /> 
+        Year: ${data.redWine[index].year} <br />    
+        <img src='${data.redWine[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
+        <button role='button' value='${data.redWine[index].id}' type='button' class='js-edit-wine-info'>Edit</button>
+        <button role='button' value='${data.redWine[index].id}' type='button' class='js-delete-wine'>Delete</button>
+        `;
+        ul.append(li);
     }
+    $('#labelInformation').html(ul)
 }
 
 //White Wine Listing
@@ -404,12 +406,11 @@ function addNewUser() {
             'contentType': 'application/json',
             'data': JSON.stringify(userInformation),
             'success': function(data) {
-                //$("#new-registration input[type='text']").val('');
                 wineQuery();
             },
             'error': function(err) {
                 if (password.length < 10) {
-                    $('#new-registration').html("Password must be a minimum of 10 characters")
+                    $('#reenterPass').html('Password must be a minimum of 10 characters')
                 }
             }
         };
@@ -481,6 +482,7 @@ function editWineLabel(data) {
 
 //Button to delete single Red Wine bottle entry
 function removeRedWine(data) {
+    console.log(data);
     $('.js-delete-wine').on('click', event => {
         let currentID = $('.js-delete-wine').val();
         console.log(currentID);

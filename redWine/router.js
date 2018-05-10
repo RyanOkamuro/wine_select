@@ -85,14 +85,16 @@ router.put('/:id', (req, res) => {
   const updateableFields = ['brand', 'wineName','rating', 'averagePrice', 'foodSuggestion'];
 
   updateableFields.forEach(field => {
-    if (field in req.body) {
-      toUpdate[field] = req.body[field];
+    console.log(field);
+    if (field in req.body.redBottle) {
+      console.log(req.body.redBottle[field]);
+      toUpdate[field] = req.body.redBottle[field];
     }
   });
-
+console.log(toUpdate);
     Red
     .findByIdAndUpdate(req.params.id, {$set: toUpdate})
-    .then(redWines => res.status(204).json(redWines))
+    .then(redWines =>  {console.log(redWines); return res.status(202).json(redWines)})
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
