@@ -47,7 +47,8 @@ function getRedWine() {
             searchRedWine(data)
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
-            editWineLabel(data)
+            editWineLabel()
+            submitEditRedLabel(data)
             removeRedWine(data)
         }
     }
@@ -69,7 +70,8 @@ function getWhiteWine() {
         'success': function(data) {
             createWhiteWineListing(data)
             singleWhiteWineSearchWindow(data)
-            editWineLabel(data)
+            editWineLabel()
+            submitEditRedLabel(data)
         }
     }
     $.ajax(settings2);
@@ -308,6 +310,7 @@ function editWine(currentWine) {
         .prop('hidden', false)
         .html(editBottleLabel);
         submitEditRedLabel();
+        //submitEditWhiteLabel();
 }
 
 //Display wine list from search results
@@ -537,11 +540,12 @@ function whiteWineSearchWindow() {
 }
 
 //Button to edit Red/White Wine
-function editWineLabel(redWine, whiteWine) {
-    $('.js-edit-wine-info').on('click', event => {
-        let currentWine = $('.js-edit-wine-info').val();
+function editWineLabel() {
+    $('.js-edit-wine-info').on('click', function(event) {
+        let currentWine = $(this).val();
         console.log(currentWine);
         event.preventDefault();
+        getRedWine();
         editWine(currentWine);
     })    
 }
@@ -557,12 +561,14 @@ function removeRedWine(data) {
     })
 } 
 
-//Edit Red Wine brand, name, price
-function submitEditRedLabel() {
+//Submit edited Red Wine information
+function submitEditRedLabel(wine) {
+    console.log(wine);
     $('.editBottle-form').submit('.js-update-bottle', event => {
         event.preventDefault();
-        let current_id = $('.js-edit-wine-info').val();
-        var wineData = {
+        //let current_id = $('.js-edit-wine-info').val();
+        let current_id = $('.js-update-bottle').val();
+        let wineData = {
             brand: $(event.target).find('#js-edit-wine-brand').val(),
             wineName: $(event.target).find('#js-edit-wine-name').val(),
             rating: $(event.target).find('#js-edit-wine-rating').val(),
@@ -570,17 +576,27 @@ function submitEditRedLabel() {
             foodSuggestion: $(event.target).find('#js-edit-wine-food').val()
         };
         console.log(wineData);
-        let wineBottleVal = $('.js-update-bottle').val();
-        console.log(wineBottleVal);
-        if ( wineBottleVal === current_id) {
-            editCurrentRedWine(current_id, wineData);
-        }else {
-             editCurrentWhiteWine(current_id, wineData);
-        }
-        
-       
+        editCurrentRedWine(current_id, wineData)       
     });
 }
+
+//Submit edited White Wine information 
+//function submitEditWhiteLabel() {
+    //$('.editBottle-form').submit('.js-update-bottle', function(event) {
+        //event.preventDefault();
+        //let current_id = $('.js-edit-wine-info').val();
+        //console.log(current_id)
+        //let wineData = {
+            //brand: $(event.target).find('#js-edit-wine-brand').val(),
+            //wineName: $(event.target).find('#js-edit-wine-name').val(),
+            //rating: $(event.target).find('#js-edit-wine-rating').val(),
+            //averagePrice: $(event.target).find('#js-edit-wine-averagePrice').val(),
+            //foodSuggestion: $(event.target).find('#js-edit-wine-food').val()
+        //};
+        //console.log(wineData);
+        //editCurrentWhiteWine(current_id, wineData)       
+    //});
+//}
 
 //Single Red Wine Search Window
 function singleRedWineSearchWindow(data) {
