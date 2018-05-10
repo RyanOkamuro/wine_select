@@ -268,7 +268,7 @@ function editWine(currentWine) {
 function wineCollectionListing() {
     let searchResultsList = `
     <section role='region' class='wineResults'>
-        <ul id='labelInformation'></ul>
+        
     </section>
     `;
     $('.wineLabelRedWhite').hide();
@@ -317,7 +317,7 @@ function singleWineResult(currentWine) {
 //Red Wine Listing
 function createRedWineListing(data) {
     let ul = document.createElement('ul');
-        ul.classList.add('vino');
+    ul.classList.add('labelInformation');
     for (index in data.redWine) {
         let li = document.createElement('li');
         li.classList.add('vino');
@@ -334,7 +334,7 @@ function createRedWineListing(data) {
         `;
         ul.append(li);
     }
-    $('#labelInformation').html(ul)
+    $('.wineResults').html(ul)
 }
 
 //White Wine Listing
