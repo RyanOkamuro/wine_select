@@ -30,6 +30,7 @@ function newUser() {
             .html(newUserAccount);    
 }
 
+//Get Red Wine JSON 
 function getRedWine() {
     let authToken = localStorage.getItem('authToken');
     const settings = {
@@ -55,6 +56,7 @@ function getRedWine() {
     $.ajax(settings);
 }
 
+//Get White Wine JSON
 function getWhiteWine() {
     let authToken = localStorage.getItem('authToken');
     const settings2 = {
@@ -268,12 +270,12 @@ function editWine(currentWine) {
 function wineCollectionListing() {
     let searchResultsList = `
     <section role='region' class='wineResults'>
-        
     </section>
     `;
     $('.wineLabelRedWhite').hide();
     $('.wineRedWhiteImages').hide();
     $('.addBottle').hide();
+    $('.editBottle').hide();
     let outputElem = $('#wineList');
         outputElem
             .prop('hidden', false)
@@ -339,6 +341,8 @@ function createRedWineListing(data) {
 
 //White Wine Listing
 function createWhiteWineListing(data) {
+    let ul = document.createElement('ul');
+    ul.classList.add('labelInformation');
     for (index in data.whiteWine) {
     let li = document.createElement('li');
     li.classList.add('vino');
@@ -353,8 +357,9 @@ function createWhiteWineListing(data) {
     <button role='button' type='button' class='js-edit-wine-info'>Edit</button>
     <button role='button' type='button' class='js-delete-wine'>Delete</button>
     `;
-    $('#labelInformation').append(li);
+    ul.append(li);
     }
+    $('.wineResults').html(ul)
 }
 
 function startSearchWindow() {
