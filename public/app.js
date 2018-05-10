@@ -43,14 +43,12 @@ function getRedWine() {
             'Cache-Control': 'no-cache',
         },
         'success': function(data) {
-            //if (image !== undefined){
+            wineQuery(data)
+            searchRedWine(data)
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
             editWineLabel(data)
             removeRedWine(data)
-            //if (updatedBottleInformation !== undefined){
-                //singleWineResult(updatedBottleInformation)
-            //} 
         }
     }
     $.ajax(settings);
@@ -116,8 +114,7 @@ function editCurrentRedWine(id, redBottle) {
         'contentType': 'application/json',
         'data': JSON.stringify({id, redBottle}),
         'success': function(modifiedRedVino) {
-            console.log(modifiedRedVino);
-            getRedWine();
+            getRedWine(modifiedRedVino);
             wineCollectionListing();
         }
     }
@@ -146,7 +143,8 @@ function deleteRedWine(id) {
 
 //Search by querying wine label.  
 //Search by red or white wine by clicking on the wine bottle image. 
-function wineQuery() {
+function wineQuery(allWines) {
+    console.log(allWines);
     let wineSearch = `
     <section role='region' class='wineLabelRedWhite'>
         <form role='form' class='wineBrand-form'>
@@ -154,14 +152,6 @@ function wineQuery() {
             <legend>Wine Label Search</legend>
             <label for='js-wine-label' class='winery'>Wine Label</label>
             <select name='js-wine-label' id='js-wine-label'>
-                <option value="BF">Baileyana Firepeak</option>
-                <option value="CMC">Christian Moreau Chablis</option>
-                <option value="DTBB">Dr. Thanisch Bernkasteler Badstube</option>
-                <option value="GADB">Gaja Alteni Di Brassica</option>
-                <option value="HOT">Holm Oak Tasmania</option>
-                <option value="LCP">Layer Cake Primitivo</option>
-                <option value="PB">Penfolds Bin 2</option>
-                <option value="TENGR">Tarapaca Etiqueta Negra Gran Reserva</option>
             </select>
             <button role='button' type='submit' class='js-label-search'>Submit</button>
             <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
@@ -181,7 +171,14 @@ function wineQuery() {
         outputElem
             .prop('hidden', false)
             .html(wineSearch);
-            
+    for (index in allWines.redWine) {
+        let valueID = allWines.redWine[index].id;
+        let wineBottleLabel = allWines.redWine[index].wineLabelDetails;
+        $('#js-wine-label').append($('<option>', {
+            value: valueID,
+            text: wineBottleLabel
+        }));
+    }
 }
 
 //<label for='js-wine-color' class='newWineColor'>Wine Color</label>
@@ -344,20 +341,20 @@ function createWhiteWineListing(data) {
     let ul = document.createElement('ul');
     ul.classList.add('labelInformation');
     for (index in data.whiteWine) {
-    let li = document.createElement('li');
-    li.classList.add('vino');
-    li.innerHTML = `
-    Wine Label: ${data.whiteWine[index].wineLabelDetails} <br /> 
-    Type: ${data.whiteWine[index].type} <br /> 
-    Rating: ${data.whiteWine[index].rating} <br />
-    Price: ${data.whiteWine[index].averagePrice} <br />  
-    Region: ${data.whiteWine[index].wineOrigin} <br /> 
-    Year: ${data.whiteWine[index].year} <br />    
-    <img src='${data.whiteWine[index].image}' class='whiteWine' data-index='${index}' alt='wine-bottle'>
-    <button role='button' type='button' class='js-edit-wine-info'>Edit</button>
-    <button role='button' type='button' class='js-delete-wine'>Delete</button>
-    `;
-    ul.append(li);
+        let li = document.createElement('li');
+        li.classList.add('vino');
+        li.innerHTML = `
+        Wine Label: ${data.whiteWine[index].wineLabelDetails} <br /> 
+        Type: ${data.whiteWine[index].type} <br /> 
+        Rating: ${data.whiteWine[index].rating} <br />
+        Price: ${data.whiteWine[index].averagePrice} <br />  
+        Region: ${data.whiteWine[index].wineOrigin} <br /> 
+        Year: ${data.whiteWine[index].year} <br />    
+        <img src='${data.whiteWine[index].image}' class='whiteWine' data-index='${index}' alt='wine-bottle'>
+        <button role='button' type='button' class='js-edit-wine-info'>Edit</button>
+        <button role='button' type='button' class='js-delete-wine'>Delete</button>
+        `;
+        ul.append(li);
     }
     $('.wineResults').html(ul)
 }
@@ -378,6 +375,7 @@ function startSearchWindow() {
                 localStorage.setItem('currentUser', username);
                 user = username;
                 console.log(data);
+                getRedWine();
                 wineQuery(data);
             },
             error: function(err) {
@@ -420,6 +418,20 @@ function addNewUser() {
             }
         };
         $.ajax(registerUser);
+    });
+}
+
+function searchRedWine(redBottles) {
+    $('#red-white').on('click', '.js-label-search', event => {
+        event.preventDefault();
+        let singleWineID = $('#js-wine-label').val();
+        for (index in redBottles.redWine) {
+            let value_ID = redBottles.redWine[index].id;
+            if (singleWineID === value_ID) {
+                singleWineResult(redBottles.redWine[index]);
+                $('.wineRedWhiteImages').hide();
+            }
+        };
     });
 }
 
@@ -540,8 +552,6 @@ function handleCreateApp() {
     addNewUser();
     addNewWineBottle();
     addRedWine(); 
-    //editWineLabel();
-    //removeRedWine();
     redWineSearchWindow();
     whiteWineSearchWindow();
 }
