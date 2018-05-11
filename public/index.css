@@ -60,26 +60,26 @@
     margin: 15px auto;
   }
 
-  .wineBrand-form {
+  .redWineBrand-form {
       width: 400px;
       padding: 40px;
       border-radius: 4px;
       margin: 0 auto;
   }
 
-  .wineBrand-form legend {
+  .redWineBrand-form legend {
       width: 100%;
       text-align: center;
       margin: 0 auto 20px;
   }
 
-  .wineBrand-form label {
+  .redWineBrand-form label {
       display: block;
       margin-bottom: 5px;
       margin-top: 5px;
   }
 
-  .wineBrand-form input, .wineBrand-form button {
+  .redWineBrand-form input, .redWineBrand-form button {
       padding: 6px;
       border-radius: 3px;
       margin-bottom: 3px;

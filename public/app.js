@@ -48,8 +48,8 @@ function getRedWine() {
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
             editWineLabel()
-            submitEditRedLabel(data)
-            removeRedWine(data)
+            submitEditLabel(data)
+            removeWine(data)
         }
     }
     $.ajax(settings);
@@ -72,7 +72,8 @@ function getWhiteWine() {
             createWhiteWineListing(data)
             singleWhiteWineSearchWindow(data)
             editWineLabel()
-            submitEditRedLabel(data)
+            submitEditLabel(data)
+            removeWine(data)
         }
     }
     $.ajax(settings2);
@@ -183,7 +184,7 @@ function deleteWhiteWine(id) {
             'Cache-Control': 'no-cache',
         },
         'success': function(whiteVino) {
-            getRedWine(whiteVino)
+            getWhiteWine(whiteVino)
         }
     }
     $.ajax(settings7);
@@ -196,7 +197,7 @@ function wineQuery(allWines) {
     console.log(allWines);
     let wineSearch = `
     <section role='region' class='wineLabelRedWhite'>
-        <form role='form' class='wineBrand-form'>
+        <form role='form' class='redWineBrand-form'>
             <fieldset name='wineLabel'>
             <legend>Wine Label Search</legend>
             <label for='js-wine-label' class='winery'>Wine Label</label>
@@ -318,7 +319,7 @@ function editWine(currentWine, color) {
     outputElem
         .prop('hidden', false)
         .html(editBottleLabel);
-        submitEditRedLabel();
+        submitEditLabel();
         //submitEditWhiteLabel();
 }
 
@@ -563,19 +564,29 @@ function editWineLabel() {
 }
 
 //Button to delete single Red Wine bottle entry
-function removeRedWine(data) {
+function removeWine(data) {
     console.log(data);
     $('.js-delete-wine').on('click', function(event) {
         let currentID = $(this).val();
+        let color = $(this).siblings('img').attr('class');
         console.log(currentID);
+        console.log(color);
         event.preventDefault();
-        deleteRedWine(currentID);
-        createRedWineListing(data);
+        if (color === 'redWine') {
+            deleteRedWine(currentID);
+            createRedWineListing(data);
+        } else {
+            deleteWhiteWine(currentID);
+            createWhiteWineListing(data);
+        }
+        
+        //deleteWhiteWine(currentID);
+        
     })
 } 
 
-//Submit edited Red Wine information
-function submitEditRedLabel(wine) {
+//Submit edited wine information
+function submitEditLabel(wine) {
     $('.editBottle-form').submit('.js-update-bottle', event => {
         event.preventDefault();
         //let current_id = $('.js-edit-wine-info').val();
