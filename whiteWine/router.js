@@ -10,7 +10,7 @@ const {White} = require('./models');
 const jwtAuth = passport.authenticate('jwt', {session: false});
 router.get('/', jwtAuth, (req, res) => {
     White
-    .find().exec()
+    .find({}).exec()
     .then(whiteWine => {
       res.json({
         whiteWine: whiteWine.map(
@@ -81,14 +81,16 @@ router.put('/:id', (req, res) => {
   const updateableFields = ['brand', 'wineName','rating', 'averagePrice', 'foodSuggestion'];
 
   updateableFields.forEach(field => {
-    if (field in req.body) {
-      toUpdate[field] = req.body[field];
+    console.log(field);
+    if (field in req.body.whiteBottle) {
+      console.log(req.body.whiteBottle[field]);
+      toUpdate[field] = req.body.whiteBottle[field];
     }
   });
-
+console.log(toUpdate);
     White
     .findByIdAndUpdate(req.params.id, { $set: toUpdate})
-    .then(whiteWines => res.status(204).end())
+    .then(whiteWines =>  {console.log(whiteWines); return res.status(202).json(whiteWines)})
     .catch(err => res.status(500).json ({ message: 'Internal server error'}));
   });
 

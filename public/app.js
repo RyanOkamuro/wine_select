@@ -68,9 +68,11 @@ function getWhiteWine() {
             'Cache-Control': 'no-cache',
         },
         'success': function(data) {
+            wineQuery(data)
             createWhiteWineListing(data)
             singleWhiteWineSearchWindow(data)
             editWineLabel()
+            submitEditRedLabel(data)
         }
     }
     $.ajax(settings2);
@@ -141,7 +143,6 @@ function editCurrentWhiteWine(id, whiteBottle) {
         'contentType': 'application/json',
         'data': JSON.stringify({id, whiteBottle}),
         'success': function(modifiedWhiteVino) {
-            console.log(modifiedWhiteVino);
             getWhiteWine(modifiedWhiteVino);
             wineCollectionListing();
         }
@@ -222,6 +223,14 @@ function wineQuery(allWines) {
     for (index in allWines.redWine) {
         let valueID = allWines.redWine[index].id;
         let wineBottleLabel = allWines.redWine[index].wineLabelDetails;
+        $('#js-wine-label').append($('<option>', {
+            value: valueID,
+            text: wineBottleLabel
+        }));
+    }
+    for (index in allWines.whiteWine) {
+        let valueID = allWines.whiteWine[index].id;
+        let wineBottleLabel = allWines.whiteWine[index].wineLabelDetails;
         $('#js-wine-label').append($('<option>', {
             value: valueID,
             text: wineBottleLabel
@@ -404,8 +413,8 @@ function createWhiteWineListing(data) {
         Region: ${data.whiteWine[index].wineOrigin} <br /> 
         Year: ${data.whiteWine[index].year} <br />    
         <img src='${data.whiteWine[index].image}' class='whiteWine' data-index='${index}' alt='wine-bottle'>
-        <button role='button' type='button' class='js-edit-wine-info'>Edit</button>
-        <button role='button' type='button' class='js-delete-wine'>Delete</button>
+        <button role='button' type='button' value='${data.whiteWine[index].id}' class='js-edit-wine-info'>Edit</button>
+        <button role='button' type='button' value='${data.whiteWine[index].id}' class='js-delete-wine'>Delete</button>
         `;
         ul.append(li);
     }
@@ -429,6 +438,7 @@ function startSearchWindow() {
                 user = username;
                 console.log(data);
                 getRedWine();
+                getWhiteWine();
                 wineQuery(data);
             },
             error: function(err) {
@@ -547,12 +557,14 @@ function editWineLabel() {
         console.log(currentWine);
         event.preventDefault();
         getRedWine();
+        getWhiteWine();
         editWine(currentWine, color);
     })    
 }
 
 //Button to delete single Red Wine bottle entry
 function removeRedWine(data) {
+    console.log(data);
     $('.js-delete-wine').on('click', function(event) {
         let currentID = $(this).val();
         console.log(currentID);
@@ -564,11 +576,11 @@ function removeRedWine(data) {
 
 //Submit edited Red Wine information
 function submitEditRedLabel(wine) {
-    console.log(wine);
     $('.editBottle-form').submit('.js-update-bottle', event => {
         event.preventDefault();
         //let current_id = $('.js-edit-wine-info').val();
         let current_id = $('.js-update-bottle').val();
+        console.log(current_id);
         let wineData = {
             brand: $(event.target).find('#js-edit-wine-brand').val(),
             wineName: $(event.target).find('#js-edit-wine-name').val(),
@@ -594,23 +606,6 @@ function submitEditRedLabel(wine) {
     });
 }
 
-//Submit edited White Wine information 
-//function submitEditWhiteLabel() {
-    //$('.editBottle-form').submit('.js-update-bottle', function(event) {
-        //event.preventDefault();
-        //let current_id = $('.js-edit-wine-info').val();
-        //console.log(current_id)
-        //let wineData = {
-            //brand: $(event.target).find('#js-edit-wine-brand').val(),
-            //wineName: $(event.target).find('#js-edit-wine-name').val(),
-            //rating: $(event.target).find('#js-edit-wine-rating').val(),
-            //averagePrice: $(event.target).find('#js-edit-wine-averagePrice').val(),
-            //foodSuggestion: $(event.target).find('#js-edit-wine-food').val()
-        //};
-        //console.log(wineData);
-        //editCurrentWhiteWine(current_id, wineData)       
-    //});
-//}
 
 //Single Red Wine Search Window
 function singleRedWineSearchWindow(data) {
