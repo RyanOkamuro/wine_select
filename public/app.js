@@ -101,12 +101,34 @@ function addNewRedWine(redBottle) {
     $.ajax(settings3);
 }
 
+//Add White Wine 
+function addNewWhiteWine(whiteBottle) {
+    let authToken = localStorage.getItem('authToken');
+    const settings4 = {
+        'async': true,
+        'crossDomain': true,
+        'url': '/whiteWine',
+        'method': 'POST',
+        'headers': {
+            'Authorization': `Bearer ${authToken}`,
+            'Cache-Control': 'no-cache',
+        },
+        'dataType': 'json',
+        'contentType': 'application/json',
+        'data': JSON.stringify(whiteBottle),
+        'success': function(whiteVino) {
+            getWhiteWine(whiteVino)
+        }
+    }
+    $.ajax(settings4);
+}
+
 //Edit Red Wine
 function editCurrentRedWine(id, redBottle) {
     console.log(id);
     console.log(JSON.stringify(redBottle));
     let authToken = localStorage.getItem('authToken');
-    const settings4 = {
+    const settings5 = {
         'async': true,
         'crossDomain': true,
         'url': '/redWine/' + id,
@@ -123,7 +145,7 @@ function editCurrentRedWine(id, redBottle) {
             wineCollectionListing();
         }
     }
-    $.ajax(settings4);
+    $.ajax(settings5);
 }
 
 //Edit White Wine
@@ -131,7 +153,7 @@ function editCurrentWhiteWine(id, whiteBottle) {
     console.log(id);
     console.log(JSON.stringify(whiteBottle));
     let authToken = localStorage.getItem('authToken');
-    const settings5 = {
+    const settings6 = {
         'async': true,
         'crossDomain': true,
         'url': '/whiteWine/' + id,
@@ -148,13 +170,13 @@ function editCurrentWhiteWine(id, whiteBottle) {
             wineCollectionListing();
         }
     }
-    $.ajax(settings5);
+    $.ajax(settings6);
 }
 
 //Delete Red Wine
 function deleteRedWine(id) {
     let authToken = localStorage.getItem('authToken');
-    const settings6 = {
+    const settings7 = {
         'async': true,
         'crossDomain': true,
         'url': '/redWine/' + id,
@@ -167,14 +189,13 @@ function deleteRedWine(id) {
             getRedWine(redVino)
         }
     }
-    console.log(settings6);
-    $.ajax(settings6);
+    $.ajax(settings7);
 }
 
 //Delete White Wine
 function deleteWhiteWine(id) {
     let authToken = localStorage.getItem('authToken');
-    const settings7 = {
+    const settings8 = {
         'async': true,
         'crossDomain': true,
         'url': '/whiteWine/' + id,
@@ -187,7 +208,7 @@ function deleteWhiteWine(id) {
             getWhiteWine(whiteVino)
         }
     }
-    $.ajax(settings7);
+    $.ajax(settings8);
 }
 
 
@@ -257,7 +278,10 @@ function addWine() {
                 <label for='js-wine-name' class='newWineName'>Wine Name</label>
                 <input placeholder='Hillside Select' type='text' name='js-wine-name' id='js-wine-name'>
                 <label for='js-wine-color' class='newWineColor'>Wine Color</label>
-                <input placeholder='red' type='text' name='js-wine-color' id='js-wine-color'>
+                    <select name='js-wine-color' id='js-wine-color'>
+                        <option value='Red'selected>Red</option>
+                        <option value='White'>White</option>
+                    </select>
                 <label for='js-wine-type' class='newWineType'>Wine Type</label>
                 <input placeholder='Cabernet Sauvignon' type='text' name='js-wine-type' id='js-wine-type'>
                 <label for='js-wine-rating' class='newWineRating'>Rating</label>
@@ -505,13 +529,13 @@ function addNewWineBottle() {
     });
 }
 
-function addRedWine() {
+function addWine() {
     $('#wineDetails').submit('.js-add-bottle', event => {
         event.preventDefault();
         var wineData = {
             brand: $(event.target).find('#js-wine-brand').val(),
             wineName: $(event.target).find('#js-wine-name').val(),
-            color: $(event.target).find('#js-wine-color').val(),
+            color: $('#js-wine-color').val(),
             type: $(event.target).find('#js-wine-type').val(),
             rating: $(event.target).find('#js-wine-rating').val(),
             averagePrice: $(event.target).find('#js-wine-averagePrice').val(),
@@ -523,10 +547,30 @@ function addRedWine() {
             history: $(event.target).find('#js-wine-history').val(),
             moreInformation: $(event.target).find('#js-wine-information').val(),
         };
-        console.log(wineData);
-        $("#wineDetails input[type='text']").val('');
-        addNewRedWine(wineData);
-        singleWineResult(wineData);
+        let brand = $(event.target).find('#js-wine-brand').val();
+        let wineName = $(event.target).find('#js-wine-name').val();
+        let region = $(event.target).find('#js-wine-region').val();
+        let country = $(event.target).find('#js-wine-country').val();
+        let singleWine = {
+            wineLabelDetails: `${brand} ${wineName}`.trim(),
+            color: $('#js-wine-color').val(),
+            type: $(event.target).find('#js-wine-type').val(),
+            rating: $(event.target).find('#js-wine-rating').val(),
+            averagePrice: $(event.target).find('#js-wine-averagePrice').val(),
+            wineOrigin: `${region} ${country}`.trim(),
+            year: $(event.target).find('#js-wine-year').val(),
+            foodSuggestion: $(event.target).find('#js-wine-food').val(),
+            image: $(event.target).find('#js-wine-image').val(),
+            history: $(event.target).find('#js-wine-history').val(),
+            moreInformation: $(event.target).find('#js-wine-information').val(),
+        }
+        if ($('#js-wine-color').val() === 'Red') {
+            addNewRedWine(wineData);
+            singleWineResult(singleWine);
+        } else {
+            addNewWhiteWine(wineData);
+            singleWineResult(singleWine);
+        }
     });
 }
 
@@ -579,9 +623,6 @@ function removeWine(data) {
             deleteWhiteWine(currentID);
             createWhiteWineListing(data);
         }
-        
-        //deleteWhiteWine(currentID);
-        
     })
 } 
 
@@ -589,7 +630,6 @@ function removeWine(data) {
 function submitEditLabel(wine) {
     $('.editBottle-form').submit('.js-update-bottle', event => {
         event.preventDefault();
-        //let current_id = $('.js-edit-wine-info').val();
         let current_id = $('.js-update-bottle').val();
         console.log(current_id);
         let wineData = {
@@ -604,16 +644,6 @@ function submitEditLabel(wine) {
         } else {
             editCurrentWhiteWine(current_id, wineData)
         }
-        
-        //for (index in wine.redWine) {
-            //let value_ID = wine.redWine[index].id;
-            //console.log(value_ID);
-            //if (current_id === value_ID) {
-                //editCurrentRedWine(current_id, wineData)
-            //} else {
-                //editCurrentWhiteWine(current_id, wineData)
-            //}
-        //}   
     });
 }
 
@@ -643,7 +673,7 @@ function handleCreateApp() {
     registerNewUser();
     addNewUser();
     addNewWineBottle();
-    addRedWine(); 
+    addWine(); 
     redWineSearchWindow();
     whiteWineSearchWindow();
 }
