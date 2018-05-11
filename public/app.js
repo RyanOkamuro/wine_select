@@ -71,7 +71,6 @@ function getWhiteWine() {
             createWhiteWineListing(data)
             singleWhiteWineSearchWindow(data)
             editWineLabel()
-            submitEditRedLabel(data)
         }
     }
     $.ajax(settings2);
@@ -143,7 +142,7 @@ function editCurrentWhiteWine(id, whiteBottle) {
         'data': JSON.stringify({id, whiteBottle}),
         'success': function(modifiedWhiteVino) {
             console.log(modifiedWhiteVino);
-            getRedWine(modifiedWhiteVino);
+            getWhiteWine(modifiedWhiteVino);
             wineCollectionListing();
         }
     }
@@ -282,8 +281,8 @@ function addWine() {
 }
 
 //Edit Wine Label Information
-function editWine(currentWine) {
-    console.log(currentWine);
+function editWine(currentWine, color) {
+    console.log(currentWine, color);
     let editBottleLabel = `
     <section role='region' class='editBottle'>
         <form role='form' class='editBottle-form'>
@@ -299,6 +298,7 @@ function editWine(currentWine) {
                 <input placeholder= 30.99 type='number' step='any' name='js-edit-wine-averagePrice' id='js-edit-wine-averagePrice'>
                 <label for='js-edit-wine-food' class='editWineFood'>Food Pairing</label>
                 <input placeholder='Beef' type='text' name='js-edit-wine-food' id='js-edit-wine-food'>
+                <input type='hidden' id='js-editWineColor' value='${color}'>
                 <button role='button' type='submit' value='${currentWine}' class='js-update-bottle'>Update</button>
             </fieldset>
         </form>
@@ -543,10 +543,11 @@ function whiteWineSearchWindow() {
 function editWineLabel() {
     $('.js-edit-wine-info').on('click', function(event) {
         let currentWine = $(this).val();
+        let color = $(this).siblings('img').attr('class');
         console.log(currentWine);
         event.preventDefault();
         getRedWine();
-        editWine(currentWine);
+        editWine(currentWine, color);
     })    
 }
 
@@ -575,8 +576,21 @@ function submitEditRedLabel(wine) {
             averagePrice: $(event.target).find('#js-edit-wine-averagePrice').val(),
             foodSuggestion: $(event.target).find('#js-edit-wine-food').val()
         };
-        console.log(wineData);
-        editCurrentRedWine(current_id, wineData)       
+        if ($(event.target).find('#js-editWineColor').val() === 'redWine') {
+            editCurrentRedWine(current_id, wineData)
+        } else {
+            editCurrentWhiteWine(current_id, wineData)
+        }
+        
+        //for (index in wine.redWine) {
+            //let value_ID = wine.redWine[index].id;
+            //console.log(value_ID);
+            //if (current_id === value_ID) {
+                //editCurrentRedWine(current_id, wineData)
+            //} else {
+                //editCurrentWhiteWine(current_id, wineData)
+            //}
+        //}   
     });
 }
 
