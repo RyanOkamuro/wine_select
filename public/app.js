@@ -217,26 +217,38 @@ function deleteWhiteWine(id) {
 function wineQuery() {
     let wineSearch = `
     <section role='region' class='wineLabelRedWhite'>
-        <form role='form' class='wineBrand-form'>
-            <fieldset name='wineLabel'>
-            <legend>Wine Label Search</legend>
-            <label for='js-red-wine-label' class='winery'>Red Wine Collection</label>
-            <select name='js-red-wine-label' id='js-red-wine-label'>
-            </select>
-            <button role='button' type='button' class='js-red-label-search'>Search</button>
-            <label for='js-white-wine-label' class='winery'>White Wine Collection</label>
-            <select name='js-white-wine-label' id='js-white-wine-label'>
-            </select>
-            <button role='button' type='button' class='js-white-label-search'>Search</button>
-            <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
-            </fieldset>
-        </form>
+        <h3>Search for Red or White Wine</h3>
+        <h4>Click on the red/white bottle for full wine listing or search from the drop down wine menu</h4>
+        <div class='row'>
+            <div class='col-6'>
+                <form role='form' class='redWineBrand-form'>
+                    <fieldset name='redWineLabel'>
+                    <legend>Red Wine Label Search</legend>
+                    <img src='http://www.leclos.net/wp-content/uploads/850761.png' class='red' alt='Lafite'>
+                    <label for='js-red-wine-label' class='winery'>Red Wine Collection</label>
+                    <select name='js-red-wine-label' id='js-red-wine-label'>
+                    </select>
+                    <button role='button' type='button' class='js-red-label-search'>Search</button>
+                    <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
+                    </fieldset>
+                </form>
+            </div>
+            <div class='col-6'>
+                <form role='form' class='whiteWineBrand-form'>
+                    <fieldset name='whiteWineLabel'>
+                    <legend>White Wine Label Search</legend>
+                    <img src='http://www.jpost.com/HttpHandlers/ShowImage.ashx?id=327394' class='white' alt='Jadot Lous'>
+                    <label for='js-white-wine-label' class='winery'>White Wine Collection</label>
+                    <select name='js-white-wine-label' id='js-white-wine-label'>
+                    </select>
+                    <button role='button' type='button' class='js-white-label-search'>Search</button>
+                    <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </section>
     <section role='region' class='newWineInputArea' aria-live='assertive' hidden></section>
-    <section role='region' class='wineRedWhiteImages'>
-        <img src='http://www.leclos.net/wp-content/uploads/850761.png' class='red' alt='Lafite'>
-        <img src='http://www.jpost.com/HttpHandlers/ShowImage.ashx?id=327394' class='white' alt='Jadot Lous'>
-    </section>
     `;
     $('.login-form').hide();
     $('.newUser-form').hide();
@@ -318,7 +330,6 @@ function addWine() {
     </section>
     `;
     $('.wineLabelRedWhite').hide();
-    $('.wineRedWhiteImages').hide();
     let outputElem = $('#wineDetails');
     outputElem
         .prop('hidden', false)
@@ -366,7 +377,6 @@ function wineCollectionListing() {
     `;
     $('#red-white').hide();
     $('.wineLabelRedWhite').hide();
-    $('.wineRedWhiteImages').hide();
     $('.addBottle').hide();
     $('.editBottle').hide();
     let outputElem = $('#wineList');
@@ -398,7 +408,6 @@ function singleWineResult(currentWine) {
         Year: ${currentWine.year} <br />
     `;
     $('#red-white').hide();
-    $('.wineRedWhiteImages').hide();
     $('.wineResults').hide();
     $('.addBottle').hide();
     $('.wineLabelRedWhite').hide();
