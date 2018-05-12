@@ -43,7 +43,7 @@ function getRedWine() {
             'Cache-Control': 'no-cache',
         },
         'success': function(data) {
-            wineQuery(data)
+            redWineQuery(data)
             searchRedWine(data)
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
@@ -68,7 +68,8 @@ function getWhiteWine() {
             'Cache-Control': 'no-cache',
         },
         'success': function(data) {
-            wineQuery(data)
+            whiteWineQuery(data)
+            searchWhiteWine(data)
             createWhiteWineListing(data)
             singleWhiteWineSearchWindow(data)
             editWineLabel()
@@ -211,20 +212,22 @@ function deleteWhiteWine(id) {
     $.ajax(settings8);
 }
 
-
 //Search by querying wine label.  
 //Search by red or white wine by clicking on the wine bottle image. 
-function wineQuery(allWines) {
-    console.log(allWines);
+function wineQuery() {
     let wineSearch = `
     <section role='region' class='wineLabelRedWhite'>
-        <form role='form' class='redWineBrand-form'>
+        <form role='form' class='wineBrand-form'>
             <fieldset name='wineLabel'>
             <legend>Wine Label Search</legend>
-            <label for='js-wine-label' class='winery'>Wine Label</label>
-            <select name='js-wine-label' id='js-wine-label'>
+            <label for='js-red-wine-label' class='winery'>Red Wine Collection</label>
+            <select name='js-red-wine-label' id='js-red-wine-label'>
             </select>
-            <button role='button' type='submit' class='js-label-search'>Submit</button>
+            <button role='button' type='button' class='js-red-label-search'>Search</button>
+            <label for='js-white-wine-label' class='winery'>White Wine Collection</label>
+            <select name='js-white-wine-label' id='js-white-wine-label'>
+            </select>
+            <button role='button' type='button' class='js-white-label-search'>Search</button>
             <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
             </fieldset>
         </form>
@@ -237,23 +240,30 @@ function wineQuery(allWines) {
     `;
     $('.login-form').hide();
     $('.newUser-form').hide();
+    $('#login-landing').hide();
     //display brand, red wine, or white wine search page
     let outputElem = $('#red-white');
         outputElem
             .prop('hidden', false)
             .html(wineSearch);
-    for (index in allWines.redWine) {
-        let valueID = allWines.redWine[index].id;
-        let wineBottleLabel = allWines.redWine[index].wineLabelDetails;
-        $('#js-wine-label').append($('<option>', {
+}
+
+function redWineQuery(redLabel) {
+    for (index in redLabel.redWine) {
+        let valueID = redLabel.redWine[index].id;
+        let wineBottleLabel = redLabel.redWine[index].wineLabelDetails;
+        $('#js-red-wine-label').append($('<option>', {
             value: valueID,
             text: wineBottleLabel
         }));
     }
-    for (index in allWines.whiteWine) {
-        let valueID = allWines.whiteWine[index].id;
-        let wineBottleLabel = allWines.whiteWine[index].wineLabelDetails;
-        $('#js-wine-label').append($('<option>', {
+}
+
+function whiteWineQuery(whiteLabel) {
+    for (index in whiteLabel.whiteWine) {
+        let valueID = whiteLabel.whiteWine[index].id;
+        let wineBottleLabel = whiteLabel.whiteWine[index].wineLabelDetails;
+        $('#js-white-wine-label').append($('<option>', {
             value: valueID,
             text: wineBottleLabel
         }));
@@ -307,6 +317,7 @@ function addWine() {
         </form>
     </section>
     `;
+    $('.wineLabelRedWhite').hide();
     $('.wineRedWhiteImages').hide();
     let outputElem = $('#wineDetails');
     outputElem
@@ -362,7 +373,6 @@ function wineCollectionListing() {
         outputElem
             .prop('hidden', false)
             .html(searchResultsList);
-            
 }
 
 //Display single wine information
@@ -510,29 +520,43 @@ function addNewUser() {
 }
 
 function searchRedWine(redBottles) {
-    $('#red-white').on('click', '.js-label-search', event => {
+    $('#red-white').on('click', '.js-red-label-search', event => {
         event.preventDefault();
-        let singleWineID = $('#js-wine-label').val();
+        let singleRedWineID = $('#js-red-wine-label').val();
         for (index in redBottles.redWine) {
             let value_ID = redBottles.redWine[index].id;
-            if (singleWineID === value_ID) {
+            console.log(value_ID);
+            if (singleRedWineID === value_ID) {
                 singleWineResult(redBottles.redWine[index]);
-            }
+            } 
         };
     });
 }
 
+function searchWhiteWine(whiteBottles){
+    $('#red-white').on('click', '.js-white-label-search', event => {
+        event.preventDefault();
+        let singleWhiteWineID = $('#js-white-wine-label').val();
+        for (index in whiteBottles.whiteWine) {
+            let value_ID = whiteBottles.whiteWine[index].id;
+            if (singleWhiteWineID === value_ID) {
+                singleWineResult(whiteBottles.whiteWine[index]);
+            }
+        }
+    });
+}
+
 function addNewWineBottle() {
-    $('#red-white').on('click', '.js-label-add-wines', event => {
+    $('#red-white').on('click', '.js-label-add-wines', function(event) {
         event.preventDefault();
         addWine();
     });
 }
 
-function addWine() {
+function submitNewWine() {
     $('#wineDetails').submit('.js-add-bottle', event => {
         event.preventDefault();
-        var wineData = {
+        let wineData = {
             brand: $(event.target).find('#js-wine-brand').val(),
             wineName: $(event.target).find('#js-wine-name').val(),
             color: $('#js-wine-color').val(),
@@ -673,7 +697,7 @@ function handleCreateApp() {
     registerNewUser();
     addNewUser();
     addNewWineBottle();
-    addWine(); 
+    submitNewWine(); 
     redWineSearchWindow();
     whiteWineSearchWindow();
 }

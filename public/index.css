@@ -5,6 +5,7 @@
   html, body {
     color: #1B0404;
     background-color: #FEFEFE;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .heading {
@@ -26,6 +27,12 @@
       padding: 0;
       border: 0;
       margin: 0;
+  }
+
+  #login-landing {
+      background-image: url("http://branwarwines.com/wp-content/uploads/2015/06/BranwarWines-Banner-Home1.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
   }
 
   .login-form, .newBottle-form, .newUser-form {
@@ -60,26 +67,28 @@
     margin: 15px auto;
   }
 
-  .redWineBrand-form {
-      width: 400px;
+  .wineBrand-form {
+      width: 500px;
       padding: 40px;
       border-radius: 4px;
       margin: 0 auto;
+      border: 1px solid black;
   }
 
-  .redWineBrand-form legend {
+  .wineBrand-form legend {
+      font-size: 40px;
       width: 100%;
       text-align: center;
       margin: 0 auto 20px;
   }
 
-  .redWineBrand-form label {
+  .wineBrand-form label {
       display: block;
-      margin-bottom: 5px;
-      margin-top: 5px;
+      margin: 5px auto 5px auto;
   }
 
-  .redWineBrand-form input, .redWineBrand-form button {
+  .wineBrand-form input, #js-red-wine-label, #js-white-wine-label, .wineBrand-form button {
+      width: 100%;
       padding: 6px;
       border-radius: 3px;
       margin-bottom: 3px;
