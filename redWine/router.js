@@ -82,7 +82,7 @@ router.put('/:id', (req, res) => {
   }
 
   const toUpdate = {};
-  const updateableFields = ['brand', 'wineName','rating', 'averagePrice', 'foodSuggestion'];
+  const updateableFields = ['rating', 'averagePrice'];
 
   updateableFields.forEach(field => {
     console.log(field);

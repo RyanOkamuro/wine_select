@@ -343,17 +343,11 @@ function editWine(currentWine, color) {
     <section role='region' class='editBottle'>
         <form role='form' class='editBottle-form'>
             <fieldset name='editWineInformation'>
-                <legend>Edit Wine Label</legend>
-                <label for='js-edit-wine-brand' class='editWineBrand'>Wine Brand</label>
-                <input placeholder='Shafer' type='text' name='js-edit-wine-brand' id='js-edit-wine-brand'>
-                <label for='js-edit-wine-name' class='editWineName'>Wine Name</label>
-                <input placeholder='Hillside Select' type='text' name='js-edit-wine-name' id='js-edit-wine-name'>
+                <legend>Edit Wine Rating and Average Price</legend>
                 <label for='js-edit-wine-rating' class='editWineRating'>Rating</label>
                 <input placeholder= 4.8 type='number' step='any' name='js-edit-wine-rating' id='js-edit-wine-rating'>
                 <label for='js-edit-wine-averagePrice' class='editWineAveragePrice'>Average Price</label>
                 <input placeholder= 30.99 type='number' step='any' name='js-edit-wine-averagePrice' id='js-edit-wine-averagePrice'>
-                <label for='js-edit-wine-food' class='editWineFood'>Food Pairing</label>
-                <input placeholder='Beef' type='text' name='js-edit-wine-food' id='js-edit-wine-food'>
                 <input type='hidden' id='js-editWineColor' value='${color}'>
                 <button role='button' type='submit' value='${currentWine}' class='js-update-bottle'>Update</button>
             </fieldset>
@@ -361,6 +355,7 @@ function editWine(currentWine, color) {
     </section>
     `;
     $('.wineResults').hide();
+    $('.heading').hide();
     let outputElem = $('#editWineDetails');
     outputElem
         .prop('hidden', false)
@@ -372,7 +367,12 @@ function editWine(currentWine, color) {
 //Display wine list from search results
 function wineCollectionListing() {
     let searchResultsList = `
+    <header role="banner" class="heading">
+        <h5>Wine Collection</h5>
+        <h6>Click on the wine bottle for more details or click edit/delete to make changes to the wine bottle.</h6>
+    </header>
     <section role='region' class='wineResults'>
+    
     </section>
     `;
     $('#red-white').hide();
@@ -406,6 +406,7 @@ function singleWineResult(currentWine) {
         Price: ${currentWine.averagePrice} <br />
         Region: ${currentWine.wineOrigin} <br />
         Year: ${currentWine.year} <br />
+        Food Suggestion: ${currentWine.foodSuggestion} <br />
     `;
     $('#red-white').hide();
     $('.wineResults').hide();
@@ -666,11 +667,8 @@ function submitEditLabel(wine) {
         let current_id = $('.js-update-bottle').val();
         console.log(current_id);
         let wineData = {
-            brand: $(event.target).find('#js-edit-wine-brand').val(),
-            wineName: $(event.target).find('#js-edit-wine-name').val(),
             rating: $(event.target).find('#js-edit-wine-rating').val(),
             averagePrice: $(event.target).find('#js-edit-wine-averagePrice').val(),
-            foodSuggestion: $(event.target).find('#js-edit-wine-food').val()
         };
         if ($(event.target).find('#js-editWineColor').val() === 'redWine') {
             editCurrentRedWine(current_id, wineData)

@@ -18,7 +18,7 @@
       margin-top: 40px;
   }
 
-  h2 {
+  h2, h6 {
       color: #1B0404;
       font-size: 22px;
   }
@@ -27,7 +27,7 @@
       text-align: center;
   }
 
-  h3 {
+  h3, h5 {
       font-size: 32px;
       color: #7F1A1A;
       margin-top: 40px;
@@ -49,7 +49,7 @@
       background-repeat: no-repeat;
   }
 
-  .login-form, .newBottle-form, .newUser-form {
+  .login-form, .newBottle-form, .newUser-form, .editBottle-form {
       width: 400px;
       padding: 40px;
       border-radius: 4px;
@@ -57,30 +57,30 @@
       border: 1px solid black;
   }
 
-  .newBottle-form {
+  .newBottle-form, .editBottle-form {
       width: 600px;
       border: none;
   }
 
-  .login-form legend, .newBottle-form legend, .newUser-form legend {
+  .login-form legend, .newBottle-form legend, .newUser-form legend, .editBottle-form legend {
       width: 100%;
       text-align: center;
       margin: 0 auto 50px;
   }
 
-  .newBottle-form legend {
+  .newBottle-form legend, .editBottle-form legend {
       font-size: 22px;
       font-weight: bold;
       color: #7F1A1A;
   }
 
-  .login-form label, .newBottle-form label, .newUser-form label {
+  .login-form label, .newBottle-form label, .newUser-form label, .editBottle-form label {
       display: block;
       margin-bottom: 5px;
       margin-top: 5px;
   }
 
-  .login-form input, .login-form button, .newBottle-form input, .newBottle-form select,.newBottle-form button, .newUser-form input, .newUser-form button {
+  .login-form input, .login-form button, .newBottle-form input, .newBottle-form select,.newBottle-form button, .newUser-form input, .newUser-form button, .editBottle-form input, .editBottle-form button {
       width: 100%;
       padding: 6px;
       border-radius: 3px;
@@ -151,7 +151,6 @@
       outline: none;
   }
 
-
   .red, .white {
       display: block;
       margin-left: auto;
@@ -181,8 +180,15 @@
       top: 0;
       height: 150px;
       width: 50px;
+      margin-right: 20px;
+      padding-top: 15px;
   }
 
+  button.js-edit-wine-info, button.js-delete-wine {
+      width: 60px;
+      height: 30px;
+  }
+  
   #labelInformation {
       max-width: 600px;
       margin-left: auto;
@@ -191,7 +197,9 @@
   }
 
   .vino {
-      margin-bottom: 30px;
+      border-bottom: 1px solid black;
+      padding-top: 15px;
+      padding-bottom: 15px;
   }
 
   .labelInformation, #singleLabel {
@@ -225,8 +233,10 @@
 
   .history-winerylink {
       display: block;
-      margin-right: 50px;
-      margin-left: 50px;
+      max-width: 950px;
+      margin-top: 20px;
+      margin-right: auto;
+      margin-left: auto;
   }
 
 /* Mobile defaults */
