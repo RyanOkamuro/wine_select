@@ -28,7 +28,13 @@
   }
 
   h3 {
+      font-size: 32px;
+      color: #7F1A1A;
       margin-top: 40px;
+  }
+
+  h4 {
+      font-size: 22px;
   }
 
   fieldset {
@@ -51,10 +57,21 @@
       border: 1px solid black;
   }
 
+  .newBottle-form {
+      width: 600px;
+      border: none;
+  }
+
   .login-form legend, .newBottle-form legend, .newUser-form legend {
       width: 100%;
       text-align: center;
       margin: 0 auto 50px;
+  }
+
+  .newBottle-form legend {
+      font-size: 22px;
+      font-weight: bold;
+      color: #7F1A1A;
   }
 
   .login-form label, .newBottle-form label, .newUser-form label {
@@ -63,7 +80,7 @@
       margin-top: 5px;
   }
 
-  .login-form input, .login-form button, .newBottle-form input, .newBottle-form button, .newUser-form input, .newUser-form button {
+  .login-form input, .login-form button, .newBottle-form input, .newBottle-form select,.newBottle-form button, .newUser-form input, .newUser-form button {
       width: 100%;
       padding: 6px;
       border-radius: 3px;
@@ -75,8 +92,14 @@
     margin: 15px auto;
   }
 
+  #js-wine-history {
+    word-wrap: break-word;
+    height: 100px;
+    padding: 0;
+}
+
   .redWineBrand-form, .whiteWineBrand-form {
-      width: 400px;
+      width: 410px;
       padding: 40px;
       border-radius: 4px;
       border: 1px solid black;
@@ -103,10 +126,37 @@
       margin-bottom: 3px;
   }
 
+  button[type="submit"],
+  button[type="button"] {
+      width: 100%;
+      height: 40px;
+      padding: 2px;
+      background-color: #7F1A1A;
+      color: #F8F8FF;
+      border: 0.5px;
+      border-radius: 3px;
+      margin-top: 5px;
+      margin-bottom: 2px;
+  }
+
+  button[type="submit"]:hover,
+  button[type="submit"]:focus,
+  button[type="button"]:hover,
+  button[type="button"]:focus {
+      background-color: #581212;
+      -webkit-transition: background 0.1s;
+      -moz-transition: background 0.1s;
+      -o-transition: background 0.1s;
+      transition: background 0.1s;
+      outline: none;
+  }
+
+
   .red, .white {
       display: block;
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 10px;
       height: 300px;
       width: 80px;
   }
@@ -115,24 +165,13 @@
       float: left;
       padding-left: 1.04166666%;
       padding-right: 1.04166666%;
-  }
+    }
 
   .row {
-    max-width: 1000px;
+    max-width: 870px;
     padding-left: 20px;
     padding-right: 20px;
     margin: 0 auto;
-  }
-
-  /* Clearfix */
-  .row::before,
-  .row::after {
-      display: table;
-      content: '';
-  }
-
-  .row::after {
-      clear: both;
   }
 
   .redWine, .whiteWine {
@@ -196,7 +235,7 @@
 }
 
 /* Non-mobile, grid */
-@media only screen and (min-width: 840px) {
+@media only screen and (min-width: 960px) {
   .col-6 {
     width: 50%;
   }

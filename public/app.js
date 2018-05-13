@@ -223,9 +223,9 @@ function wineQuery() {
             <div class='col-6'>
                 <form role='form' class='redWineBrand-form'>
                     <fieldset name='redWineLabel'>
-                    <legend>Red Wine Label Search</legend>
+                    <legend>Red Wine</legend>
                     <img src='http://www.leclos.net/wp-content/uploads/850761.png' class='red' alt='Lafite'>
-                    <label for='js-red-wine-label' class='winery'>Red Wine Collection</label>
+                    <label for='js-red-wine-label' class='winery'>Collection</label>
                     <select name='js-red-wine-label' id='js-red-wine-label'>
                     </select>
                     <button role='button' type='button' class='js-red-label-search'>Search</button>
@@ -236,9 +236,9 @@ function wineQuery() {
             <div class='col-6'>
                 <form role='form' class='whiteWineBrand-form'>
                     <fieldset name='whiteWineLabel'>
-                    <legend>White Wine Label Search</legend>
+                    <legend>White Wine</legend>
                     <img src='http://www.jpost.com/HttpHandlers/ShowImage.ashx?id=327394' class='white' alt='Jadot Lous'>
-                    <label for='js-white-wine-label' class='winery'>White Wine Collection</label>
+                    <label for='js-white-wine-label' class='winery'>Collection</label>
                     <select name='js-white-wine-label' id='js-white-wine-label'>
                     </select>
                     <button role='button' type='button' class='js-white-label-search'>Search</button>
