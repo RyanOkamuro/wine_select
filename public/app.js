@@ -498,6 +498,9 @@ function startSearchWindow() {
                 wineQuery(data);
             },
             error: function(err) {
+                //if(err === 401) {
+                    //alert(`Incorrect username or password`);
+                //}
                 console.log(err);
             }
         };
