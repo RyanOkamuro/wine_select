@@ -23,6 +23,8 @@ function newUser() {
     </section>
     `;
     $('.login-form').hide();
+    $('.heading').hide();
+    $('.footer').hide();
     //display new accout registration form
     let outputElem = $('#new-registration');
         outputElem
@@ -251,6 +253,8 @@ function wineQuery() {
     <section role='region' class='newWineInputArea' aria-live='assertive' hidden></section>
     `;
     $('.login-form').hide();
+    $('.heading').hide();
+    $('.footer').hide();
     $('.newUser-form').hide();
     $('#login-landing').hide();
     //display brand, red wine, or white wine search page
@@ -321,7 +325,7 @@ function addWine() {
                 <label for='js-wine-image' class='newWineImage'>Wine Image URL</label>
                 <input placeholder='www.wineimage...' type='text' name='js-wine-image' id='js-wine-image'>
                 <label for='js-wine-history' class='newWineHistory'>History</label>
-                <input placeholder='The 2013 Hillside Select is...' type='text' name='js-wine-history' id='js-wine-history'>
+                <textarea placeholder='The 2013 Hillside Select is...' rows="6" cols="65" id='js-wine-history'></textarea>
                 <label for='js-wine-information' class='newWineInformation'>More Information URL</label>
                 <input placeholder='www.shafervine...' type='text' name='js-wine-information' id='js-wine-information'>
                 <button role='button' type='submit' class='js-add-bottle'>Submit</button>
@@ -355,7 +359,7 @@ function editWine(currentWine, color) {
     </section>
     `;
     $('.wineResults').hide();
-    $('.heading').hide();
+    $('.wineListing').hide();
     let outputElem = $('#editWineDetails');
     outputElem
         .prop('hidden', false)
@@ -390,7 +394,7 @@ function singleWineResult(currentWine) {
     console.log(currentWine);
     let singleWine = `
     <section role='region' class='oneWine'>
-        <img src='${currentWine.image}' class='singleRedWineImage' alt='wine-bottle'>
+        <img src='${currentWine.image}' class='singleWineImage' alt='wine-bottle'>
         <ul id='singleLabel'></ul>
     </section>
     <section role='region' class='history-winerylink'>
@@ -478,10 +482,16 @@ function startSearchWindow() {
             'contentType': 'application/json',
             'data': JSON.stringify(userInformation),
             'success': function(data) {
+                if (data.login) {
+                    var html = document.getElementsByTagName('html')[0];
+                    var body = document.getElementsByTagName('body')[0];
+                    console.log(body);
+                    html.style.backgroundImage = 'none';
+                    body.style.backgroundImage = 'none';
+                }
                 localStorage.setItem('authToken', data.authToken);
                 localStorage.setItem('currentUser', username);
                 user = username;
-                console.log(data);
                 getRedWine();
                 getWhiteWine();
                 wineQuery(data);

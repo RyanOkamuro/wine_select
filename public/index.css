@@ -61,10 +61,6 @@
       background-repeat: no-repeat;
   }
   */
-  
-  html, body {
-      clear: both;
-  }
 
   .login-form, .newBottle-form, .newUser-form, .editBottle-form {
       width: 400px;
@@ -74,15 +70,23 @@
       border: 1px solid black;
   }
 
+  .newAddUser {
+      padding-top: 50px;
+  }
   .newBottle-form, .editBottle-form {
       width: 600px;
       border: none;
+  }
+
+  textarea {
+      resize: none;
   }
 
   .login-form legend, .newBottle-form legend, .newUser-form legend, .editBottle-form legend {
       width: 100%;
       text-align: center;
       margin: 0 auto 50px;
+      font-weight: bold;
   }
 
   .newBottle-form legend, .editBottle-form legend {
@@ -109,11 +113,12 @@
     margin: 15px auto;
   }
 
-  #js-wine-history {
+  /*#js-wine-history {
     word-wrap: break-word;
     height: 100px;
     padding: 0;
 }
+*/
 
   .redWineBrand-form, .whiteWineBrand-form {
       width: 410px;
@@ -126,6 +131,7 @@
 
   .redWineBrand-form legend, .whiteWineBrand-form legend {
       font-size: 20px;
+      font-weight: bold;
       width: 100%;
       text-align: center;
       margin: 0 auto 20px;
@@ -191,14 +197,17 @@
   }
 
   .redWine, .whiteWine {
-      clear: both;
       position: absolute;
-      right: 0;
+      right: 30px;
       top: 0;
+      margin-right: 20px;
       height: 150px;
       width: 50px;
-      margin-right: 20px;
       padding-top: 15px;
+  }
+
+  .whiteWine {
+      width: 70px;
   }
 
   button.js-edit-wine-info, button.js-delete-wine {
@@ -227,12 +236,11 @@
       text-align: center;
   }
 
-  .singleRedWineImage {
+  .singleWineImage {
       display: block;
       margin-left: auto;
       margin-right: auto;
       height: 250px;
-      width: 80px;
   }
 
   #singleLabel {
