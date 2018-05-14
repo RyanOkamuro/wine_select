@@ -494,7 +494,8 @@ function startSearchWindow() {
                 user = username;
                 getRedWine();
                 getWhiteWine();
-                wineQuery(data);
+                window.location.href= '/app/search';
+                //wineQuery(data);
             },
             error: function(err) {
                 console.log(err);

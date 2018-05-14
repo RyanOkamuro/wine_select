@@ -102,4 +102,4 @@ if (require.main === module) {
 module.exports = { app, runServer, closeServer };
 
 
-//Redesign routing to go to app/search && app/collection : )
+//Redesign routing to go to app/search 
