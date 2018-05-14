@@ -198,12 +198,12 @@
 
   .redWine, .whiteWine {
       position: absolute;
-      right: 30px;
+      right: 0;
       top: 0;
-      margin-right: 20px;
       height: 150px;
       width: 50px;
       padding-top: 15px;
+      margin-right: 15px;
   }
 
   .whiteWine {
@@ -215,8 +215,8 @@
       height: 30px;
   }
   
-  #labelInformation {
-      max-width: 600px;
+  #wineList {
+      width: 1080px;
       margin-left: auto;
       margin-right: auto;
       padding: 0;
@@ -265,16 +265,30 @@
   }
 
 /* Mobile defaults */
-.col-6 {
+  .col-6 {
     width: 100%;
 }
 
 /* Non-mobile, grid */
+@media only screen and (max-width: 1080px) {
+    #wineList {
+      width: 1080px;
+    }
+  }
+
 @media only screen and (min-width: 960px) {
   .col-6 {
     width: 50%;
   }
 }
+
+@media only screen and (max-width: 640px) {
+    #wineList {
+      width: 640px;
+    }
+  }
+
+
   
 
 
