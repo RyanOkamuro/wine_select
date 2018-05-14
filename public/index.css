@@ -2,11 +2,20 @@
   box-sizing: border-box;
   }
 
+
+
   html, body {
       color: #1B0404;
       height: 100%;
-      background-color: #FEFEFE;
       font-family: 'Open Sans', sans-serif;
+      /*
+      background-color: #FEFEFE;
+      */
+      background-image: url("http://branwarwines.com/wp-content/uploads/2015/06/BranwarWines-Banner-Home1.jpg");
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
   }
 
   .heading {
@@ -24,7 +33,7 @@
       font-size: 22px;
   }
 
-  h3, h4 {
+  h3, h4, h5, h6 {
       text-align: center;
   }
 
@@ -44,14 +53,18 @@
       margin: 0;
   }
 
-  #login-landing {
+  /*#login-landing {
       background-image: url("http://branwarwines.com/wp-content/uploads/2015/06/BranwarWines-Banner-Home1.jpg");
       height: 100%;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
   }
+  */
   
+  html, body {
+      clear: both;
+  }
 
   .login-form, .newBottle-form, .newUser-form, .editBottle-form {
       width: 400px;

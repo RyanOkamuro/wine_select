@@ -10,7 +10,6 @@
     <link href="index.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <section role="region" id="login-landing">
     <header role="banner" class="heading">
         <h1>Wine Select</h1>
         <h2>Find the perfect bottle of wine based on community reviews.</h2>
@@ -23,12 +22,11 @@
             <label for="js-user-password" class="password">Password</label>
             <input placeholder="Enter Password" type="password" name="js-user-password" id="js-user-password" required/>
             <button role="button" type="submit" class="js-submit-button">Login</button>
-            <footer role="contentinfo" class="footer">
-                <p>Create a new user account <a href="#" id="register-new-user">New User</a></p>
-            </footer>
         </fieldset>
     </form>
-    </section>
+    <footer role="contentinfo" class="footer">
+        <p>Create a new user account <a href="#" id="register-new-user">New User</a></p>
+    </footer>
     <main role="main">
         <section role="region" id="new-registration" aria-live="assertive" hidden></section>
         <section role="region" id="red-white" aria-live="assertive" hidden></section>
@@ -38,6 +36,5 @@
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
-    
 </body>
 </html>

@@ -367,7 +367,7 @@ function editWine(currentWine, color) {
 //Display wine list from search results
 function wineCollectionListing() {
     let searchResultsList = `
-    <header role="banner" class="heading">
+    <section role='region' class='wineListing'>
         <h5>Wine Collection</h5>
         <h6>Click on the wine bottle for more details or click edit/delete to make changes to the wine bottle.</h6>
     </header>
