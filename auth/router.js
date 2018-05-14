@@ -14,11 +14,12 @@ const createAuthToken = function(user) {
   });
 };
 
-const localAuth = passport.authenticate('local', {session: false});
+const localAuth = passport.authenticate('local');
 router.use(bodyParser.json());
 router.post('/login', localAuth, (req, res) => {
   const authToken = createAuthToken(req.user.serialize());
-  res.json({authToken});
+  res.json({authToken: authToken, login: true});
+  console.log('Login working');
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});

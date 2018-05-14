@@ -11,6 +11,7 @@ const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 //const { wineListRouter } = require('./wineListRouter');
 const { router: redWineRouter } = require('./redWine');
 const { router: whiteWineRouter } = require('./whiteWine');
+const pageRoutes = require('./routing/routes');
 //const {userReviewRouter} = require('./userReviewRouter');
 
 mongoose.Promise = global.Promise;
@@ -20,7 +21,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use(morgan('common'));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -35,11 +36,12 @@ app.use(function (req, res, next) {
 app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-
+app.use(express.static('public'));
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 app.use('/whiteWine/', whiteWineRouter);
 app.use('/redWine/', redWineRouter);
+app.use('/app', pageRoutes);
 //app.use('/wineBottles', wineListRouter);
 
 const jwtAuth = passport.authenticate('jwt', {session: false })
@@ -98,3 +100,6 @@ if (require.main === module) {
 };
 
 module.exports = { app, runServer, closeServer };
+
+
+//Redesign routing to go to app/search && app/collection : )
