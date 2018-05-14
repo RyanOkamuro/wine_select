@@ -492,6 +492,7 @@ function startSearchWindow() {
                 localStorage.setItem('authToken', data.authToken);
                 localStorage.setItem('currentUser', username);
                 user = username;
+                console.log(data);
                 getRedWine();
                 getWhiteWine();
                 wineQuery(data);
