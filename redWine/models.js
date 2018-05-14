@@ -22,7 +22,7 @@ wineSchema.virtual('wineLabelDetails').get(function() {
     return `${this.brand} ${this.wineName}`.trim()});
 
 wineSchema.virtual('wineOrigin').get(function() {
-    return `${this.region} ${this.country}`.trim()});
+    return `${this.region}, ${this.country}`.trim()});
 
 wineSchema.methods.serialize = function() {
     return {

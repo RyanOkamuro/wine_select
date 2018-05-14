@@ -403,7 +403,7 @@ function singleWineResult(currentWine) {
         Wine Label: ${currentWine.wineLabelDetails} <br />
         Type: ${currentWine.type} <br />
         Rating: ${currentWine.rating} <br /> 
-        Price: ${currentWine.averagePrice} <br />
+        Price: $${currentWine.averagePrice} <br />
         Region: ${currentWine.wineOrigin} <br />
         Year: ${currentWine.year} <br />
         Food Suggestion: ${currentWine.foodSuggestion} <br />
@@ -431,7 +431,7 @@ function createRedWineListing(data) {
         Wine Label: ${data.redWine[index].wineLabelDetails} <br /> 
         Type: ${data.redWine[index].type} <br /> 
         Rating: ${data.redWine[index].rating} <br />
-        Price: ${data.redWine[index].averagePrice} <br />  
+        Price: $${data.redWine[index].averagePrice} <br />  
         Region: ${data.redWine[index].wineOrigin} <br /> 
         Year: ${data.redWine[index].year} <br />    
         <img src='${data.redWine[index].image}' class='redWine' data-index='${index}' alt='wine-bottle'>
@@ -591,7 +591,7 @@ function submitNewWine() {
             type: $(event.target).find('#js-wine-type').val(),
             rating: $(event.target).find('#js-wine-rating').val(),
             averagePrice: $(event.target).find('#js-wine-averagePrice').val(),
-            wineOrigin: `${region} ${country}`.trim(),
+            wineOrigin: `${region}, ${country}`.trim(),
             year: $(event.target).find('#js-wine-year').val(),
             foodSuggestion: $(event.target).find('#js-wine-food').val(),
             image: $(event.target).find('#js-wine-image').val(),

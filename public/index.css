@@ -4,18 +4,19 @@
 
   html, body {
       color: #1B0404;
+      height: 100%;
       background-color: #FEFEFE;
       font-family: 'Open Sans', sans-serif;
   }
 
   .heading {
       color: #7F1A1A;
-      margin: 10px auto;
       text-align: center;
   }
 
   h1 {
-      margin-top: 40px;
+      padding-top: 40px;
+      margin-top: 0;
   }
 
   h2, h6 {
@@ -45,9 +46,12 @@
 
   #login-landing {
       background-image: url("http://branwarwines.com/wp-content/uploads/2015/06/BranwarWines-Banner-Home1.jpg");
+      height: 100%;
+      background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
   }
+  
 
   .login-form, .newBottle-form, .newUser-form, .editBottle-form {
       width: 400px;
