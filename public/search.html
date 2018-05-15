@@ -1,1 +1,50 @@
-<h1>Search</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link rel="icon" type="image/png" href="https://9woclymefe-flywheel.netdna-ssl.com/wp-content/uploads/Red-Wine-Icon-600x600.jpg">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <title>Wine Select</title>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header role="banner" class="heading">
+<h3>Search for Red or White Wine</h3>
+<h4>Click on the red/white bottle for full wine listing or search from the drop down wine menu</h4>
+    </header>    
+<div class='row'>
+        <div class='col-6'>
+            <form role='form' class='redWineBrand-form'>
+                <fieldset name='redWineLabel'>
+                <legend>Red Wine</legend>
+                <img src='http://www.leclos.net/wp-content/uploads/850761.png' class='red' alt='Lafite'>
+                <label for='js-red-wine-label' class='winery'>Collection</label>
+                <select name='js-red-wine-label' id='js-red-wine-label'>
+                </select>
+                <button role='button' type='button' class='js-red-label-search'>Search</button>
+                <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
+                </fieldset>
+            </form>
+        </div>
+        <div class='col-6'>
+            <form role='form' class='whiteWineBrand-form'>
+                <fieldset name='whiteWineLabel'>
+                <legend>White Wine</legend>
+                <img src='http://www.jpost.com/HttpHandlers/ShowImage.ashx?id=327394' class='white' alt='Jadot Lous'>
+                <label for='js-white-wine-label' class='winery'>Collection</label>
+                <select name='js-white-wine-label' id='js-white-wine-label'>
+                </select>
+                <button role='button' type='button' class='js-white-label-search'>Search</button>
+                <button role='button' type='button' class='js-label-add-wines'>Add New Bottle</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <main role="main">
+        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="app.js"></script>
+    </body>
+    </html>
