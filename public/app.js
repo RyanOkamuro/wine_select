@@ -15,7 +15,7 @@ function newUser() {
             <input placeholder='Red' type='text' name='js-new-last-name' id='js-new-last-name'>
             <label for='js-new-user-name' class='newUserName'>User Name</label>
             <input placeholder='username' type='text' name='js-new-user-name' id='js-new-user-name'>
-            <label for='js-new-user-password' class='newUserPassword'>Password <span id='reenterPass'></span></label>
+            <label for='js-new-user-password' class='newUserPassword'>Password <br/><span id='reenterPass'></span></label>
             <input placeholder='mysecretpassword' type='text' name='js-new-user-password' id='js-new-user-password'>
             <button role='button' type='submit' class='js-add-user'>Submit</button>
             </fieldset>
@@ -498,10 +498,9 @@ function startSearchWindow() {
                 wineQuery(data);
             },
             error: function(err) {
-                //if(err === 401) {
-                    //alert(`Incorrect username or password`);
-                //}
-                console.log(err);
+                if(err.status === 401) {
+                    $('#wrongPass').html('Incorrect user name or password');
+                }
             }
         };
         $.ajax(loginPass);
