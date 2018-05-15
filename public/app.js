@@ -374,9 +374,8 @@ function wineCollectionListing() {
     <section role='region' class='wineListing'>
         <h5>Wine Collection</h5>
         <h6>Click on the wine bottle for more details or click edit/delete to make changes to the wine bottle.</h6>
-    </header>
+    </section>
     <section role='region' class='wineResults'>
-    
     </section>
     `;
     $('#red-white').hide();
@@ -391,8 +390,8 @@ function wineCollectionListing() {
 
 //Display single wine information
 function singleWineResult(currentWine) {
-    console.log(currentWine);
     let singleWine = `
+    <h7>Wine Select</h7>
     <section role='region' class='oneWine'>
         <img src='${currentWine.image}' class='singleWineImage' alt='wine-bottle'>
         <ul id='singleLabel'></ul>
@@ -412,6 +411,7 @@ function singleWineResult(currentWine) {
         Year: ${currentWine.year} <br />
         Food Suggestion: ${currentWine.foodSuggestion} <br />
     `;
+    $('#wineList').hide();
     $('#red-white').hide();
     $('.wineResults').hide();
     $('.addBottle').hide();

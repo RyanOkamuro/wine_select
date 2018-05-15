@@ -33,11 +33,11 @@
       font-size: 22px;
   }
 
-  h3, h4, h5, h6 {
+  h3, h4, h5, h6, h7 {
       text-align: center;
   }
 
-  h3, h5 {
+  h3, h5, h7 {
       font-size: 32px;
       color: #7F1A1A;
       margin-top: 40px;
@@ -263,6 +263,7 @@
   .history-winerylink {
       display: block;
       max-width: 950px;
+      padding-left: 15px;
       margin-top: 20px;
       margin-right: auto;
       margin-left: auto;
