@@ -43,6 +43,13 @@
       margin-top: 40px;
   }
 
+  .h7 {
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+      width: 180px;
+  }
+
   h4 {
       font-size: 22px;
   }
