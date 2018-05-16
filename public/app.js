@@ -1,5 +1,4 @@
-//let REDWINE_URL = 'redWine';
-//let WHITEWINE_URL = 'whiteWine';
+
 let user = localStorage.getItem('currentUser');
 
 //Create new user account
@@ -128,8 +127,6 @@ function addNewWhiteWine(whiteBottle) {
 
 //Edit Red Wine
 function editCurrentRedWine(id, redBottle) {
-    console.log(id);
-    console.log(JSON.stringify(redBottle));
     let authToken = localStorage.getItem('authToken');
     const settings5 = {
         'async': true,
@@ -153,8 +150,6 @@ function editCurrentRedWine(id, redBottle) {
 
 //Edit White Wine
 function editCurrentWhiteWine(id, whiteBottle) {
-    console.log(id);
-    console.log(JSON.stringify(whiteBottle));
     let authToken = localStorage.getItem('authToken');
     const settings6 = {
         'async': true,
@@ -286,12 +281,6 @@ function whiteWineQuery(whiteLabel) {
     }
 }
 
-//<label for='js-wine-color' class='newWineColor'>Wine Color</label>
-//<select name='js-wine-color id='js-wine-color'>
-    //<option value='Red'>Red</option>
-    //<option value='White'>White</option>
-
-
 //Add New Wine
 function addWine() {
     let newWine = `
@@ -342,7 +331,6 @@ function addWine() {
 
 //Edit Wine Label Information
 function editWine(currentWine, color) {
-    console.log(currentWine, color);
     let editBottleLabel = `
     <section role='region' class='editBottle'>
         <form role='form' class='editBottle-form'>
@@ -365,7 +353,6 @@ function editWine(currentWine, color) {
         .prop('hidden', false)
         .html(editBottleLabel);
         submitEditLabel();
-        //submitEditWhiteLabel();
 }
 
 //Display wine list from search results
@@ -485,14 +472,12 @@ function startSearchWindow() {
                 if (data.login) {
                     var html = document.getElementsByTagName('html')[0];
                     var body = document.getElementsByTagName('body')[0];
-                    console.log(body);
                     html.style.backgroundImage = 'none';
                     body.style.backgroundImage = 'none';
                 }
                 localStorage.setItem('authToken', data.authToken);
                 localStorage.setItem('currentUser', username);
                 user = username;
-                console.log(data);
                 getRedWine();
                 getWhiteWine();
                 wineQuery(data);
@@ -523,7 +508,6 @@ function addNewUser() {
         let username = $('#js-new-user-name').val();
         let password = $('#js-new-user-password').val();
         let userInformation = {firstName, lastName, username, password};
-        console.log(JSON.stringify(userInformation));
         const registerUser = {
             'url': '/api/users/',
             'type': 'POST',
@@ -532,7 +516,6 @@ function addNewUser() {
             'success': function(data) {
                 var html = document.getElementsByTagName('html')[0];
                 var body = document.getElementsByTagName('body')[0];
-                console.log(body);
                 html.style.backgroundImage = 'none';
                 body.style.backgroundImage = 'none';
                 getRedWine();
@@ -555,7 +538,6 @@ function searchRedWine(redBottles) {
         let singleRedWineID = $('#js-red-wine-label').val();
         for (index in redBottles.redWine) {
             let value_ID = redBottles.redWine[index].id;
-            console.log(value_ID);
             if (singleRedWineID === value_ID) {
                 singleWineResult(redBottles.redWine[index]);
             } 
@@ -634,7 +616,6 @@ function redWineSearchWindow() {
         event.preventDefault();
         getRedWine();
         wineCollectionListing();
-        //getAndDisplayRedWineResults();
     })
 }
 
@@ -644,7 +625,6 @@ function whiteWineSearchWindow() {
         event.preventDefault();
         getWhiteWine();
         wineCollectionListing();
-        //getAndDisplayWhiteWineResults();
     })
 }
 
@@ -653,7 +633,6 @@ function editWineLabel() {
     $('.js-edit-wine-info').on('click', function(event) {
         let currentWine = $(this).val();
         let color = $(this).siblings('img').attr('class');
-        console.log(currentWine);
         event.preventDefault();
         getRedWine();
         getWhiteWine();
@@ -663,12 +642,9 @@ function editWineLabel() {
 
 //Button to delete single Red Wine bottle entry
 function removeWine(data) {
-    console.log(data);
     $('.js-delete-wine').on('click', function(event) {
         let currentID = $(this).val();
         let color = $(this).siblings('img').attr('class');
-        console.log(currentID);
-        console.log(color);
         event.preventDefault();
         if (color === 'redWine') {
             deleteRedWine(currentID);
@@ -685,7 +661,6 @@ function submitEditLabel(wine) {
     $('.editBottle-form').submit('.js-update-bottle', event => {
         event.preventDefault();
         let current_id = $('.js-update-bottle').val();
-        console.log(current_id);
         let wineData = {
             rating: $(event.target).find('#js-edit-wine-rating').val(),
             averagePrice: $(event.target).find('#js-edit-wine-averagePrice').val(),
