@@ -259,7 +259,7 @@ function generateInformation() {
   });
 
 describe('PUT Label Information', function() {
-  it('should add an item on PUT', function() {
+  it('should replace an existing item on PUT', function() {
     const updateData = {
       rating: 4.3,
       averagePrice: 49.99 
@@ -276,7 +276,6 @@ describe('PUT Label Information', function() {
       })
       .then(function(res) {
         expect(res).to.have.status(204);
-
         return Red.findById(updateData.id);
       })
       .then(function(redWines) {
