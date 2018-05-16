@@ -391,7 +391,7 @@ function wineCollectionListing() {
 //Display single wine information
 function singleWineResult(currentWine) {
     let singleWine = `
-    <h7 class='h7'>Wine Select</h7>
+    <h7 class='h7'>${currentWine.wineLabelDetails}</h7>
     <section role='region' class='oneWine'>
         <img src='${currentWine.image}' class='singleWineImage' alt='wine-bottle'>
         <ul id='singleLabel'></ul>
