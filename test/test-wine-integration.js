@@ -73,7 +73,7 @@ function generateAveragePrice() {
 let randomLocation = 0;
 function generateWineOrigin() {
   const wineOrigin = [
-    'Edna Valley USA', 'Maipo Valley Chile', 'Puglia Italy', 'South Australia Australia'];
+    'Edna Valley, USA', 'Maipo Valley, Chile', 'Puglia, Italy', 'South Australia, Australia'];
   randomLocation = Math.floor(Math.random() * wineOrigin.length)
     return wineOrigin[randomLocation];
 }

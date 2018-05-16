@@ -17,7 +17,7 @@ let authToken;
 //let agent = request.agent(app);
 
 describe('Auth endpoints', function() {
-  const username = 'WineTaster';
+  const username = 'WineTaster2';
   const password = 'RedWine1234';
   const firstName = 'Alice';
   const lastName = 'Red';
