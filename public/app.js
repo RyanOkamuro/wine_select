@@ -530,6 +530,13 @@ function addNewUser() {
             'contentType': 'application/json',
             'data': JSON.stringify(userInformation),
             'success': function(data) {
+                var html = document.getElementsByTagName('html')[0];
+                var body = document.getElementsByTagName('body')[0];
+                console.log(body);
+                html.style.backgroundImage = 'none';
+                body.style.backgroundImage = 'none';
+                getRedWine();
+                getWhiteWine();
                 wineQuery();
             },
             'error': function(err) {
