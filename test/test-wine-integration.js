@@ -275,7 +275,7 @@ describe('PUT Label Information', function() {
           .send(updateData);
       })
       .then(function(res) {
-        expect(res).to.have.status(204);
+        expect(res).to.have.status(202);
         return Red.findById(updateData.id);
       })
       .then(function(redWines) {

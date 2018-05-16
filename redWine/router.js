@@ -77,7 +77,6 @@ router.put('/:id', (req, res) => {
       `Request path id (${req.params.id}) and request body id ` +
       `(${req.body.id}) must match`);
     console.error(message);
-    // we return here to break out of this function
     return res.status(400).json({message: message});
   }
 
@@ -85,10 +84,10 @@ router.put('/:id', (req, res) => {
   const updateableFields = ['rating', 'averagePrice'];
 
   updateableFields.forEach(field => {
-    console.log(field);
-    if (field in req.body.redBottle) {
-      console.log(req.body.redBottle[field]);
-      toUpdate[field] = req.body.redBottle[field];
+    console.log(req.body.redBottle);
+    if (field in req.body) {
+      console.log(req.body[field]);
+      toUpdate[field] = req.body[field];
     }
   });
 console.log(toUpdate);
