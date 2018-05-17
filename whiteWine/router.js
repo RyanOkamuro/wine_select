@@ -81,28 +81,25 @@ router.put('/:id', (req, res) => {
   const updateableFields = ['rating', 'averagePrice'];
 
   updateableFields.forEach(field => {
-    console.log(field);
-    if (field in req.body.whiteBottle) {
-      console.log(req.body.whiteBottle[field]);
-      toUpdate[field] = req.body.whiteBottle[field];
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
     }
   });
-console.log(toUpdate);
     White
-    .findByIdAndUpdate(req.params.id, { $set: toUpdate})
-    .then(whiteWines =>  {console.log(whiteWines); return res.status(202).json(whiteWines)})
-    .catch(err => res.status(500).json ({ message: 'Internal server error'}));
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .then(whiteWines =>  {return res.status(202).json(whiteWines)})
+    .catch(err => res.status(500).json ({message: 'Internal server error'}));
   });
 
 router.delete('/:id', (req, res) => {
     White
     .findByIdAndRemove(req.params.id)
     .then(whiteWines => res.status(204).end())
-    .catch(err => res.status(500).json({ message: 'Internal server error' }));
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
   });
 
 router.use('*', function (req, res) {
-    res.status(404).json({ message: 'Not found' });
+    res.status(404).json({message: 'Not found'});
   });
 
 module.exports = {router};

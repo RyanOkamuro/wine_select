@@ -385,9 +385,10 @@ function singleWineResult(currentWine) {
     </section>
     <section role='region' class='history-winerylink'>
     ${currentWine.history}
-    <a href='${currentWine.information}'>More information</a>
+    <a href='${currentWine.moreInformation}'>More information</a>
     </section>
     `;
+    console.log(currentWine.information);
     let li = document.createElement('li');
     li.innerHTML = `
         Wine Label: ${currentWine.wineLabelDetails} <br />
@@ -540,6 +541,7 @@ function searchRedWine(redBottles) {
             let value_ID = redBottles.redWine[index].id;
             if (singleRedWineID === value_ID) {
                 singleWineResult(redBottles.redWine[index]);
+                console.log(redBottles.redWine[index]);
             } 
         };
     });

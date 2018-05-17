@@ -2,15 +2,11 @@
   box-sizing: border-box;
   }
 
-
-
   html, body {
       color: #1B0404;
       height: 100%;
       font-family: 'Open Sans', sans-serif;
-      /*
       background-color: #FEFEFE;
-      */
       background-image: url("http://branwarwines.com/wp-content/uploads/2015/06/BranwarWines-Banner-Home1.jpg");
       height: 100%;
       background-position: center;
@@ -45,10 +41,7 @@
 
   .h7 {
       display: block;
-      margin-right: auto;
-      margin-left: auto;
-
-      margin-bottom: 20px;
+      margin: 40px auto 20px auto;
       font-weight: bold;
       text-align: center;
   }
@@ -201,11 +194,11 @@
       height: 150px;
       width: 50px;
       padding-top: 15px;
-      margin-right: 15px;
+      margin-right: 5px;
   }
 
   .whiteWine {
-      width: 70px;
+      width: 90px;
   }
 
   button.js-edit-wine-info, button.js-delete-wine {
