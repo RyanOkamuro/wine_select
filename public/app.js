@@ -24,7 +24,6 @@ function newUser() {
     $('.login-form').hide();
     $('.heading').hide();
     $('.footer').hide();
-    //display new accout registration form
     let outputElem = $('#new-registration');
         outputElem
             .prop('hidden', false)
@@ -388,7 +387,6 @@ function singleWineResult(currentWine) {
     <a href='${currentWine.moreInformation}'>More information</a>
     </section>
     `;
-    console.log(currentWine.information);
     let li = document.createElement('li');
     li.innerHTML = `
         Wine Label: ${currentWine.wineLabelDetails} <br />
@@ -541,7 +539,6 @@ function searchRedWine(redBottles) {
             let value_ID = redBottles.redWine[index].id;
             if (singleRedWineID === value_ID) {
                 singleWineResult(redBottles.redWine[index]);
-                console.log(redBottles.redWine[index]);
             } 
         };
     });

@@ -140,6 +140,16 @@ function generateInformation() {
       return seedWineData();
     });
 
+    afterEach(function() {
+      return tearDownDb();
+    });
+
+    after(function() {
+      return seedWineData();
+      return closeServer();
+      
+    });
+
   describe('GET Label Information', function() {
     it('should list information on GET', function() {
       let res;
