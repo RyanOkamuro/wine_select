@@ -130,13 +130,12 @@ function generateInformation() {
     return mongoose.connection.dropDatabase();
   }
 
-  describe('Wine API2 resource', function() {
+  describe('White wine API resource', function() {
 
     before(function() {
       return runServer(TEST_DATABASE_URL);
     });
 
-    /*
     beforeEach(function() {
       return seedWineData();
     });
@@ -144,7 +143,6 @@ function generateInformation() {
     afterEach(function() {
       return tearDownDb();
     });
-    */
 
     after(function() {
       return closeServer();

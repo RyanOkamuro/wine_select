@@ -53,9 +53,9 @@ app.use('*', (req, res) => {
     
 let server;
 
-  function runServer() {
+  function runServer(db = DATABASE_URL) {
     return new Promise((resolve, reject) => {
-      mongoose.connect(DATABASE_URL, {useMongoClient: true}, err => {
+      mongoose.connect(db, {useMongoClient: true}, err => {
         if (err) {
           return reject(err);
         }
