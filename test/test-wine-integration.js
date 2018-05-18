@@ -145,7 +145,6 @@ function generateInformation() {
     });
 
     after(function() {
-      return seedWineData();
       return closeServer();
       
     });

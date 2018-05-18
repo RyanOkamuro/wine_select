@@ -16,7 +16,6 @@ router.get('/', jwtAuth, (req, res) => {
         whiteWine: whiteWine.map(
           (White) => White.serialize())
         });
-        res.status(200).json(whiteWine)
     })
     .catch(err => {
       console.error(err);
@@ -76,15 +75,16 @@ router.put('/:id', (req, res) => {
       `(${req.body.id}) must match`);
       return res.status(400).json({ message: message });
     }
-
+    console.log(req.body);
   const toUpdate = {};
   const updateableFields = ['rating', 'averagePrice'];
 
   updateableFields.forEach(field => {
-    if (field in req.body) {
-      toUpdate[field] = req.body[field];
+    if (field in req.body.whiteBottle) {
+      toUpdate[field] = req.body.whiteBottle[field];
     }
   });
+  console.log(toUpdate);
     White
     .findByIdAndUpdate(req.params.id, {$set: toUpdate})
     .then(whiteWines =>  {return res.status(202).json(whiteWines)})

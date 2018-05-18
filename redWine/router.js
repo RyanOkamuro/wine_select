@@ -16,7 +16,6 @@ router.get('/', jwtAuth, (req, res) => {
         redWine: redWine.map(
           (Red) => Red.serialize())
       });
-      res.status(200).json(redWine)
     })
     .catch(err => {
       console.error(err);
@@ -81,8 +80,8 @@ router.put('/:id', (req, res) => {
   const updateableFields = ['rating', 'averagePrice'];
 
   updateableFields.forEach(field => {
-    if (field in req.body) {
-      toUpdate[field] = req.body[field];
+    if (field in req.body.redBottle) {
+      toUpdate[field] = req.body.redBottle[field];
     }
   });
     Red

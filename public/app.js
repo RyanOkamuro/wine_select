@@ -149,6 +149,8 @@ function editCurrentRedWine(id, redBottle) {
 
 //Edit White Wine
 function editCurrentWhiteWine(id, whiteBottle) {
+    console.log(id);
+    console.log(whiteBottle);
     let authToken = localStorage.getItem('authToken');
     const settings6 = {
         'async': true,
@@ -164,6 +166,7 @@ function editCurrentWhiteWine(id, whiteBottle) {
         'data': JSON.stringify({id, whiteBottle}),
         'success': function(modifiedWhiteVino) {
             getWhiteWine(modifiedWhiteVino);
+            console.log(modifiedWhiteVino);
             wineCollectionListing();
         }
     }
