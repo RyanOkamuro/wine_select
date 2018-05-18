@@ -2,7 +2,6 @@
 global.DATABASE_URL = 'mongodb://localhost/wine-select';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-//const request = require('supertest');
 const jwt = require('jsonwebtoken');
 
 const { app, runServer, closeServer } = require('../server');
@@ -14,7 +13,6 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 let authToken;
-//let agent = request.agent(app);
 
 describe('Auth endpoints', function() {
   const username = 'WineTaster3';
@@ -48,7 +46,6 @@ describe('Auth endpoints', function() {
   describe('/api/auth/login', function() {
     it('Should reject requests with no credentials', function () {
       return chai
-      //agent
         .request(app)
         .post('/api/auth/login')
         .then((res) => {
@@ -62,7 +59,6 @@ describe('Auth endpoints', function() {
     });
     it('Should reject requests with incorrect usernames', function() {
       return chai
-      //agent
         .request(app)
         .post('/api/auth/login')
         .send({ username: 'wrongUsername', password })        

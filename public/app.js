@@ -1,35 +1,6 @@
 
 let user = localStorage.getItem('currentUser');
 
-//Create new user account
-function newUser() {
-    let newUserAccount = `
-    <section role='region' class='newAddUser'>
-        <form role='form' class='newUser-form'>
-            <fieldset name='newAddedUser'>
-            <legend>New User</legend>
-            <label for='js-new-first-name' class='newUserFirstName'>First Name</label>
-            <input placeholder='Alice' type='text' name='js-new-first-name' id='js-new-first-name'>
-            <label for='js-new-last-name' class='newUserLastName'>Last Name</label>
-            <input placeholder='Red' type='text' name='js-new-last-name' id='js-new-last-name'>
-            <label for='js-new-user-name' class='newUserName'>User Name</label>
-            <input placeholder='username' type='text' name='js-new-user-name' id='js-new-user-name'>
-            <label for='js-new-user-password' class='newUserPassword'>Password <br/><span id='reenterPass'></span></label>
-            <input placeholder='mysecretpassword' type='text' name='js-new-user-password' id='js-new-user-password'>
-            <button role='button' type='submit' class='js-add-user'>Submit</button>
-            </fieldset>
-        </form>
-    </section>
-    `;
-    $('.login-form').hide();
-    $('.heading').hide();
-    $('.footer').hide();
-    let outputElem = $('#new-registration');
-        outputElem
-            .prop('hidden', false)
-            .html(newUserAccount);    
-}
-
 //Get Red Wine JSON 
 function getRedWine() {
     let authToken = localStorage.getItem('authToken');
@@ -48,7 +19,6 @@ function getRedWine() {
             createRedWineListing(data)
             singleRedWineSearchWindow(data)
             editWineLabel()
-            submitEditLabel(data)
             removeWine(data)
         }
     }
@@ -73,7 +43,6 @@ function getWhiteWine() {
             createWhiteWineListing(data)
             singleWhiteWineSearchWindow(data)
             editWineLabel()
-            submitEditLabel(data)
             removeWine(data)
         }
     }
@@ -124,7 +93,7 @@ function addNewWhiteWine(whiteBottle) {
     $.ajax(settings4);
 }
 
-//Edit Red Wine
+//Update Red Wine
 function editCurrentRedWine(id, redBottle) {
     let authToken = localStorage.getItem('authToken');
     const settings5 = {
@@ -147,10 +116,8 @@ function editCurrentRedWine(id, redBottle) {
     $.ajax(settings5);
 }
 
-//Edit White Wine
+//Update White Wine
 function editCurrentWhiteWine(id, whiteBottle) {
-    console.log(id);
-    console.log(whiteBottle);
     let authToken = localStorage.getItem('authToken');
     const settings6 = {
         'async': true,
@@ -166,7 +133,6 @@ function editCurrentWhiteWine(id, whiteBottle) {
         'data': JSON.stringify({id, whiteBottle}),
         'success': function(modifiedWhiteVino) {
             getWhiteWine(modifiedWhiteVino);
-            console.log(modifiedWhiteVino);
             wineCollectionListing();
         }
     }
@@ -211,6 +177,35 @@ function deleteWhiteWine(id) {
     $.ajax(settings8);
 }
 
+//Create new user account
+function newUser() {
+    let newUserAccount = `
+    <section role='region' class='newAddUser'>
+        <form role='form' class='newUser-form'>
+            <fieldset name='newAddedUser'>
+            <legend>New User</legend>
+            <label for='js-new-first-name' class='newUserFirstName'>First Name</label>
+            <input placeholder='Alice' type='text' name='js-new-first-name' id='js-new-first-name'>
+            <label for='js-new-last-name' class='newUserLastName'>Last Name</label>
+            <input placeholder='Red' type='text' name='js-new-last-name' id='js-new-last-name'>
+            <label for='js-new-user-name' class='newUserName'>User Name</label>
+            <input placeholder='username' type='text' name='js-new-user-name' id='js-new-user-name'>
+            <label for='js-new-user-password' class='newUserPassword'>Password <br/><span id='reenterPass'></span></label>
+            <input placeholder='mysecretpassword' type='text' name='js-new-user-password' id='js-new-user-password'>
+            <button role='button' type='submit' class='js-add-user'>Submit</button>
+            </fieldset>
+        </form>
+    </section>
+    `;
+    $('.login-form').hide();
+    $('.heading').hide();
+    $('.footer').hide();
+    let outputElem = $('#new-registration');
+        outputElem
+            .prop('hidden', false)
+            .html(newUserAccount);    
+}
+
 //Search by querying wine label.  
 //Search by red or white wine by clicking on the wine bottle image. 
 function wineQuery() {
@@ -253,7 +248,6 @@ function wineQuery() {
     $('.heading').hide();
     $('.footer').hide();
     $('.newUser-form').hide();
-    $('#login-landing').hide();
     //display brand, red wine, or white wine search page
     let outputElem = $('#red-white');
         outputElem
@@ -534,6 +528,7 @@ function addNewUser() {
     });
 }
 
+//Search Red Wine Bottles
 function searchRedWine(redBottles) {
     $('#red-white').on('click', '.js-red-label-search', event => {
         event.preventDefault();
@@ -547,6 +542,7 @@ function searchRedWine(redBottles) {
     });
 }
 
+//Search White Wine Bottles
 function searchWhiteWine(whiteBottles){
     $('#red-white').on('click', '.js-white-label-search', event => {
         event.preventDefault();
@@ -560,6 +556,7 @@ function searchWhiteWine(whiteBottles){
     });
 }
 
+//Button to Move to New Wine Bottle Form
 function addNewWineBottle() {
     $('#red-white').on('click', '.js-label-add-wines', function(event) {
         event.preventDefault();
@@ -567,6 +564,7 @@ function addNewWineBottle() {
     });
 }
 
+//Submit New Wine Bottle
 function submitNewWine() {
     $('#wineDetails').submit('.js-add-bottle', event => {
         event.preventDefault();
@@ -630,7 +628,7 @@ function whiteWineSearchWindow() {
     })
 }
 
-//Button to edit Red/White Wine
+//Button to Edit Red/White Wine
 function editWineLabel() {
     $('.js-edit-wine-info').on('click', function(event) {
         let currentWine = $(this).val();
@@ -642,7 +640,7 @@ function editWineLabel() {
     })    
 }
 
-//Button to delete single Red Wine bottle entry
+//Button to Delete Single Wine Bottle
 function removeWine(data) {
     $('.js-delete-wine').on('click', function(event) {
         let currentID = $(this).val();
@@ -658,8 +656,8 @@ function removeWine(data) {
     })
 } 
 
-//Submit edited wine information
-function submitEditLabel(wine) {
+//Submit Edited Wine Information
+function submitEditLabel() {
     $('.editBottle-form').submit('.js-update-bottle', event => {
         event.preventDefault();
         let current_id = $('.js-update-bottle').val();

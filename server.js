@@ -85,6 +85,11 @@ function closeServer() {
   });
 }
 
+/*
+call runServer function if this module is being run by calling node server.js from the command line 
+(aka, when we run our app locally or in prod). When we open this file in order to import app and runServer 
+in a test module, we don't want the server to automatically run, and this conditional block makes that possible
+*/
 if (require.main === module) {
   runServer().catch(err => console.error(err));
 };

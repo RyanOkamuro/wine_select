@@ -136,6 +136,7 @@ function generateInformation() {
       return runServer(TEST_DATABASE_URL);
     });
 
+    /*
     beforeEach(function() {
       return seedWineData();
     });
@@ -144,8 +145,9 @@ function generateInformation() {
       return tearDownDb();
     });
 
+    */
+
     after(function() {
-      return seedWineData();
       return closeServer();
     });
 
@@ -205,6 +207,7 @@ function generateInformation() {
       const newWineBottle = generateWineData();
       return chai.request(app)
         .post('/redWine')
+        //use .send() to pass in an object representing a new wine bottle label
         .send(newWineBottle)
         .then(function(res) {
           expect(res).to.have.status(201);
@@ -243,10 +246,10 @@ function generateInformation() {
     it('should replace an existing item on PUT', function() {
       const updateData = {
         redBottle: {
-        rating: 4.3,
-        averagePrice: 49.99 
-      }
-    };
+          rating: 4.3,
+          averagePrice: 49.99 
+        }
+      };
 
       return Red
         .findOne()

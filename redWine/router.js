@@ -33,7 +33,7 @@ router.get('/:id', (req,res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['brand', 'wineName', 'color', 'type', 'rating', 'averagePrice', 'region', 'country', 'year', 'foodSuggestion', 'image', 'history', 'moreInformation'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -68,7 +68,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+  if (!(req.params.id && req.body.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
       `(${req.body.id}) must match`);
@@ -84,6 +84,7 @@ router.put('/:id', (req, res) => {
     }
   });
     Red
+    //for matching criteria with same id, $set operator will update new inputed values for rating & averagePrice
     .findByIdAndUpdate(req.params.id, {$set: toUpdate})
     .then(redWines => {return res.status(202).json(redWines)})
     .catch(err => res.status(500).json({message: 'Internal server error'}));
