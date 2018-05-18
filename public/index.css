@@ -33,21 +33,23 @@
       text-align: center;
   }
 
-  h3, h5, h7 {
+  h3, h5 {
       font-size: 32px;
       color: #7F1A1A;
       margin-top: 40px;
   }
 
+  h4 {
+    font-size: 22px;
+  }
+
   .h7 {
+      font-size: 32px;
+      color: #7F1A1A;
       display: block;
       margin: 40px auto 20px auto;
       font-weight: bold;
       text-align: center;
-  }
-
-  h4 {
-      font-size: 22px;
   }
 
   fieldset {

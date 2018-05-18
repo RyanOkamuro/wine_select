@@ -383,6 +383,7 @@ function singleWineResult(currentWine) {
     ${currentWine.history}
     <a href='${currentWine.moreInformation}'>More information</a>
     </section>
+    <button role='button' type='button' class='js-back-wine-search'>Return to Wine Search</button>
     `;
     let li = document.createElement('li');
     li.innerHTML = `
