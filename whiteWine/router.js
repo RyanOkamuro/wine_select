@@ -75,16 +75,14 @@ router.put('/:id', (req, res) => {
       `(${req.body.id}) must match`);
       return res.status(400).json({ message: message });
     }
-    console.log(req.body);
   const toUpdate = {};
   const updateableFields = ['rating', 'averagePrice'];
 
   updateableFields.forEach(field => {
-    if (field in req.body.whiteBottle) {
+    if (req.body.whiteBottle[field]) {
       toUpdate[field] = req.body.whiteBottle[field];
     }
   });
-  console.log(toUpdate);
     White
     .findByIdAndUpdate(req.params.id, {$set: toUpdate})
     .then(whiteWines =>  {return res.status(202).json(whiteWines)})

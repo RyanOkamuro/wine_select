@@ -75,12 +75,11 @@ router.put('/:id', (req, res) => {
     console.error(message);
     return res.status(400).json({message: message});
   }
-
   const toUpdate = {};
   const updateableFields = ['rating', 'averagePrice'];
 
   updateableFields.forEach(field => {
-    if (field in req.body.redBottle) {
+    if (req.body.redBottle[field]) {
       toUpdate[field] = req.body.redBottle[field];
     }
   });

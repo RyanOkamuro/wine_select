@@ -145,8 +145,8 @@ function generateInformation() {
     });
 
     after(function() {
+      return seedWineData();
       return closeServer();
-      
     });
 
   describe('GET Label Information', function() {
@@ -242,9 +242,11 @@ function generateInformation() {
   describe('PUT Label Information', function() {
     it('should replace an existing item on PUT', function() {
       const updateData = {
+        redBottle: {
         rating: 4.3,
         averagePrice: 49.99 
-      };
+      }
+    };
 
       return Red
         .findOne()
@@ -260,8 +262,8 @@ function generateInformation() {
           return Red.findById(updateData.id);
       })
         .then(function(redWines) {
-          expect(redWines.rating).to.equal(updateData.rating);
-          expect(redWines.averagePrice).to.equal(updateData.averagePrice);
+          expect(redWines.rating).to.equal(updateData.redBottle.rating);
+          expect(redWines.averagePrice).to.equal(updateData.redBottle.averagePrice);
       });
     });
   });
