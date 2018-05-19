@@ -2,8 +2,6 @@ language: node_js
 node_js: node
 env: 
   TEST_DATABASE_URL=mongodb://newuser:123456@ds033186.mlab.com:33186/test-wine-select, 
-  jwt:
-     secure: ajipefjwjpfpjawpaweiifjabnzxlbknf
 deploy:
   provider: heroku
   api_key:
