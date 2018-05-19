@@ -1,6 +1,6 @@
 'use strict';
 
-//require('dotenv').config();
+require('dotenv').config();
 const chai = require('chai');
 const request = require('supertest');
 const chaiHttp = require('chai-http');
@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const {Red} = require('../redWine/models');
 const {app, runServer, closeServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
-
+console.log(TEST_DATABASE_URL);
 const expect = chai.expect;
 
 chai.use(chaiHttp);
