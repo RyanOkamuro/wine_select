@@ -258,6 +258,10 @@
       margin-left: auto;
   }
 
+  .history-winerylink button {
+      margin-top: 30px;
+  }
+
 /* Mobile defaults */
   .col-6 {
       width: 100%;

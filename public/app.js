@@ -203,7 +203,8 @@ function newUser() {
     let outputElem = $('#new-registration');
         outputElem
             .prop('hidden', false)
-            .html(newUserAccount);    
+            .html(newUserAccount);
+    $('#new-registration').show();    
 }
 
 //Search by querying wine label.  
@@ -247,14 +248,17 @@ function wineQuery() {
     $('.login-form').hide();
     $('.heading').hide();
     $('.footer').hide();
-    $('.newUser-form').hide();
-    $('.oneWine').hide();
-    $('.history-winerylink').hide();
+    $('#new-registration').hide();
+    $('#wineDetails').hide();
+    
+    //$('.oneWine').hide();
+    //$('.history-winerylink').hide();
     //display brand, red wine, or white wine search page
     let outputElem = $('#red-white');
         outputElem
             .prop('hidden', false)
             .html(wineSearch);
+    $('#red-white').show();      
 }
 
 function redWineQuery(redLabel) {
@@ -320,11 +324,12 @@ function addWine() {
         </form>
     </section>
     `;
-    $('.wineLabelRedWhite').hide();
+    $('#red-white').hide();
     let outputElem = $('#wineDetails');
     outputElem
         .prop('hidden', false)
         .html(newWine);
+    $('#wineDetails').show();
 }
 
 //Edit Wine Label Information
@@ -344,13 +349,13 @@ function editWine(currentWine, color) {
         </form>
     </section>
     `;
-    $('.wineResults').hide();
-    $('.wineListing').hide();
+    $('#wineList').hide();
     let outputElem = $('#editWineDetails');
     outputElem
         .prop('hidden', false)
         .html(editBottleLabel);
         submitEditLabel();
+    $('#editWineDetails').show();
 }
 
 //Display wine list from search results
@@ -364,13 +369,13 @@ function wineCollectionListing() {
     </section>
     `;
     $('#red-white').hide();
-    $('.wineLabelRedWhite').hide();
-    $('.addBottle').hide();
-    $('.editBottle').hide();
+    $('#wineDetails').hide();
+    $('#editWineDetails').hide();
     let outputElem = $('#wineList');
         outputElem
             .prop('hidden', false)
             .html(searchResultsList);
+    $('#wineList').show();
 }
 
 //Display single wine information
@@ -400,15 +405,13 @@ function singleWineResult(currentWine) {
     `;
     $('#wineList').hide();
     $('#red-white').hide();
-    $('.wineResults').hide();
-    $('.addBottle').hide();
-    $('.wineLabelRedWhite').hide();
-    $('.editBottle-form').hide();
+    $('#editWineDetails').hide();
     let outputElem = $('#wineDetails');
         outputElem
             .prop('hidden', false)
             .html(singleWine);
     $('#singleLabel').append(li);
+    $('#wineDetails').show();
 }
 
 //Red Wine Listing
@@ -480,7 +483,7 @@ function startSearchWindow() {
                 user = username;
                 getRedWine();
                 getWhiteWine();
-                wineQuery(data);
+                wineQuery();
             },
             error: function(err) {
                 if(err.status === 401) {
@@ -564,6 +567,7 @@ function searchWhiteWine(whiteBottles){
 function addNewWineBottle() {
     $('#red-white').on('click', '.js-label-add-wines', function(event) {
         event.preventDefault();
+        $('#wineList').prop('hidden'); 
         addWine();
     });
 }
@@ -700,13 +704,15 @@ function singleWhiteWineSearchWindow(data) {
 //function to re-start quiz
 function returnSearchWindow() {
     $('#wineDetails').on('click','.js-back-wine-search', event=> {
-        
-      
-      wineQuery();
-      //$('#newPageLoader').html(generateQuestion());
-      
+        getRedWine();
+        getWhiteWine();
+        $('#wineDetails').prop('hidden');   
+        $('#wineList').prop('hidden'); 
+        $('#red-white').html(wineQuery());
     });
   }
+
+
 
 /*function returnSearchWindow() {
     console.log($('.js-back-wine-search'));
