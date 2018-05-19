@@ -374,16 +374,17 @@ function wineCollectionListing() {
 //Display single wine information
 function singleWineResult(currentWine) {
     let singleWine = `
-    <h7 class='h7'>${currentWine.wineLabelDetails}</h7>
     <section role='region' class='oneWine'>
+    <h7 class='h7'>${currentWine.wineLabelDetails}</h7>
         <img src='${currentWine.image}' class='singleWineImage' alt='wine-bottle'>
         <ul id='singleLabel'></ul>
     </section>
     <section role='region' class='history-winerylink'>
     ${currentWine.history}
     <a href='${currentWine.moreInformation}'>More information</a>
-    </section>
     <button role='button' type='button' class='js-back-wine-search'>Return to Wine Search</button>
+    </section>
+   
     `;
     let li = document.createElement('li');
     li.innerHTML = `
@@ -674,7 +675,6 @@ function submitEditLabel() {
     });
 }
 
-
 //Single Red Wine Search Window
 function singleRedWineSearchWindow(data) {
     $('body').on('click', '.redWine', event=> {
@@ -695,6 +695,13 @@ function singleWhiteWineSearchWindow(data) {
     })
 }
 
+function returnSearchWindow() {
+    $('.history-winerylink').on('click', '.js-back-wine-search', function(event) {
+        event.preventDefault();
+        wineQuery();
+    })
+}
+
 function handleCreateApp() {
     startSearchWindow();
     registerNewUser();
@@ -703,6 +710,7 @@ function handleCreateApp() {
     submitNewWine(); 
     redWineSearchWindow();
     whiteWineSearchWindow();
+    returnSearchWindow();
 }
 
 $(handleCreateApp);
