@@ -248,6 +248,8 @@ function wineQuery() {
     $('.heading').hide();
     $('.footer').hide();
     $('.newUser-form').hide();
+    $('.oneWine').hide();
+    $('.history-winerylink').hide();
     //display brand, red wine, or white wine search page
     let outputElem = $('#red-white');
         outputElem
@@ -695,12 +697,31 @@ function singleWhiteWineSearchWindow(data) {
     })
 }
 
+//function to re-start quiz
 function returnSearchWindow() {
-    $('.history-winerylink').on('click', '.js-back-wine-search', function(event) {
+    $('#wineDetails').on('click','.js-back-wine-search', event=> {
+        
+      
+      wineQuery();
+      //$('#newPageLoader').html(generateQuestion());
+      
+    });
+  }
+
+/*function returnSearchWindow() {
+    console.log($('.js-back-wine-search'));
+    if (!$('.js-back-wine-search').html()) {
+        setTimeout(returnSearchWindow, 500)
+        console.log('.');
+        return false;
+    }
+    console.log('!');
+    $('.js-back-wine-search').on('click', function(event) {
         event.preventDefault();
-        wineQuery();
+        $('#red-white').html(wineQuery());
     })
 }
+*/
 
 function handleCreateApp() {
     startSearchWindow();
