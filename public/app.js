@@ -213,7 +213,7 @@ function wineQuery() {
     let wineSearch = `
     <section role='region' class='wineLabelRedWhite'>
         <h3>Search for Red or White Wine</h3>
-        <h4>Click on the red/white bottle for full wine listing or search from the drop down wine menu</h4>
+        <h4>Click on a red/white bottle for full wine listing or search from the drop down wine menu</h4>
         <div class='row'>
             <div class='col-6'>
                 <form role='form' class='redWineBrand-form'>
@@ -382,14 +382,14 @@ function wineCollectionListing() {
 function singleWineResult(currentWine) {
     let singleWine = `
     <section role='region' class='oneWine'>
-    <h7 class='h7'>${currentWine.wineLabelDetails}</h7>
+        <h7 class='h7'>${currentWine.wineLabelDetails}</h7>
         <img src='${currentWine.image}' class='singleWineImage' alt='wine-bottle'>
         <ul id='singleLabel'></ul>
     </section>
     <section role='region' class='history-winerylink'>
-    ${currentWine.history}
-    <a href='${currentWine.moreInformation}'>More information</a>
-    <button role='button' type='button' class='js-back-wine-search'>Return to Wine Search</button>
+        ${currentWine.history}
+        <a href='${currentWine.moreInformation}'>More information</a>
+        <button role='button' type='button' class='js-back-wine-search'>Return to Wine Search</button>
     </section>
    
     `;
@@ -711,23 +711,6 @@ function returnSearchWindow() {
         $('#red-white').html(wineQuery());
     });
   }
-
-
-
-/*function returnSearchWindow() {
-    console.log($('.js-back-wine-search'));
-    if (!$('.js-back-wine-search').html()) {
-        setTimeout(returnSearchWindow, 500)
-        console.log('.');
-        return false;
-    }
-    console.log('!');
-    $('.js-back-wine-search').on('click', function(event) {
-        event.preventDefault();
-        $('#red-white').html(wineQuery());
-    })
-}
-*/
 
 function handleCreateApp() {
     startSearchWindow();
