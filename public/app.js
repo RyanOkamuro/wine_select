@@ -250,9 +250,6 @@ function wineQuery() {
     $('.footer').hide();
     $('#new-registration').hide();
     $('#wineDetails').hide();
-    
-    //$('.oneWine').hide();
-    //$('.history-winerylink').hide();
     //display brand, red wine, or white wine search page
     let outputElem = $('#red-white');
         outputElem
@@ -701,7 +698,7 @@ function singleWhiteWineSearchWindow(data) {
     })
 }
 
-//function to re-start quiz
+//Re-start quiz
 function returnSearchWindow() {
     $('#wineDetails').on('click','.js-back-wine-search', event=> {
         getRedWine();
