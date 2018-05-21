@@ -201,6 +201,7 @@
 
   .whiteWine {
       width: 90px;
+      margin-right: 0;
   }
 
   button.js-edit-wine-info, button.js-delete-wine {

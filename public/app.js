@@ -1,5 +1,7 @@
 
 let user = localStorage.getItem('currentUser');
+//let data = localStorage.getItem('data');
+//console.log(data)
 
 //Get Red Wine JSON 
 function getRedWine() {
@@ -14,6 +16,7 @@ function getRedWine() {
             'Cache-Control': 'no-cache',
         },
         'success': function(data) {
+            //localStorage.setItem('data', reds.data);
             redWineQuery(data)
             searchRedWine(data)
             createRedWineListing(data)
@@ -66,6 +69,7 @@ function addNewRedWine(redBottle) {
         'data': JSON.stringify(redBottle),
         'success': function(redVino) {
             getRedWine(redVino)
+            singleWineResult(redVino)
         }
     }
     $.ajax(settings3);
@@ -87,7 +91,7 @@ function addNewWhiteWine(whiteBottle) {
         'contentType': 'application/json',
         'data': JSON.stringify(whiteBottle),
         'success': function(whiteVino) {
-            getWhiteWine(whiteVino)
+            singleWineResult(whiteVino)
         }
     }
     $.ajax(settings4);
@@ -288,34 +292,34 @@ function addWine() {
             <fieldset name='addNewWineListing'>
                 <legend>Add New Wine Bottle</legend>
                 <label for='js-wine-brand' class='newWineBrand'>Wine Brand</label>
-                <input placeholder='Shafer' type='text' name='js-wine-brand' id='js-wine-brand'>
+                <input placeholder='Shafer' type='text' name='js-wine-brand' id='js-wine-brand' required/>
                 <label for='js-wine-name' class='newWineName'>Wine Name</label>
-                <input placeholder='Hillside Select' type='text' name='js-wine-name' id='js-wine-name'>
+                <input placeholder='Hillside Select' type='text' name='js-wine-name' id='js-wine-name' required/>
                 <label for='js-wine-color' class='newWineColor'>Wine Color</label>
                     <select name='js-wine-color' id='js-wine-color'>
                         <option value='Red'selected>Red</option>
                         <option value='White'>White</option>
                     </select>
                 <label for='js-wine-type' class='newWineType'>Wine Type</label>
-                <input placeholder='Cabernet Sauvignon' type='text' name='js-wine-type' id='js-wine-type'>
+                <input placeholder='Cabernet Sauvignon' type='text' name='js-wine-type' id='js-wine-type' required/>
                 <label for='js-wine-rating' class='newWineRating'>Rating</label>
-                <input placeholder= 4.8 type='number' step='any' name='js-wine-rating' id='js-wine-rating'>
+                <input placeholder= 4.8 type='number' min='0' max='5' name='js-wine-rating' id='js-wine-rating' required/>
                 <label for='js-wine-averagePrice' class='newWineAveragePrice'>Average Price</label>
-                <input placeholder= 30.99 type='number' step='any' name='js-wine-averagePrice' id='js-wine-averagePrice'>
+                <input placeholder= 30.99 type='number' min='0' step='any' name='js-wine-averagePrice' id='js-wine-averagePrice' required/>
                 <label for='js-wine-region' class='newWineRegion'>Region</label>
-                <input placeholder='Napa Valley' type='text' name='js-wine-region' id='js-wine-region'>
+                <input placeholder='Napa Valley' type='text' name='js-wine-region' id='js-wine-region' required/>
                 <label for='js-wine-country' class='newWineCoutry'>Country of Origin</label>
-                <input placeholder='USA' type='text' name='js-wine-country' id='js-wine-country'>
+                <input placeholder='USA' type='text' name='js-wine-country' id='js-wine-country' required/>
                 <label for='js-wine-year' class='newWineYear'>Year</label>
-                <input placeholder= 2013 type='number' name='js-wine-year' id='js-wine-year'>
+                <input placeholder= 2013 type='number' min='1800' max='2018' name='js-wine-year' id='js-wine-year' required/>
                 <label for='js-wine-food' class='newWineFood'>Food Pairing</label>
-                <input placeholder='Beef' type='text' name='js-wine-food' id='js-wine-food'>
+                <input placeholder='Beef' type='text' name='js-wine-food' id='js-wine-food' required/>
                 <label for='js-wine-image' class='newWineImage'>Wine Image URL</label>
-                <input placeholder='www.wineimage...' type='text' name='js-wine-image' id='js-wine-image'>
+                <input placeholder='www.wineimage...' type='text' name='js-wine-image' id='js-wine-image' required/>
                 <label for='js-wine-history' class='newWineHistory'>History</label>
                 <textarea placeholder='The 2013 Hillside Select is...' rows="6" cols="65" id='js-wine-history'></textarea>
                 <label for='js-wine-information' class='newWineInformation'>More Information URL</label>
-                <input placeholder='www.shafervine...' type='text' name='js-wine-information' id='js-wine-information'>
+                <input placeholder='www.shafervine...' type='text' name='js-wine-information' id='js-wine-information' required/>
                 <button role='button' type='submit' class='js-add-bottle'>Submit</button>
             </fieldset>
         </form>
@@ -337,9 +341,9 @@ function editWine(currentWine, color) {
             <fieldset name='editWineInformation'>
                 <legend>Edit Wine Rating and Average Price</legend>
                 <label for='js-edit-wine-rating' class='editWineRating'>Rating</label>
-                <input placeholder= 4.8 type='number' step='any' name='js-edit-wine-rating' id='js-edit-wine-rating'>
+                <input placeholder= 4.8 type='number' min='0' max='5' name='js-edit-wine-rating' id='js-edit-wine-rating'>
                 <label for='js-edit-wine-averagePrice' class='editWineAveragePrice'>Average Price</label>
-                <input placeholder= 30.99 type='number' step='any' name='js-edit-wine-averagePrice' id='js-edit-wine-averagePrice'>
+                <input placeholder= 30.99 type='number' min='0' step='any' name='js-edit-wine-averagePrice' id='js-edit-wine-averagePrice'>
                 <input type='hidden' id='js-editWineColor' value='${color}'>
                 <button role='button' type='submit' value='${currentWine}' class='js-update-bottle'>Update</button>
             </fieldset>
@@ -588,29 +592,10 @@ function submitNewWine() {
             history: $(event.target).find('#js-wine-history').val(),
             moreInformation: $(event.target).find('#js-wine-information').val(),
         };
-        let brand = $(event.target).find('#js-wine-brand').val();
-        let wineName = $(event.target).find('#js-wine-name').val();
-        let region = $(event.target).find('#js-wine-region').val();
-        let country = $(event.target).find('#js-wine-country').val();
-        let singleWine = {
-            wineLabelDetails: `${brand} ${wineName}`.trim(),
-            color: $('#js-wine-color').val(),
-            type: $(event.target).find('#js-wine-type').val(),
-            rating: $(event.target).find('#js-wine-rating').val(),
-            averagePrice: $(event.target).find('#js-wine-averagePrice').val(),
-            wineOrigin: `${region}, ${country}`.trim(),
-            year: $(event.target).find('#js-wine-year').val(),
-            foodSuggestion: $(event.target).find('#js-wine-food').val(),
-            image: $(event.target).find('#js-wine-image').val(),
-            history: $(event.target).find('#js-wine-history').val(),
-            moreInformation: $(event.target).find('#js-wine-information').val(),
-        }
         if ($('#js-wine-color').val() === 'Red') {
             addNewRedWine(wineData);
-            singleWineResult(singleWine);
         } else {
-            addNewWhiteWine(wineData);
-            singleWineResult(singleWine);
+            addNewWhiteWine(wineData)
         }
     });
 }
@@ -680,9 +665,12 @@ function submitEditLabel() {
 
 //Single Red Wine Search Window
 function singleRedWineSearchWindow(data) {
+    console.log(data);
     $('body').on('click', '.redWine', event=> {
         let profileWineName = $(event.target).data('index');
+        console.log(profileWineName);
         let currentWine = data.redWine[profileWineName]
+        console.log(currentWine);
         event.preventDefault();
         singleWineResult(currentWine);
     })
