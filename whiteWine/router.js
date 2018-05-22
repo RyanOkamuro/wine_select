@@ -51,6 +51,8 @@ router.post('/', jsonParser, (req, res) => {
       color: req.body.color,
       type: req.body.type,
       rating: req.body.rating,
+      numRaters: req.body.numRaters,
+      cumulativeRating: req.body.cumulativeRating,
       averagePrice: req.body.averagePrice,
       region: req.body.region,
       country: req.body.country,
@@ -75,7 +77,7 @@ router.put('/:id', jsonParser, (req, res) => {
       return res.status(400).json({message: message });
     }
   const toUpdate = {};
-  const updateableFields = ['rating', 'averagePrice'];
+  const updateableFields = ['rating', 'numRaters', 'cumulativeRating', 'averagePrice'];
 
   updateableFields.forEach(field => {
     if (req.body.whiteBottle[field]) {

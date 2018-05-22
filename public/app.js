@@ -25,7 +25,7 @@ function getRedWine() {
 }
 
 //Get Red Wine by ID
-function getRedWineByID(id) {
+function getRedWineByID(id, color) {
     let authToken = localStorage.getItem('authToken');
     const settings2 = {
         'async': true,
@@ -37,9 +37,11 @@ function getRedWineByID(id) {
             'Cache-Control': 'no-cache',
         },
         'success': function(currentID) {
-            singleWineResult(currentID);
-            editWine(currentID);
-            console.log(currentID);
+            if(color === 'redWine') {
+                editWine(currentID);
+            } else {
+                singleWineResult(currentID);
+            }
         }
     }
     $.ajax(settings2);
@@ -70,7 +72,7 @@ function getWhiteWine() {
 }
 
 //Get White Wine by ID
-function getWhiteWineByID(id) {
+function getWhiteWineByID(id, color) {
     let authToken = localStorage.getItem('authToken');
     const settings4 = {
         'async': true,
@@ -82,8 +84,11 @@ function getWhiteWineByID(id) {
             'Cache-Control': 'no-cache',
         },
         'success': function(currentID) {
-            singleWineResult(currentID);
-            editWine(currentID);
+            if(color === 'whiteWine') {
+                editWine(currentID);
+            } else {
+                singleWineResult(currentID);
+            }
         }
     }
     $.ajax(settings4);
@@ -226,13 +231,13 @@ function newUser() {
             <fieldset name='newAddedUser'>
             <legend>New User</legend>
             <label for='js-new-first-name' class='newUserFirstName'>First Name</label>
-            <input placeholder='Alice' type='text' name='js-new-first-name' id='js-new-first-name'>
+            <input placeholder='Ryan' type='text' name='js-new-first-name' id='js-new-first-name'>
             <label for='js-new-last-name' class='newUserLastName'>Last Name</label>
-            <input placeholder='Red' type='text' name='js-new-last-name' id='js-new-last-name'>
-            <label for='js-new-user-name' class='newUserName'>User Name</label>
+            <input placeholder='Okamuro' type='text' name='js-new-last-name' id='js-new-last-name'>
+            <label for='js-new-user-name' class='newUserName'>Username</label>
             <input placeholder='username' type='text' name='js-new-user-name' id='js-new-user-name'>
             <label for='js-new-user-password' class='newUserPassword'>Password <br/><span id='reenterPass'></span></label>
-            <input placeholder='mysecretpassword' type='text' name='js-new-user-password' id='js-new-user-password'>
+            <input placeholder='password' type='text' name='js-new-user-password' id='js-new-user-password'>
             <button role='button' type='submit' class='js-add-user'>Submit</button>
             </fieldset>
         </form>
@@ -291,7 +296,6 @@ function wineQuery() {
     $('.footer').hide();
     $('#new-registration').hide();
     $('#wineDetails').hide();
-    //display brand, red wine, or white wine search page
     let outputElem = $('#red-white');
         outputElem
             .prop('hidden', false)
@@ -299,6 +303,7 @@ function wineQuery() {
     $('#red-white').show();      
 }
 
+//Red Wine Search
 function redWineQuery(redLabel) {
     for (index in redLabel.redWine) {
         let valueID = redLabel.redWine[index].id;
@@ -310,6 +315,7 @@ function redWineQuery(redLabel) {
     }
 }
 
+//White Wine Search
 function whiteWineQuery(whiteLabel) {
     for (index in whiteLabel.whiteWine) {
         let valueID = whiteLabel.whiteWine[index].id;
@@ -387,6 +393,7 @@ function editWine(currentWine) {
     </section>
     `;
     $('#wineList').hide();
+    $('#wineDetails').hide();
     let outputElem = $('#editWineDetails');
     outputElem
         .prop('hidden', false)
@@ -400,7 +407,7 @@ function wineCollectionListing() {
     let searchResultsList = `
     <section role='region' class='wineListing'>
         <h5>Wine Collection</h5>
-        <h6>Click on the wine bottle for more details or click edit/delete to make changes to the wine bottle.</h6>
+        <h6>Click on the wine bottle for more details or click edit to make changes to the rating/price.</h6>
     </section>
     <section role='region' class='wineResults'>
     </section>
@@ -428,13 +435,13 @@ function singleWineResult(currentWine) {
         <a href='${currentWine.moreInformation}'>More information</a>
         <button role='button' type='button' class='js-back-wine-search'>Return to Wine Search</button>
     </section>
-   
     `;
     let li = document.createElement('li');
     li.innerHTML = `
         Wine Label: ${currentWine.wineLabelDetails} <br />
         Type: ${currentWine.type} <br />
-        Rating: ${currentWine.rating} <br /> 
+        Rating: ${currentWine.rating} <br />
+        Number of Reviewers: ${currentWine.numRaters} <br />
         Price: $${currentWine.averagePrice} <br />
         Region: ${currentWine.wineOrigin} <br />
         Year: ${currentWine.year} <br />
@@ -462,6 +469,7 @@ function createRedWineListing(data) {
         Wine Label: ${data.redWine[index].wineLabelDetails} <br /> 
         Type: ${data.redWine[index].type} <br /> 
         Rating: ${data.redWine[index].rating} <br />
+        Number of Reviewers: ${data.redWine[index].numRaters} <br />
         Price: $${data.redWine[index].averagePrice} <br />  
         Region: ${data.redWine[index].wineOrigin} <br /> 
         Year: ${data.redWine[index].year} <br />    
@@ -485,6 +493,7 @@ function createWhiteWineListing(data) {
         Wine Label: ${data.whiteWine[index].wineLabelDetails} <br /> 
         Type: ${data.whiteWine[index].type} <br /> 
         Rating: ${data.whiteWine[index].rating} <br />
+        Number of Reviewers: ${data.whiteWine[index].numRaters} <br />
         Price: ${data.whiteWine[index].averagePrice} <br />  
         Region: ${data.whiteWine[index].wineOrigin} <br /> 
         Year: ${data.whiteWine[index].year} <br />    
@@ -660,14 +669,12 @@ function whiteWineSearchWindow() {
 function editWineLabel() {
     $('.js-edit-wine-info').on('click', function(event) {
         let currentWine = $(this).val();
-        console.log(currentWine);
         let color = $(this).siblings('img').attr('class');
-        console.log(color);
         event.preventDefault();
-        if (color === "redWine") {
-            getRedWineByID(currentWine);
+        if (color === 'redWine') {
+            getRedWineByID(currentWine, color);
         } else {
-            getWhiteWineByID(currentWine);
+            getWhiteWineByID(currentWine, color);
         }
     })    
 }
@@ -690,30 +697,26 @@ function removeWine(data) {
 
 //Submit Edited Wine Information
 function submitEditLabel(currentWine) {
-    console.log(currentWine);
     $('.editBottle-form').submit('.js-update-bottle', event => {
         event.preventDefault();
         let id = currentWine.id
-        console.log(id);
         let currentRating = $(event.target).find('#js-edit-wine-rating').val();
-        console.log(currentRating);
-        console.log(currentWine.cumulativeRating);
-        console.log(currentWine.numRaters);
         let combinedRating = parseFloat(currentRating) + parseFloat(currentWine.cumulativeRating);
-        console.log(combinedRating);
-        let totalRaters = parseFloat(currentWine.numRaters) + 1;
-        console.log(totalRaters);
+        let totalRaters;
+        if (isNaN(combinedRating)) {
+            totalRaters = parseFloat(currentWine.numRaters)
+        } else {
+            totalRaters = parseFloat(currentWine.numRaters) + 1;
+        }
+        let ratingEquation = combinedRating/totalRaters;
+        let rating = Math.round(ratingEquation*10)/10;
         let wineData = {
-            rating: combinedRating/totalRaters,
+            rating: rating,
             cumulativeRating: combinedRating,
             numRaters: totalRaters,
             averagePrice: $(event.target).find('#js-edit-wine-averagePrice').val()
         };
-        console.log(combinedRating/totalRaters);
-        console.log(combinedRating);
-        console.log(totalRaters);
         if (currentWine.color === 'Red') {
-            console.log(currentWine.color);
             editCurrentRedWine(id, wineData)
         } else {
             editCurrentWhiteWine(id, wineData)
@@ -739,7 +742,7 @@ function singleWhiteWineSearchWindow() {
     })
 }
 
-//Re-start quiz
+//Re-start search
 function returnSearchWindow() {
     $('#wineDetails').on('click','.js-back-wine-search', event=> {
         getRedWine();

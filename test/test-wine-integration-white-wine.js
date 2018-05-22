@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 const {White} = require('../whiteWine/models');
 const {app, runServer, closeServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
-console.log(TEST_DATABASE_URL);
 const expect = chai.expect;
 
 chai.use(chaiHttp);
