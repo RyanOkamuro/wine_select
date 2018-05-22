@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require ('mongoose');
+const mongoose = require('mongoose');
 
 const wineSchema = mongoose.Schema({
     brand: {type: String, required: true},
@@ -8,6 +8,8 @@ const wineSchema = mongoose.Schema({
     color: {type: String, required: true},
     type: {type: String, required: true},
     rating: {type: Number, required: true},
+    numRaters: {type: Number, required: false},
+    cumulativeRating: {type: Number, required: false},
     averagePrice: {type: Number, required: true},
     region: {type: String, required: true},
     country: {type: String, required: true},
@@ -30,6 +32,8 @@ wineSchema.methods.serialize = function() {
         wineLabelDetails: this.wineLabelDetails,
         type: this.type,
         rating: this.rating,
+        numRaters: this.numRaters,
+        cumulativeRating: this.cumulativeRating,
         averagePrice: this.averagePrice,
         wineOrigin: this.wineOrigin,
         year: this.year,
