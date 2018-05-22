@@ -18,7 +18,6 @@ function getRedWine() {
             searchRedWine(data)
             createRedWineListing(data)
             editWineLabel()
-            submitEditLabel(data)
             removeWine(data)
         }
     }
@@ -39,6 +38,8 @@ function getRedWineByID(id) {
         },
         'success': function(currentID) {
             singleWineResult(currentID);
+            editWine(currentID);
+            console.log(currentID);
         }
     }
     $.ajax(settings2);
@@ -82,6 +83,7 @@ function getWhiteWineByID(id) {
         },
         'success': function(currentID) {
             singleWineResult(currentID);
+            editWine(currentID);
         }
     }
     $.ajax(settings4);
@@ -369,7 +371,7 @@ function addWine() {
 }
 
 //Edit Wine Label Information
-function editWine(currentWine, color) {
+function editWine(currentWine) {
     let editBottleLabel = `
     <section role='region' class='editBottle'>
         <form role='form' class='editBottle-form'>
@@ -379,8 +381,7 @@ function editWine(currentWine, color) {
                 <input placeholder= 4 type='number' min='0' max='5' name='js-edit-wine-rating' id='js-edit-wine-rating'>
                 <label for='js-edit-wine-averagePrice' class='editWineAveragePrice'>Average Price</label>
                 <input placeholder= 30.99 type='number' min='0' step='any' name='js-edit-wine-averagePrice' id='js-edit-wine-averagePrice'>
-                <input type='hidden' id='js-editWineColor' value='${color}'>
-                <button role='button' type='submit' value='${currentWine}' class='js-update-bottle'>Update</button>
+                <button role='button' type='submit' class='js-update-bottle'>Update</button>
             </fieldset>
         </form>
     </section>
@@ -390,7 +391,7 @@ function editWine(currentWine, color) {
     outputElem
         .prop('hidden', false)
         .html(editBottleLabel);
-        //submitEditLabel();
+        submitEditLabel(currentWine);
     $('#editWineDetails').show();
 }
 
@@ -618,6 +619,8 @@ function submitNewWine() {
             color: $('#js-wine-color').val(),
             type: $(event.target).find('#js-wine-type').val(),
             rating: $(event.target).find('#js-wine-rating').val(),
+            numRaters: 1,
+            cumulativeRating: $(event.target).find('#js-wine-rating').val(),
             averagePrice: $(event.target).find('#js-wine-averagePrice').val(),
             region: $(event.target).find('#js-wine-region').val(),
             country: $(event.target).find('#js-wine-country').val(),
@@ -659,10 +662,13 @@ function editWineLabel() {
         let currentWine = $(this).val();
         console.log(currentWine);
         let color = $(this).siblings('img').attr('class');
+        console.log(color);
         event.preventDefault();
-        getRedWine();
-        getWhiteWine();
-        editWine(currentWine, color);
+        if (color === "redWine") {
+            getRedWineByID(currentWine);
+        } else {
+            getWhiteWineByID(currentWine);
+        }
     })    
 }
 
@@ -683,31 +689,34 @@ function removeWine(data) {
 } 
 
 //Submit Edited Wine Information
-function submitEditLabel(data) {
-    console.log(data);
+function submitEditLabel(currentWine) {
+    console.log(currentWine);
     $('.editBottle-form').submit('.js-update-bottle', event => {
         event.preventDefault();
-        let current_id = $('.js-update-bottle').val();
-        console.log(current_id);
+        let id = currentWine.id
+        console.log(id);
         let currentRating = $(event.target).find('#js-edit-wine-rating').val();
-        let totalRating = [];
-        let numberRaters = [];
-        //console.log(totalRating);
-        //console.log(numberRaters);
-        for (index in data.redWine){
-            if (data.redWine[index].id = current_id) {
-                totalRating.push(data.redWine[index].cumulativeRating);
-                numberRaters.push(data.redWine[index].numRaters);
-            }
-        }
+        console.log(currentRating);
+        console.log(currentWine.cumulativeRating);
+        console.log(currentWine.numRaters);
+        let combinedRating = parseFloat(currentRating) + parseFloat(currentWine.cumulativeRating);
+        console.log(combinedRating);
+        let totalRaters = parseFloat(currentWine.numRaters) + 1;
+        console.log(totalRaters);
         let wineData = {
-            rating: ((currentRating + totalRating)/(numberRaters + 1)),
+            rating: combinedRating/totalRaters,
+            cumulativeRating: combinedRating,
+            numRaters: totalRaters,
             averagePrice: $(event.target).find('#js-edit-wine-averagePrice').val()
         };
-        if ($(event.target).find('#js-editWineColor').val() === 'redWine') {
-            editCurrentRedWine(current_id, wineData)
+        console.log(combinedRating/totalRaters);
+        console.log(combinedRating);
+        console.log(totalRaters);
+        if (currentWine.color === 'Red') {
+            console.log(currentWine.color);
+            editCurrentRedWine(id, wineData)
         } else {
-            editCurrentWhiteWine(current_id, wineData)
+            editCurrentWhiteWine(id, wineData)
         }
     });
 }

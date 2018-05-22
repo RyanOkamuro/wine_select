@@ -30,6 +30,7 @@ wineSchema.methods.serialize = function() {
     return {
         id: this._id,
         wineLabelDetails: this.wineLabelDetails,
+        color: this.color,
         type: this.type,
         rating: this.rating,
         numRaters: this.numRaters,
