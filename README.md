@@ -24,7 +24,8 @@ Edit Wine Label:
 Single Wine Result:
 ![Single Wine Result](https://raw.githubusercontent.com/RyanOkamuro/wine_select/feature/mockdata-test/images/Wine_Select_Single_Wine_Result.JPG)
 
-
+Add New Bottle:
+![Add New Bottle](https://raw.githubusercontent.com/RyanOkamuro/wine_select/feature/mockdata-test/images/Wine_Select_Add_New_Bottle.JPG)
 
 Built With
 ----------
