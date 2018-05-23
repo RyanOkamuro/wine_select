@@ -567,9 +567,7 @@ function addNewUser() {
                 var body = document.getElementsByTagName('body')[0];
                 html.style.backgroundImage = 'none';
                 body.style.backgroundImage = 'none';
-                getRedWine();
-                getWhiteWine();
-                wineQuery();
+                window.location.href= 'https://wine-select.herokuapp.com/';
             },
             'error': function(err) {
                 if (password.length < 10) {
