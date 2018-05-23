@@ -494,7 +494,7 @@ function createWhiteWineListing(data) {
         Type: ${data.whiteWine[index].type} <br /> 
         Rating: ${data.whiteWine[index].rating} <br />
         Number of Reviewers: ${data.whiteWine[index].numRaters} <br />
-        Price: ${data.whiteWine[index].averagePrice} <br />  
+        Price: $${data.whiteWine[index].averagePrice} <br />  
         Region: ${data.whiteWine[index].wineOrigin} <br /> 
         Year: ${data.whiteWine[index].year} <br />    
         <img src='${data.whiteWine[index].image}' class='whiteWine' data-index='${data.whiteWine[index].id}' alt='wine-bottle'>
