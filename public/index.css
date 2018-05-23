@@ -272,15 +272,14 @@
 @media only screen and (max-width: 1080px) {
   #wineList {
       width: 800px;
-    }
   }
-
+}
 
 @media only screen and (max-width: 820px) {
   #wineList {
       width: 700px;
-    }
   }
+}
 
 @media only screen and (min-width: 960px) {
   .col-6 {
@@ -291,9 +290,88 @@
 @media only screen and (max-width: 720px) {
   #wineList {
       width: 550px;
-    }
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  h3 {
+      font-size: 26px;
   }
 
+  h4 {
+      font-size: 19px;
+  }
+
+  h5 {
+      font-size: 24px;
+  }
+
+  h6 {
+      font-size: 17px;
+  }
+
+  .h7 {
+      font-size: 26px;
+  }
+
+  .newUser-form {
+      width: auto;
+  }
+
+  #js-red-wine-label, #js-white-wine-label {
+      font-size: 16px;
+  }
+
+  #wineList {
+      width: 320px;
+  }
+
+  .login-form {
+      width: 300px;
+  }
+  
+  .redWineBrand-form, .whiteWineBrand-form {
+      width: auto;
+      padding: 18px;
+  }
+
+  .whiteWineBrand-form {
+    margin-bottom: 20px;
+  }
+
+  .labelInformation {
+      padding-left: 10px;
+  }
+
+  .labelInformation > li {
+      font-size: 14px;
+  }
+
+  .redWine, .whiteWine {
+      top: 15px;
+  }
+
+  .newBottle-form, .editBottle-form {
+      width: auto;
+  }
+
+  .newBottle-form input, .newBottle-form select, textarea, .newBottle-form button {
+      width: 100%;
+  }
+
+  #singleLabel {
+      padding-left: 15px;
+  }
+
+  .history-winerylink {
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+
+  .history-winerylink button {
+      margin-bottom: 10px;
+  }
+}  
 
   
 
