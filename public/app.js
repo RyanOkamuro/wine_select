@@ -244,7 +244,7 @@ function newUser() {
     </section>
     `;
     $('.login-form').hide();
-    $('.heading').hide();
+    $('.perfectBottle').hide();
     $('.footer').hide();
     let outputElem = $('#new-registration');
         outputElem
@@ -258,8 +258,7 @@ function newUser() {
 function wineQuery() {
     let wineSearch = `
     <section role='region' class='wineLabelRedWhite'>
-        <h3>Search for Red or White Wine</h3>
-        <h4>Click on a red/white bottle for full wine listing or search from the drop down wine menu</h4>
+        <h3>Click on a red/white bottle for full wine listing or search from the drop down wine menu</h3>
         <div class='row'>
             <div class='col-6'>
                 <form role='form' class='redWineBrand-form'>
@@ -292,7 +291,7 @@ function wineQuery() {
     <section role='region' class='newWineInputArea' aria-live='assertive' hidden></section>
     `;
     $('.login-form').hide();
-    $('.heading').hide();
+    $('.perfectBottle').hide();
     $('.footer').hide();
     $('#new-registration').hide();
     $('#wineDetails').hide();
@@ -406,8 +405,7 @@ function editWine(currentWine) {
 function wineCollectionListing() {
     let searchResultsList = `
     <section role='region' class='wineListing'>
-        <h5>Wine Collection</h5>
-        <h6>Click on the wine bottle for more details or click edit to make changes to the rating/price.</h6>
+        <h4>Click on the wine bottle for more details or click edit to make changes to the rating/price.</h4>
     </section>
     <section role='region' class='wineResults'>
     </section>
@@ -426,7 +424,6 @@ function wineCollectionListing() {
 function singleWineResult(currentWine) {
     let singleWine = `
     <section role='region' class='oneWine'>
-        <h7 class='h7'>${currentWine.wineLabelDetails}</h7>
         <img src='${currentWine.image}' class='singleWineImage' alt='wine-bottle'>
         <ul id='singleLabel'></ul>
     </section>

@@ -24,32 +24,17 @@
       margin-top: 0;
   }
 
-  h2, h6 {
+  h2, h4 {
       color: #1B0404;
       font-size: 22px;
   }
 
-  h3, h4, h5, h6 {
+  h3, h4 {
       text-align: center;
   }
 
-  h3, h5 {
-      font-size: 32px;
-      color: #7F1A1A;
-      margin-top: 40px;
-  }
-
-  h4 {
+  h3 {
     font-size: 22px;
-  }
-
-  .h7 {
-      font-size: 32px;
-      color: #7F1A1A;
-      display: block;
-      margin: 40px auto 60px auto;
-      font-weight: bold;
-      text-align: center;
   }
 
   fieldset {
@@ -234,6 +219,7 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
+      padding-top: 15px;
       height: 250px;
   }
 
@@ -294,26 +280,20 @@
 }
 
 @media only screen and (max-width: 414px) {
+  html, body {
+      background-image: url("https://public.boxcloud.com/api/2.0/internal_files/294204108092/versions/309699328172/representations/jpg_paged_2048x2048/content/1.jpg?access_token=1!LTtrPe2RZFb98TkWH0TjQQ5dJWKIOx3Y16LlBxcsiapUR93qFh5yn3q7rIKDrQD3dxCHSEPGzj04Eof-PsNAad6Bw3jtGJjRWrkjXxL8KmgnX64eDuOkqwQmiRXy8boplvFWZ3SaG6K8sGWAcJ6Eu-qzc7yIxVBLpFK8UrjbCCLWg5gblwiI7ZBvOfexu4PqwKwvVp_Tdr136Ux8zq3PiDpU8DhuTXrPc_-BINGxNjqE65Wvk5cuT6s9OLCJ7Bd4VAiIKTqFaO2NsJ0_fxq1Kx6JDQpxmjZVsQ8Tliw_twTh8iW3RBZVzDsdhQBh0AdDB6qBTkCU30435WEXCQidK91PC1DaYrZpvYaqRSU6t18HirWDDSIK7PCRmXqQ3LJPdTRQL8wIZIuDjsvs&shared_link=https%3A%2F%2Fapp.box.com%2Fs%2Fvyx2keigfcius1fssl7p3gcwyuq7s09g&box_client_name=box-content-preview&box_client_version=1.43.1https://public.boxcloud.com/api/2.0/internal_files/294204108092/versions/309699328172/representations/jpg_paged_2048x2048/content/1.jpg?access_token=1!LTtrPe2RZFb98TkWH0TjQQ5dJWKIOx3Y16LlBxcsiapUR93qFh5yn3q7rIKDrQD3dxCHSEPGzj04Eof-PsNAad6Bw3jtGJjRWrkjXxL8KmgnX64eDuOkqwQmiRXy8boplvFWZ3SaG6K8sGWAcJ6Eu-qzc7yIxVBLpFK8UrjbCCLWg5gblwiI7ZBvOfexu4PqwKwvVp_Tdr136Ux8zq3PiDpU8DhuTXrPc_-BINGxNjqE65Wvk5cuT6s9OLCJ7Bd4VAiIKTqFaO2NsJ0_fxq1Kx6JDQpxmjZVsQ8Tliw_twTh8iW3RBZVzDsdhQBh0AdDB6qBTkCU30435WEXCQidK91PC1DaYrZpvYaqRSU6t18HirWDDSIK7PCRmXqQ3LJPdTRQL8wIZIuDjsvs&shared_link=https%3A%2F%2Fapp.box.com%2Fs%2Fvyx2keigfcius1fssl7p3gcwyuq7s09g&box_client_name=box-content-preview&box_client_version=1.43.1");
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  
   h3 {
-      font-size: 25px;
-      padding-left: 5px;
-      padding-right: 5px;
-  }
-
-  h4 {
       font-size: 19px;
   }
 
-  h5 {
-      font-size: 24px;
-  }
-
-  h6 {
+  h4 {
       font-size: 17px;
-  }
-
-  .h7 {
-      font-size: 26px;
   }
 
   .newUser-form {
