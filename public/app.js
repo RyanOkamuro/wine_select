@@ -560,11 +560,19 @@ function addNewUser() {
             'contentType': 'application/json',
             'data': JSON.stringify(userInformation),
             'success': function(data) {
-                var html = document.getElementsByTagName('html')[0];
-                var body = document.getElementsByTagName('body')[0];
-                html.style.backgroundImage = 'none';
-                body.style.backgroundImage = 'none';
-                window.location.href= 'https://wine-select.herokuapp.com/';
+                // var html = document.getElementsByTagName('html')[0];
+                // var body = document.getElementsByTagName('body')[0];
+                // html.style.backgroundImage = 'none';
+                // body.style.backgroundImage = 'none';
+                //window.location.href= 'https://wine-select.herokuapp.com/';
+                $('#new-registration').hide();
+                let outputElem = $('#landing');
+                    outputElem 
+                        .prop('hidden', false)
+                        $('.heading').show();
+                        $('.login-form').show();
+                        $('.footer').show();
+                //$('#landing').load('index.html');
             },
             'error': function(err) {
                 if (password.length < 10) {
