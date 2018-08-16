@@ -363,6 +363,7 @@ function addWine() {
                 <label for='js-wine-information' class='newWineInformation'>More Information URL</label>
                 <input placeholder='www.shafervine...' type='text' name='js-wine-information' id='js-wine-information' required/>
                 <button role='button' type='submit' class='js-add-bottle'>Submit</button>
+                <button role='button' type='button' class='js-cancel-add-bottle'>Cancel</button>
             </fieldset>
         </form>
     </section>
@@ -387,6 +388,7 @@ function editWine(currentWine) {
                 <label for='js-edit-wine-averagePrice' class='editWineAveragePrice'>Average Price</label>
                 <input placeholder= 30.99 type='number' min='0' step='any' name='js-edit-wine-averagePrice' id='js-edit-wine-averagePrice'>
                 <button role='button' type='submit' class='js-update-bottle'>Update</button>
+                <button role='button' type='submit' class='js-cancel-update-bottle'>Cancel</button>
             </fieldset>
         </form>
     </section>
@@ -398,6 +400,7 @@ function editWine(currentWine) {
         .prop('hidden', false)
         .html(editBottleLabel);
         submitEditLabel(currentWine);
+        cancelEditLabel(currentWine);
     $('#editWineDetails').show();
 }
 
@@ -644,6 +647,16 @@ function submitNewWine() {
     });
 }
 
+//Cancel Add Wine Information
+function cancelAddNewWineBottle() {
+    $('#wineDetails').on('click','.js-cancel-add-bottle', event => {
+        getRedWine();
+        getWhiteWine();
+        $('#wineDetails').prop('hidden');
+        $('#red-white').html(wineQuery());
+    })
+}
+
 //Red Wine Search Window
 function redWineSearchWindow() {
     $('body').on('click', '.red', event=> {
@@ -721,6 +734,18 @@ function submitEditLabel(currentWine) {
     });
 }
 
+//Cancel Edit Wine Information
+function cancelEditLabel(currentWine) {
+    $('#editWineDetails').on('click','.js-cancel-update-bottle', event => {
+        if (currentWine.color === 'Red') {
+            editCurrentRedWine()
+        } else {
+            editCurrentWhiteWine()
+        }
+        $('#editWineDetails').prop('hidden');
+    })
+}
+
 //Single Red Wine Search Window
 function singleRedWineSearchWindow() {
     $('body').on('click', '.redWine', event=> {
@@ -755,9 +780,11 @@ function handleCreateApp() {
     registerNewUser();
     addNewUser();
     addNewWineBottle();
+    cancelAddNewWineBottle();
     submitNewWine(); 
     redWineSearchWindow();
     whiteWineSearchWindow();
+    cancelEditLabel();
     singleRedWineSearchWindow();
     singleWhiteWineSearchWindow();
     returnSearchWindow();
