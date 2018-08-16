@@ -693,14 +693,18 @@ function editWineLabel() {
 function removeWine(data) {
     $('.js-delete-wine').on('click', function(event) {
         let currentID = $(this).val();
-        let color = $(this).siblings('img').attr('class');
-        event.preventDefault();
-        if (color === 'redWine') {
-            deleteRedWine(currentID);
-            createRedWineListing(data);
+        if(confirm('Click OK to confirm to delete')){
+            let color = $(this).siblings('img').attr('class');
+            event.preventDefault();
+            if (color === 'redWine') {
+                deleteRedWine(currentID);
+                createRedWineListing(data);
+            } else {
+                deleteWhiteWine(currentID);
+                createWhiteWineListing(data);
+                }    
         } else {
-            deleteWhiteWine(currentID);
-            createWhiteWineListing(data);
+            return
         }
     })
 } 
