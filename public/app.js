@@ -18,6 +18,7 @@ function getRedWine() {
             searchRedWine(data)
             createRedWineListing(data)
             editWineLabel()
+            switchBottleColor(data)
             removeWine(data)
         }
     }
@@ -65,6 +66,7 @@ function getWhiteWine() {
             searchWhiteWine(data)
             createWhiteWineListing(data)
             editWineLabel()
+            switchBottleColor(data)
             removeWine(data)
         }
     }
@@ -412,6 +414,9 @@ function wineCollectionListing() {
     </section>
     <section role='region' class='wineResults'>
     </section>
+    <section role='region' class='switchWineColorResults'>
+        
+    </section>
     `;
     $('#red-white').hide();
     $('#wineDetails').hide();
@@ -462,6 +467,8 @@ function singleWineResult(currentWine) {
 function createRedWineListing(data) {
     let ul = document.createElement('ul');
     ul.classList.add('labelInformation');
+    let switchButton;
+    console.log(data);
     for (index in data.redWine) {
         let li = document.createElement('li');
         li.classList.add('vino');
@@ -478,14 +485,17 @@ function createRedWineListing(data) {
         <button role='button' value='${data.redWine[index].id}' type='button' class='js-delete-wine'>Delete</button>
         `;
         ul.append(li);
+        switchButton = `<button role='button' value=${data.redWine[index].color} type='button' class='js-switch-bottle'>Switch Wine Color Bottle Results</button>`;
     }
     $('.wineResults').html(ul)
+    $('.switchWineColorResults').html(switchButton);
 }
 
 //White Wine Listing
 function createWhiteWineListing(data) {
     let ul = document.createElement('ul');
     ul.classList.add('labelInformation');
+    let switchButton;
     for (index in data.whiteWine) {
         let li = document.createElement('li');
         li.classList.add('vino');
@@ -502,8 +512,10 @@ function createWhiteWineListing(data) {
         <button role='button' type='button' value='${data.whiteWine[index].id}' class='js-delete-wine'>Delete</button>
         `;
         ul.append(li);
+        switchButton = `<button role='button' value='White' type='button' class='js-switch-bottle'>Switch Wine Color Bottle Results</button>`;
     }
     $('.wineResults').html(ul)
+    $('.switchWineColorResults').html(switchButton);
 }
 
 function startSearchWindow() {
@@ -768,6 +780,39 @@ function singleWhiteWineSearchWindow() {
     })
 }
 
+//Switch wine bottle listing
+function switchBottleColor(data) {
+    // let bottleColor2 = Object.keys(data);
+    // let bottleColor = bottleColor2.toString()
+    let bottleColor = $('.js-switch-bottle').val();
+    console.log(bottleColor);
+    // console.log(data);
+    // console.log(bottleColor);
+    $('#wineList').on('click', '.js-switch-bottle', event => {
+        $('#wineList').prop('hidden');
+            if (bottleColor === 'Red') {
+                getWhiteWine();
+                // createWhiteWineListing(data);
+                // wineCollectionListing()
+                
+                
+                // wineCollectionListing(data);
+            } else if (bottleColor === 'White') {
+                getRedWine();
+                // createRedWineListing(data);
+                // wineCollectionListing()
+                // wineCollectionListing(data);
+            }
+                
+            
+            // if (bottleColor === "whiteWine") {
+            //     // getRedWine();
+            //     // createRedWineListing(data);
+            //     // wineCollectionListing();
+            // }
+        })
+}
+
 //Re-start search
 function returnSearchWindow() {
     $('#wineDetails').on('click','.js-back-wine-search', event=> {
@@ -791,6 +836,7 @@ function handleCreateApp() {
     cancelEditLabel();
     singleRedWineSearchWindow();
     singleWhiteWineSearchWindow();
+    // switchBottleColor();
     returnSearchWindow();
 }
 
