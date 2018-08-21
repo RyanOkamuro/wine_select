@@ -1,5 +1,10 @@
 
 let user = localStorage.getItem('currentUser');
+let currentWineID;
+let currentWine;
+let color;
+let id;
+let wineData;
 
 //Get Red Wine JSON 
 function getRedWine() {
@@ -18,7 +23,7 @@ function getRedWine() {
             searchRedWine(data)
             createRedWineListing(data)
             editWineLabel()
-            switchBottleColor(data)
+            // switchBottleColor(data)
             removeWine(data)
         }
     }
@@ -40,8 +45,10 @@ function getRedWineByID(id, color) {
         'success': function(currentID) {
             if(color === 'redWine') {
                 editWine(currentID);
+                routie('edit-red-wines');
             } else {
                 singleWineResult(currentID);
+                routie('red-bottle-details');
             }
         }
     }
@@ -66,7 +73,7 @@ function getWhiteWine() {
             searchWhiteWine(data)
             createWhiteWineListing(data)
             editWineLabel()
-            switchBottleColor(data)
+            // switchBottleColor(data)
             removeWine(data)
         }
     }
@@ -88,8 +95,10 @@ function getWhiteWineByID(id, color) {
         'success': function(currentID) {
             if(color === 'whiteWine') {
                 editWine(currentID);
+                routie('edit-white-wines');
             } else {
                 singleWineResult(currentID);
+                routie('white-bottle-details');
             }
         }
     }
@@ -112,8 +121,9 @@ function addNewRedWine(redBottle) {
         'contentType': 'application/json',
         'data': JSON.stringify(redBottle),
         'success': function(redVino) {
-            getRedWine(redVino)
+            // getRedWine(redVino)
             singleWineResult(redVino)
+            routie('red-bottle-details')
         }
     }
     $.ajax(settings5);
@@ -135,7 +145,9 @@ function addNewWhiteWine(whiteBottle) {
         'contentType': 'application/json',
         'data': JSON.stringify(whiteBottle),
         'success': function(whiteVino) {
+            // getWhiteWine(whiteVino)
             singleWineResult(whiteVino)
+            routie('white-bottle-details')
         }
     }
     $.ajax(settings6);
@@ -159,6 +171,7 @@ function editCurrentRedWine(id, redBottle) {
         'success': function(modifiedRedVino) {
             getRedWine(modifiedRedVino);
             wineCollectionListing();
+            routie('red-wines');
         }
     }
     $.ajax(settings7);
@@ -182,6 +195,7 @@ function editCurrentWhiteWine(id, whiteBottle) {
         'success': function(modifiedWhiteVino) {
             getWhiteWine(modifiedWhiteVino);
             wineCollectionListing();
+            routie('white-wines');
         }
     }
     $.ajax(settings8);
@@ -297,6 +311,7 @@ function wineQuery() {
     $('.footer').hide();
     $('#new-registration').hide();
     $('#wineDetails').hide();
+    $('#wineList').hide();
     let outputElem = $('#red-white');
         outputElem
             .prop('hidden', false)
@@ -390,7 +405,7 @@ function editWine(currentWine) {
                 <label for='js-edit-wine-averagePrice' class='editWineAveragePrice'>Average Price</label>
                 <input placeholder= 30.99 type='number' min='0' step='any' name='js-edit-wine-averagePrice' id='js-edit-wine-averagePrice'>
                 <button role='button' type='submit' class='js-update-bottle'>Update</button>
-                <button role='button' type='submit' class='js-cancel-update-bottle'>Cancel</button>
+                <button role='button' type='button' class='js-cancel-update-bottle'>Cancel</button>
             </fieldset>
         </form>
     </section>
@@ -539,9 +554,10 @@ function startSearchWindow() {
                 localStorage.setItem('authToken', data.authToken);
                 localStorage.setItem('currentUser', username);
                 user = username;
-                getRedWine();
-                getWhiteWine();
-                wineQuery();
+                // getRedWine();
+                // getWhiteWine();
+                // wineQuery();
+                routie('wine-select');
             },
             error: function(err) {
                 if(err.status === 401) {
@@ -602,6 +618,7 @@ function searchRedWine(redBottles) {
             let value_ID = redBottles.redWine[index].id;
             if (singleRedWineID === value_ID) {
                 singleWineResult(redBottles.redWine[index]);
+                routie('red-bottle-details')
             } 
         };
     });
@@ -616,6 +633,7 @@ function searchWhiteWine(whiteBottles){
             let value_ID = whiteBottles.whiteWine[index].id;
             if (singleWhiteWineID === value_ID) {
                 singleWineResult(whiteBottles.whiteWine[index]);
+                routie('white-bottle-details')
             }
         }
     });
@@ -627,6 +645,7 @@ function addNewWineBottle() {
         event.preventDefault();
         $('#wineList').prop('hidden'); 
         addWine();
+        routie('add-new-bottle');
     });
 }
 
@@ -634,7 +653,7 @@ function addNewWineBottle() {
 function submitNewWine() {
     $('#wineDetails').submit('.js-add-bottle', event => {
         event.preventDefault();
-        let wineData = {
+        wineData = {
             brand: $(event.target).find('#js-wine-brand').val(),
             wineName: $(event.target).find('#js-wine-name').val(),
             color: $('#js-wine-color').val(),
@@ -666,6 +685,7 @@ function cancelAddNewWineBottle() {
         getWhiteWine();
         $('#wineDetails').prop('hidden');
         $('#red-white').html(wineQuery());
+        routie('wine-select');
     })
 }
 
@@ -675,6 +695,7 @@ function redWineSearchWindow() {
         event.preventDefault();
         getRedWine();
         wineCollectionListing();
+        routie('red-wines');
     })
 }
 
@@ -684,19 +705,22 @@ function whiteWineSearchWindow() {
         event.preventDefault();
         getWhiteWine();
         wineCollectionListing();
+        routie('white-wines');
     })
 }
 
 //Button to Edit Red/White Wine
 function editWineLabel() {
     $('.js-edit-wine-info').on('click', function(event) {
-        let currentWine = $(this).val();
-        let color = $(this).siblings('img').attr('class');
+        currentWine = $(this).val();
+        color = $(this).siblings('img').attr('class');
         event.preventDefault();
         if (color === 'redWine') {
             getRedWineByID(currentWine, color);
+            routie('red-wines');
         } else {
             getWhiteWineByID(currentWine, color);
+            routie('white-wines');
         }
     })    
 }
@@ -744,8 +768,10 @@ function submitEditLabel(currentWine) {
         };
         if (currentWine.color === 'Red') {
             editCurrentRedWine(id, wineData)
+            // routie('red-wines');
         } else {
             editCurrentWhiteWine(id, wineData)
+            // routie('white-wines');
         }
     });
 }
@@ -753,10 +779,18 @@ function submitEditLabel(currentWine) {
 //Cancel Edit Wine Information
 function cancelEditLabel(currentWine) {
     $('#editWineDetails').on('click','.js-cancel-update-bottle', event => {
-        if (currentWine.color === 'Red') {
-            editCurrentRedWine()
+        event.stopPropagation();
+        if (!currentWine) {
+            return;
+        } 
+        else if (currentWine.color === 'Red') {
+            getRedWine();
+            wineCollectionListing();
+            routie('red-wines');
         } else {
-            editCurrentWhiteWine()
+            getWhiteWine();
+            wineCollectionListing();
+            routie('white-wines');
         }
         $('#editWineDetails').prop('hidden');
     })
@@ -765,16 +799,17 @@ function cancelEditLabel(currentWine) {
 //Single Red Wine Search Window
 function singleRedWineSearchWindow() {
     $('body').on('click', '.redWine', event=> {
-        let currentWineID = $(event.target).data('index');
+        currentWineID = $(event.target).data('index');
         event.preventDefault();
         getRedWineByID(currentWineID);
+        routie('red-bottle-details')
     })
 }
 
 //Single White Wine Search Window
 function singleWhiteWineSearchWindow() {
     $('body').on('click', '.whiteWine', event=> {
-        let currentWineID = $(event.target).data('index');
+        currentWineID = $(event.target).data('index');
         event.preventDefault();
         getWhiteWineByID(currentWineID);
     })
@@ -782,36 +817,18 @@ function singleWhiteWineSearchWindow() {
 
 //Switch wine bottle listing
 function switchBottleColor(data) {
-    // let bottleColor2 = Object.keys(data);
-    // let bottleColor = bottleColor2.toString()
-    let bottleColor = $('.js-switch-bottle').val();
-    console.log(bottleColor);
-    // console.log(data);
-    // console.log(bottleColor);
     $('#wineList').on('click', '.js-switch-bottle', event => {
         $('#wineList').prop('hidden');
+        let bottleColor = $('.js-switch-bottle').val();
             if (bottleColor === 'Red') {
                 getWhiteWine();
-                // createWhiteWineListing(data);
-                // wineCollectionListing()
-                
-                
-                // wineCollectionListing(data);
+                routie('white-wines');
             } else if (bottleColor === 'White') {
                 getRedWine();
-                // createRedWineListing(data);
-                // wineCollectionListing()
-                // wineCollectionListing(data);
+                routie('red-wines');
             }
-                
-            
-            // if (bottleColor === "whiteWine") {
-            //     // getRedWine();
-            //     // createRedWineListing(data);
-            //     // wineCollectionListing();
-            // }
         })
-}
+};
 
 //Re-start search
 function returnSearchWindow() {
@@ -821,6 +838,7 @@ function returnSearchWindow() {
         $('#wineDetails').prop('hidden');   
         $('#wineList').prop('hidden'); 
         $('#red-white').html(wineQuery());
+        routie('wine-select');
     });
   }
 
@@ -836,8 +854,40 @@ function handleCreateApp() {
     cancelEditLabel();
     singleRedWineSearchWindow();
     singleWhiteWineSearchWindow();
-    // switchBottleColor();
-    returnSearchWindow();
+    switchBottleColor();
+    returnSearchWindow();  
+    routie('wine-select', function() {
+        getRedWine();
+        getWhiteWine();
+        wineQuery();
+    });
+    routie('add-new-bottle', function() {
+        addWine();
+    });
+    routie('edit-red-wines', function() {
+        getRedWineByID(currentWine, color);
+    });
+    routie('edit-white-wines', function() {
+        getWhiteWineByID(currentWine, color);
+    });
+    routie('red-wines', function() {
+        getRedWine();
+        wineCollectionListing();
+    });
+    routie('white-wines', function() {
+        getWhiteWine();
+        wineCollectionListing();
+    }); 
+    routie('red-bottle-details', function() {
+        singleRedWineSearchWindow()
+        getRedWineByID(currentWineID);
+        addNewRedWine(wineData);
+    });
+    routie('white-bottle-details', function() {
+        singleWhiteWineSearchWindow()
+        getWhiteWineByID(currentWineID);
+        addNewWhiteWine(wineData);
+    });
 }
 
 $(handleCreateApp);
