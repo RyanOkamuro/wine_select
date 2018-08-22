@@ -36,10 +36,11 @@ passport.use(jwtStrategy);
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
-app.use('/whiteWine/', whiteWineRouter);
-app.use('/redWine/', redWineRouter);
 
 const jwtAuth = passport.authenticate('jwt', {session: false})
+
+app.use('/whiteWine/', jwtAuth, whiteWineRouter);
+app.use('/redWine/', jwtAuth, redWineRouter);
 
 app.get('/api/protected', jwtAuth, (req, res) => {
   return res.json({

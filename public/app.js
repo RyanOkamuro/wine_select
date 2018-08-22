@@ -478,7 +478,6 @@ function createRedWineListing(data) {
     let ul = document.createElement('ul');
     ul.classList.add('labelInformation');
     let switchButton;
-    console.log(data);
     for (index in data.redWine) {
         let li = document.createElement('li');
         li.classList.add('vino');
@@ -606,7 +605,7 @@ function addNewUser() {
 function cancelAddUser() {
     $('#new-registration').on('click','.js-cancel-add-user', event => {
         $('#new-registration').prop('hidden');
-        $('#landing').load('https://wine-select.herokuapp.com/');
+        window.location= "https://wine-select.herokuapp.com/";   
     })
 }
 
@@ -881,7 +880,6 @@ function handleCreateApp() {
         wineCollectionListing();
     }); 
     routie('red-bottle-details', function() {
-        console.log(currentWineID);
         getRedWineByID(currentWineID);
     });
     routie('white-bottle-details', function() {
