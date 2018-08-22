@@ -194,6 +194,10 @@
       height: 30px;
   }
   
+  button.js-switch-bottle {
+      margin-bottom: 20px;
+  }
+
   #wineList {
       width: 1000px;
       margin-left: auto;
@@ -209,6 +213,11 @@
 
   .labelInformation, #singleLabel {
       list-style-type: none;
+      padding: 0;
+  }
+
+  .labelInformation {
+      padding: 2px;
   }
 
   .oneWine {
@@ -240,6 +249,7 @@
       display: block;
       max-width: 950px;
       padding-left: 15px;
+      padding-right: 15px;
       margin-top: 20px;
       margin-right: auto;
       margin-left: auto;
@@ -259,17 +269,20 @@
   #wineList {
       width: 800px;
   }
-}
-
-@media only screen and (max-width: 820px) {
-  #wineList {
-      width: 700px;
+  .whiteWineBrand-form {
+      margin-bottom: 20px;
   }
 }
 
 @media only screen and (min-width: 960px) {
   .col-6 {
       width: 50%;
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  #wineList {
+      width: 700px;
   }
 }
 
