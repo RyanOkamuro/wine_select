@@ -1,10 +1,7 @@
-
 let user = localStorage.getItem('currentUser');
-let currentWineID;
 let currentWine;
 let color;
-let id;
-let wineData;
+let currentWineID;
 
 //Get Red Wine JSON 
 function getRedWine() {
@@ -23,7 +20,6 @@ function getRedWine() {
             searchRedWine(data)
             createRedWineListing(data)
             editWineLabel()
-            // switchBottleColor(data)
             removeWine(data)
         }
     }
@@ -55,7 +51,6 @@ function getRedWineByID(id, color) {
     $.ajax(settings2);
 }
 
-
 //Get White Wine JSON
 function getWhiteWine() {
     let authToken = localStorage.getItem('authToken');
@@ -73,7 +68,6 @@ function getWhiteWine() {
             searchWhiteWine(data)
             createWhiteWineListing(data)
             editWineLabel()
-            // switchBottleColor(data)
             removeWine(data)
         }
     }
@@ -121,7 +115,7 @@ function addNewRedWine(redBottle) {
         'contentType': 'application/json',
         'data': JSON.stringify(redBottle),
         'success': function(redVino) {
-            // getRedWine(redVino)
+            currentWineID = redVino.id;
             singleWineResult(redVino)
             routie('red-bottle-details')
         }
@@ -145,7 +139,7 @@ function addNewWhiteWine(whiteBottle) {
         'contentType': 'application/json',
         'data': JSON.stringify(whiteBottle),
         'success': function(whiteVino) {
-            // getWhiteWine(whiteVino)
+            currentWineID = whiteVino.id;
             singleWineResult(whiteVino)
             routie('white-bottle-details')
         }
@@ -255,6 +249,7 @@ function newUser() {
             <label for='js-new-user-password' class='newUserPassword'>Password <br/><span id='reenterPass'></span></label>
             <input placeholder='password' type='text' name='js-new-user-password' id='js-new-user-password'>
             <button role='button' type='submit' class='js-add-user'>Submit</button>
+            <button role='button' type='button' class='js-cancel-add-user'>Cancel</button>
             </fieldset>
         </form>
     </section>
@@ -554,9 +549,6 @@ function startSearchWindow() {
                 localStorage.setItem('authToken', data.authToken);
                 localStorage.setItem('currentUser', username);
                 user = username;
-                // getRedWine();
-                // getWhiteWine();
-                // wineQuery();
                 routie('wine-select');
             },
             error: function(err) {
@@ -573,6 +565,7 @@ function startSearchWindow() {
 function registerNewUser() {
     $('#register-new-user').click(function() {
         newUser();
+        routie('new-user-signup')
     });
 }
 
@@ -609,15 +602,25 @@ function addNewUser() {
     });
 }
 
+//Cancel Add Wine Information
+function cancelAddUser() {
+    $('#new-registration').on('click','.js-cancel-add-user', event => {
+        $('#new-registration').prop('hidden');
+        $('#landing').load('https://wine-select.herokuapp.com/');
+    })
+}
+
 //Search Red Wine Bottles
 function searchRedWine(redBottles) {
     $('#red-white').on('click', '.js-red-label-search', event => {
         event.preventDefault();
         let singleRedWineID = $('#js-red-wine-label').val();
         for (index in redBottles.redWine) {
+            let value = redBottles.redWine[index];
             let value_ID = redBottles.redWine[index].id;
             if (singleRedWineID === value_ID) {
-                singleWineResult(redBottles.redWine[index]);
+                currentWineID = singleRedWineID;
+                singleWineResult(value);
                 routie('red-bottle-details')
             } 
         };
@@ -632,6 +635,7 @@ function searchWhiteWine(whiteBottles){
         for (index in whiteBottles.whiteWine) {
             let value_ID = whiteBottles.whiteWine[index].id;
             if (singleWhiteWineID === value_ID) {
+                currentWineID = singleWhiteWineID;
                 singleWineResult(whiteBottles.whiteWine[index]);
                 routie('white-bottle-details')
             }
@@ -653,7 +657,7 @@ function addNewWineBottle() {
 function submitNewWine() {
     $('#wineDetails').submit('.js-add-bottle', event => {
         event.preventDefault();
-        wineData = {
+        let wineData = {
             brand: $(event.target).find('#js-wine-brand').val(),
             wineName: $(event.target).find('#js-wine-name').val(),
             color: $('#js-wine-color').val(),
@@ -681,8 +685,6 @@ function submitNewWine() {
 //Cancel Add Wine Information
 function cancelAddNewWineBottle() {
     $('#wineDetails').on('click','.js-cancel-add-bottle', event => {
-        getRedWine();
-        getWhiteWine();
         $('#wineDetails').prop('hidden');
         $('#red-white').html(wineQuery());
         routie('wine-select');
@@ -768,10 +770,8 @@ function submitEditLabel(currentWine) {
         };
         if (currentWine.color === 'Red') {
             editCurrentRedWine(id, wineData)
-            // routie('red-wines');
         } else {
             editCurrentWhiteWine(id, wineData)
-            // routie('white-wines');
         }
     });
 }
@@ -833,8 +833,6 @@ function switchBottleColor(data) {
 //Re-start search
 function returnSearchWindow() {
     $('#wineDetails').on('click','.js-back-wine-search', event=> {
-        getRedWine();
-        getWhiteWine();
         $('#wineDetails').prop('hidden');   
         $('#wineList').prop('hidden'); 
         $('#red-white').html(wineQuery());
@@ -845,6 +843,7 @@ function returnSearchWindow() {
 function handleCreateApp() {
     startSearchWindow();
     registerNewUser();
+    cancelAddUser();
     addNewUser();
     addNewWineBottle();
     cancelAddNewWineBottle();
@@ -855,7 +854,10 @@ function handleCreateApp() {
     singleRedWineSearchWindow();
     singleWhiteWineSearchWindow();
     switchBottleColor();
-    returnSearchWindow();  
+    returnSearchWindow();
+    routie('new-user-signup', function() {
+        newUser();
+    });  
     routie('wine-select', function() {
         getRedWine();
         getWhiteWine();
@@ -879,14 +881,11 @@ function handleCreateApp() {
         wineCollectionListing();
     }); 
     routie('red-bottle-details', function() {
-        singleRedWineSearchWindow()
+        console.log(currentWineID);
         getRedWineByID(currentWineID);
-        addNewRedWine(wineData);
     });
     routie('white-bottle-details', function() {
-        singleWhiteWineSearchWindow()
         getWhiteWineByID(currentWineID);
-        addNewWhiteWine(wineData);
     });
 }
 
