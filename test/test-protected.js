@@ -5,6 +5,7 @@ const chaiHttp = require('chai-http');
 const jwt = require('jsonwebtoken');
 
 const {app, runServer, closeServer} = require('../server');
+const {TEST_DATABASE_URL} = require('../config');
 const {User} = require('../users');
 const {JWT_SECRET} = require('../config');
 
@@ -19,7 +20,7 @@ describe('Protected endpoint', function() {
   const lastName = 'Red';
 
   before(function() {
-    return runServer();
+    return runServer(TEST_DATABASE_URL);
   });
 
   after(function() {
