@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const chai = require('chai');
-const request = require('supertest');
+
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
@@ -14,7 +14,6 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 let authToken;
-let agent = request.agent(app);
 
 function seedWineData() {
   console.info('seeding wine info');
@@ -151,7 +150,8 @@ function generateInformation() {
   describe('GET Label Information', function() {
     it('should list information on GET', function() {
       let res;
-      agent
+      return chai
+        .request(app)
         .get('/whiteWine')
         .set('Authorization', `Bearer ${authToken}`)
         .then(function(_res) {
@@ -167,7 +167,8 @@ function generateInformation() {
 
       it('should return the correct fields for whiteWine', function() {
         let resWine;
-        agent
+        return chai
+          .request(app)
           .get('/whiteWine')
           .set('Authorization', `Bearer ${authToken}`)
           .then(function(res) {
