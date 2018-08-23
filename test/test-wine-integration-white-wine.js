@@ -106,42 +106,42 @@ function generateInformation() {
   return moreInformation[Math.floor(Math.random() * moreInformation.length)];
   }
 
-  function generateWineData() {
-    return {
-      'wineLabelDetails': generateLabel(),
-      'brand': generateBrand(),
-      'wineName': generateWineName(),
-      'color': generateColor(),
-      'type': generateType(),
-      'rating': generateRating(),
-      'averagePrice': generateAveragePrice(),
-      'wineOrigin': generateWineOrigin(),
-      'region': generateRegion(),
-      'country': generateCountry(),
-      'year': generateYear(),
-      'foodSuggestion': generateFoodSuggestion(),
-      'image': generateImage(),
-      'history': generateHistory(),
-      'moreInformation': generateInformation(),
-    };
-  }
+function generateWineData() {
+  return {
+    'wineLabelDetails': generateLabel(),
+    'brand': generateBrand(),
+    'wineName': generateWineName(),
+    'color': generateColor(),
+    'type': generateType(),
+    'rating': generateRating(),
+    'averagePrice': generateAveragePrice(),
+    'wineOrigin': generateWineOrigin(),
+    'region': generateRegion(),
+    'country': generateCountry(),
+    'year': generateYear(),
+    'foodSuggestion': generateFoodSuggestion(),
+    'image': generateImage(),
+    'history': generateHistory(),
+    'moreInformation': generateInformation(),
+  };
+}
 
-  function tearDownDb() {
-    console.warn('Delete database');
-    return mongoose.connection.dropDatabase();
-  }
+function tearDownDb() {
+  console.warn('Delete database');
+  return mongoose.connection.dropDatabase();
+}
 
-  let authToken;
-  function loginUser() {
-    return chai
-      .request(app)
-      .post('/api/auth/login')
-      .send({username: 'newuser', password: 'demopassword'})
-      .then(function(_res) {
-        authToken = _res.body.authToken
-        return false;
-      })
-  }
+let authToken;
+function loginUser() {
+  return chai
+    .request(app)
+    .post('/api/auth/login')
+    .send({username: 'newuser', password: 'demopassword'})
+    .then(function(_res) {
+      authToken = _res.body.authToken
+      return false;
+    })
+}
 
   describe('White wine API resource', function() {
 
