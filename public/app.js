@@ -478,6 +478,7 @@ function createRedWineListing(data) {
     let ul = document.createElement('ul');
     ul.classList.add('labelInformation');
     let switchButton;
+    console.log(data);
     for (index in data.redWine) {
         let li = document.createElement('li');
         li.classList.add('vino');
@@ -601,11 +602,17 @@ function addNewUser() {
     });
 }
 
-//Cancel Add Wine Information
+//Cancel Add User
 function cancelAddUser() {
     $('#new-registration').on('click','.js-cancel-add-user', event => {
-        $('#new-registration').prop('hidden');
-        window.location= "https://wine-select.herokuapp.com/";   
+        $('#new-registration').hide();
+        let outputElem = $('#landing');
+            outputElem 
+                .prop('hidden', false)
+                $('.heading').show();
+                $('.login-form').show();
+                $('.footer').show();
+                routie('');
     })
 }
 
@@ -620,7 +627,7 @@ function searchRedWine(redBottles) {
             if (singleRedWineID === value_ID) {
                 currentWineID = singleRedWineID;
                 singleWineResult(value);
-                routie('red-bottle-details')
+                routie('red-bottle-details');
             } 
         };
     });
@@ -854,6 +861,15 @@ function handleCreateApp() {
     singleWhiteWineSearchWindow();
     switchBottleColor();
     returnSearchWindow();
+    routie('', function() {
+        $('#new-registration').hide();
+        let outputElem = $('#landing');
+            outputElem 
+                .prop('hidden', false)
+                $('.heading').show();
+                $('.login-form').show();
+                $('.footer').show();
+    });  
     routie('new-user-signup', function() {
         newUser();
     });  
@@ -888,4 +904,3 @@ function handleCreateApp() {
 }
 
 $(handleCreateApp);
-

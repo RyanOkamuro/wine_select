@@ -2,19 +2,16 @@
 
 require('dotenv').config();
 const chai = require('chai');
-const request = require('supertest');
+
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
+const {User} = require('../users/models');
 const {White} = require('../whiteWine/models');
 const {app, runServer, closeServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 const expect = chai.expect;
 
 chai.use(chaiHttp);
-
-let authToken;
-let agent = request.agent(app);
 
 function seedWineData() {
   console.info('seeding wine info');
@@ -23,7 +20,11 @@ function seedWineData() {
   for (let i=1; i<=4; i++) {
     seedData.push(generateWineData());
   }
-  return White.insertMany(seedData);
+  return White.insertMany(seedData)
+  .then(() => {
+    return User.insertMany([{username: 'newuser', firstName: 'john', lastName: 'smith', password: '$2a$10$e0MH4k7wVdhPJYcrByPL7OeYj85xu7o0/kU183JYqUsWni7HtT7Dy'}])
+  .then(() => loginUser())
+  })
 }
 
 let randomBottle = 0;
@@ -105,30 +106,42 @@ function generateInformation() {
   return moreInformation[Math.floor(Math.random() * moreInformation.length)];
   }
 
-  function generateWineData() {
-    return {
-      'wineLabelDetails': generateLabel(),
-      'brand': generateBrand(),
-      'wineName': generateWineName(),
-      'color': generateColor(),
-      'type': generateType(),
-      'rating': generateRating(),
-      'averagePrice': generateAveragePrice(),
-      'wineOrigin': generateWineOrigin(),
-      'region': generateRegion(),
-      'country': generateCountry(),
-      'year': generateYear(),
-      'foodSuggestion': generateFoodSuggestion(),
-      'image': generateImage(),
-      'history': generateHistory(),
-      'moreInformation': generateInformation(),
-    };
-  }
+function generateWineData() {
+  return {
+    'wineLabelDetails': generateLabel(),
+    'brand': generateBrand(),
+    'wineName': generateWineName(),
+    'color': generateColor(),
+    'type': generateType(),
+    'rating': generateRating(),
+    'averagePrice': generateAveragePrice(),
+    'wineOrigin': generateWineOrigin(),
+    'region': generateRegion(),
+    'country': generateCountry(),
+    'year': generateYear(),
+    'foodSuggestion': generateFoodSuggestion(),
+    'image': generateImage(),
+    'history': generateHistory(),
+    'moreInformation': generateInformation(),
+  };
+}
 
-  function tearDownDb() {
-    console.warn('Delete database');
-    return mongoose.connection.dropDatabase();
-  }
+function tearDownDb() {
+  console.warn('Delete database');
+  return mongoose.connection.dropDatabase();
+}
+
+let authToken;
+function loginUser() {
+  return chai
+    .request(app)
+    .post('/api/auth/login')
+    .send({username: 'newuser', password: 'demopassword'})
+    .then(function(_res) {
+      authToken = _res.body.authToken
+      return false;
+    })
+}
 
   describe('White wine API resource', function() {
 
@@ -151,7 +164,8 @@ function generateInformation() {
   describe('GET Label Information', function() {
     it('should list information on GET', function() {
       let res;
-      agent
+      return chai
+        .request(app)
         .get('/whiteWine')
         .set('Authorization', `Bearer ${authToken}`)
         .then(function(_res) {
@@ -167,7 +181,8 @@ function generateInformation() {
 
       it('should return the correct fields for whiteWine', function() {
         let resWine;
-        agent
+        return chai
+          .request(app)
           .get('/whiteWine')
           .set('Authorization', `Bearer ${authToken}`)
           .then(function(res) {
@@ -204,6 +219,7 @@ function generateInformation() {
       const newWineBottle = generateWineData();
       return chai.request(app)
         .post('/whiteWine')
+        .set('Authorization', `Bearer ${authToken}`)
         //use .send() to pass in an object representing a new wine bottle label
         .send(newWineBottle)
         .then(function(res) {
@@ -255,6 +271,7 @@ function generateInformation() {
 
       return chai.request(app)
         .put(`/whiteWine/${whiteWines.id}`)
+        .set('Authorization', `Bearer ${authToken}`)
         .send(updateData);
         })
         .then(function(res) {
@@ -275,7 +292,10 @@ function generateInformation() {
         .findOne()
         .then(function(_wine) {
           wine = _wine;
-          return chai.request(app).delete(`/whiteWine/${wine.id}`);
+          return chai
+            .request(app)
+            .delete(`/whiteWine/${wine.id}`)
+            .set('Authorization', `Bearer ${authToken}`);
         })
         .then(function(res) {
          expect(res).to.have.status(204);

@@ -7,11 +7,9 @@ const { JWT_SECRET } = require('../config');
 
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;
-  console.log(username, password);
   User.findOne({ username: username })
     .then(_user => {
       user = _user;
-      console.log(user);
       if (!user) {
         return Promise.reject({
           reason: 'LoginError',
