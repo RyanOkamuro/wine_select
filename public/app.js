@@ -478,7 +478,6 @@ function createRedWineListing(data) {
     let ul = document.createElement('ul');
     ul.classList.add('labelInformation');
     let switchButton;
-    console.log(data);
     for (index in data.redWine) {
         let li = document.createElement('li');
         li.classList.add('vino');
