@@ -275,7 +275,11 @@ function wineQuery() {
                 <form role='form' class='redWineBrand-form'>
                     <fieldset name='redWineLabel'>
                     <legend>Red Wine</legend>
+<<<<<<< HEAD
                     <img src='https://github.com/RyanOkamuro/wine_select/blob/master/images/Red_Wine_Images/Lafite.png?raw=true' class='red' alt='Lafite'>
+=======
+                    <img src='./images/Red_Wine_Images/Lafite.png' class='red' alt='Lafite'>
+>>>>>>> c6894207e76d0282fd515fc12f70a85c8a2ed011
                     <label for='js-red-wine-label' class='winery'>Collection</label>
                     <select name='js-red-wine-label' id='js-red-wine-label'>
                     </select>
@@ -288,7 +292,11 @@ function wineQuery() {
                 <form role='form' class='whiteWineBrand-form'>
                     <fieldset name='whiteWineLabel'>
                     <legend>White Wine</legend>
+<<<<<<< HEAD
                     <img src='https://github.com/RyanOkamuro/wine_select/blob/master/images/White_Wine_Images/Jadot_Lous.jpg?raw=true' class='white' alt='Jadot Lous'>
+=======
+                    <img src='./images/White_Wine_Images/Jadot_Lous.png' class='white' alt='Jadot Lous'>
+>>>>>>> c6894207e76d0282fd515fc12f70a85c8a2ed011
                     <label for='js-white-wine-label' class='winery'>Collection</label>
                     <select name='js-white-wine-label' id='js-white-wine-label'>
                     </select>
